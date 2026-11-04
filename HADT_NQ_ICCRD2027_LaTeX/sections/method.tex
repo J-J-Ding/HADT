@@ -1,0 +1,176 @@
+\section{Method}
+\label{sec:method}
+
+\subsection{Forecasting Task and Normalization}
+Given a historical window $\mathbf{X}\in\mathbb{R}^{B\times L\times C}$,
+HADT-NQ directly predicts $H$ future steps at seven fixed quantile levels:
+\begin{equation}
+ \mathcal{T}=\{0.05,0.10,0.25,0.50,0.75,0.90,0.95\}.
+\end{equation}
+Its output $\widehat{\mathbf{Q}}\in\mathbb{R}^{B\times H\times C\times7}$
+defines central 50\%, 80\%, and 90\% prediction intervals.
+These are conditional marginal forecasts for individual variable--horizon
+pairs; the model does not specify their joint predictive distribution.
+Figure~\ref{fig:architecture} summarizes the computation.
+
+A global, per-variable standard scaler is fitted exclusively on training
+observations and then applied unchanged to every split. Within the model,
+non-affine reversible instance normalization~\cite{kim2022revin} computes,
+for each window and variable,
+\begin{equation}
+ \mu_{bc}=\frac{1}{L}\sum_t X_{btc},\quad
+ s_{bc}=\sqrt{\frac{1}{L}\sum_t(X_{btc}-\mu_{bc})^2+\epsilon},
+ \label{eq:method-revin}
+\end{equation}
+with $\epsilon=10^{-5}$, and uses $\widetilde X_{btc}=(X_{btc}-\mu_{bc})/s_{bc}$.
+The statistics are detached from the computational graph. Output quantiles
+are transformed back by $\widehat Q_{bhcq}=s_{bc}\widetilde Q_{bhcq}+\mu_{bc}$,
+so the returned predictions remain on the globally standardized scale.
+Instance statistics use only the observed history, never future targets.
+
+\subsection{Shared Temporal Representation}
+Each variable is divided into overlapping length-$P$ patches at stride $S$,
+yielding $N=\lfloor(L-P)/S\rfloor+1$ tokens. A learned affine map from
+$\mathbb{R}^{P}$ to $\mathbb{R}^{D}$ and learned patch-position embeddings
+produce the token sequence. Following channel-independent patch modeling
+\cite{nie2023patchtst}, batch and variable axes are flattened: one shared
+encoder processes $BC$ sequences independently. Thus, parameter sharing
+does not introduce attention between variables.
+
+The encoder contains three pre-normalized Transformer blocks, each with
+multi-head self-attention, residual connections, and a two-layer GELU
+feed-forward network (FFN), followed by a final layer normalization.
+The evaluated configuration fixes $L=336$, $P=16$, $S=8$, hence $N=41$,
+with width $D=128$, $M=8$ attention heads, FFN width 256, and dropout 0.1.
+Let $\mathbf{Z}\in\mathbb{R}^{N\times D}$ denote one encoded variable
+history; its batch and variable indices are suppressed below.
+Variables share a temporal feature extractor and retain their individual
+normalization statistics. A forecast for one variable cannot explicitly
+condition on another variable's recent trajectory.
+
+\subsection{Horizon-Conditioned Temporal Sampling}
+Instead of generating future states autoregressively, the decoder builds
+one query base for each future step:
+\begin{equation}
+ \mathbf{u}_h=\operatorname{LN}\!\left(
+ W_c\frac{1}{N}\sum_{n=0}^{N-1}\mathbf{Z}_n+\mathbf{e}_h\right),
+ \label{eq:method-query}
+\end{equation}
+where $\mathbf{e}_h$ is a learned horizon embedding. Affine maps in the
+equations include their biases. Historical context therefore modifies all
+horizon queries, while the embeddings distinguish future steps. Queries
+do not attend to future targets or to one another.
+
+For head $m$ and sampling index $k$, an affine offset projection predicts
+\begin{equation}
+ \begin{aligned}
+ \delta_{hmk}&=a\tanh([W_\delta\mathbf{u}_h]_{mk}),\\
+ p_{hmk}&=\operatorname{clip}(r_k+\delta_{hmk},0,N-1).
+ \end{aligned}
+ \label{eq:method-offset}
+\end{equation}
+where $r_k=(k-1)(N-1)/(K-1)$, $k=1,\ldots,K$, and $a=1.5$
+is measured in patch-token units. The primary model uses $K=8$.
+Offsets are initialized to zero, so learning starts from uniformly spaced
+reference locations. Boundary clipping can cause sampled positions to
+coincide; distinct locations are not required. This is a temporal use of
+the deformable sampling principle~\cite{zhu2021deformable}, conditioned here
+on the forecast step and its historical context.
+The reference grid covers the full historical token axis, but each sample
+can move only within its bounded neighborhood. This separates broad
+historical coverage from local adjustment: the mechanism cannot freely
+relocate every sample to an arbitrary distant patch. Different horizons
+may use different offsets even within one input window, and different
+inputs may change the offsets for the same horizon. A fixed-offset
+intervention retains the query construction and attention computation
+while setting every offset to zero, isolating the effect of learned
+location adjustment without removing the decoder.
+
+Keys and values are projected from $\mathbf{Z}$ and split into $M$ heads
+of width $d=D/M$. For either projected sequence $\mathbf{F}$, the sample
+at a continuous position $p$ is
+\begin{equation}
+ \mathcal{I}(\mathbf{F},p)=(1-\lambda)\mathbf{F}_{\ell}
+                +\lambda\mathbf{F}_{r}.
+ \label{eq:method-interpolate}
+\end{equation}
+Here $\ell=\lfloor p\rfloor$, $r=\min(\ell+1,N-1)$, and
+$\lambda=p-\ell$. Only these neighbors are gathered. Interpolation permits
+gradients through fractional positions, although clipping and integer
+boundaries limit any interpretation of globally smooth sampling.
+The attention weights and per-head output are
+\begin{align}
+ \alpha_{hmk}&=\operatorname{softmax}_{k}
+ \left(\frac{(W_Q\mathbf{u}_h)_m^{\mathsf T}
+ \mathcal{I}(\mathbf{K}_m,p_{hmk})}{\sqrt d}\right),\\
+ \mathbf{o}_{hm}&=\sum_{k=1}^{K}\alpha_{hmk}
+                    \mathcal{I}(\mathbf{V}_m,p_{hmk}).
+\end{align}
+The softmax is over sampled locations within each head. Both offsets and
+attention depend on the same horizon query, while sampled keys additionally
+determine the attention scores. A learned pattern appears in Figure~\ref{fig:sampling}.
+
+\subsection{Decoder Residuals and Ordered Output}
+The implementation combines the heads and applies the following residual
+and normalization order:
+\begin{align}
+ \mathbf{v}_h&=\operatorname{LN}_1\!\left(\mathbf{u}_h+
+  \operatorname{Drop}(W_O[\mathbf{o}_{h1};\ldots;\mathbf{o}_{hM}])\right),\\
+ \mathbf{z}_h&=\mathbf{v}_h+
+  \operatorname{Drop}\!\left(\operatorname{FFN}
+        (\operatorname{LN}_2(\mathbf{v}_h))\right).
+ \label{eq:method-decoder}
+\end{align}
+The FFN maps $D\rightarrow2D\rightarrow D$, using GELU and internal dropout.
+In particular, the attention residual is normalized before the FFN
+residual, and there is no additional final decoder normalization.
+
+An affine output map generates a median $m_h$ and six unconstrained gap
+logits. Define $g^-_{hj}=\operatorname{softplus}(a^-_{hj})+\eta$ and
+$g^+_{hj}=\operatorname{softplus}(a^+_{hj})+\eta$, where $j=1,2,3$ and
+$\eta=10^{-4}$. With indices following the ordered quantile levels,
+the outputs are
+\begin{equation}
+ \begin{aligned}
+  \widetilde q_{h,4}&=m_h,\\
+  \widetilde q_{h,4-j}&=m_h-\sum_{i=1}^{j}g^-_{hi},\\
+  \widetilde q_{h,4+j}&=m_h+\sum_{i=1}^{j}g^+_{hi},\qquad j=1,2,3.
+ \end{aligned}
+ \label{eq:method-ordered}
+\end{equation}
+\noindent\textbf{Proposition (ordering).}
+For finite logits in real arithmetic, adjacent outputs in
+Eq.~\eqref{eq:method-ordered} differ by a strictly positive gap. Multiplying
+by $s_{bc}>0$ and adding $\mu_{bc}$ preserves their strict ordering.
+The same argument applies to inverse global scaling with positive scale.
+This follows directly by subtraction of adjacent cumulative sums.
+Floating-point rounding can produce ties, so strict inequalities are not
+an unconditional numerical guarantee. Moreover, ordering imposes neither
+correct nominal coverage nor sharp intervals.
+The median and both tails are trained jointly. Thus, the outer quantiles
+depend on cumulative distances from the median, rather than being
+independent outputs that are subsequently sorted. The implementation
+initializes gap biases to the inverse Softplus of 0.55 and uses small
+nonzero output weights. This initializes separated quantiles while allowing
+gradients to reach the temporal backbone immediately. The additional
+minimum gap is specified in the instance-normalized coordinate system,
+so its magnitude after reversal depends on the historical instance scale.
+
+\subsection{Objective and Computational Scope}
+Training minimizes the mean pinball loss over windows, future steps,
+variables, and all seven levels:
+\begin{equation}
+ \mathcal{L}=\frac{1}{7BHC}\sum_{b,h,c,q}
+ \max\!\left\{\tau_q e_{bhcq},(\tau_q-1)e_{bhcq}\right\},
+\end{equation}
+where $e_{bhcq}=Y_{bhc}-\widehat Q_{bhcq}$.
+
+The sampling and aggregation cost is $O(BCHKD)$. Dense attention
+requires $O(BCHND)$ for its scores and aggregation. Both exclude the
+shared encoder, projections, and FFNs. Each encoder layer costs
+$O(BCN^2D+BCND^2)$; projections and FFNs over horizons add
+$O(BCHD^2)$. Consequently, $K<N$ does not establish lower
+end-to-end runtime: optimized dense kernels may be faster than explicit
+gathering and interpolation. Chunking the horizon axis preserves query dependencies. The reported new runs use chunks of
+96 and disable gradient checkpointing, with batch size 32; these execution
+settings control memory use without altering the architecture.

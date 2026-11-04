@@ -1,0 +1,14 @@
+{
+  "torch": "2.7.1+cu128",
+  "numpy": "1.26.4",
+  "pandas": "2.3.3",
+  "matplotlib": "3.5.1",
+  "PyYAML": "6.0.3",
+  "tqdm": "4.67.1",
+  "python": "3.9.12",
+  "GPU": "NVIDIA GeForce RTX 5090",
+  "physical_gpu_index": 3,
+  "CUDA_runtime": "12.8",
+  "environment_name": "djjTF",
+  "timing_note": "GPU was shared; no isolated hardware speed claim"
+}

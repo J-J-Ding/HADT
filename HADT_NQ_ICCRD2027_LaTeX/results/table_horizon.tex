@@ -1,0 +1,18 @@
+\begin{table*}[t]
+\caption{Completed three-seed extension at $H=192$, using the same history length and training policy. This extension compares HADT-NQ, Linear-NQ, and Dense-NQ; it does not claim an exhaustive horizon sweep.}
+\label{tab:horizon}
+\centering
+\small
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Dataset & Method & Pinball $\downarrow$ & PICP90 (\%) & PINAW90 \\
+\midrule
+ETTh1 & HADT-NQ & $0.15191\,\pm\,0.00219$ & $88.14\,\pm\,0.56$ & $0.3130\,\pm\,0.0083$ \\
+ETTh1 & Linear-NQ & $0.14845\,\pm\,0.00004$ & $88.89\,\pm\,0.11$ & $0.3594\,\pm\,0.0018$ \\
+ETTh1 & Dense-NQ & $0.19660\,\pm\,0.00017$ & $89.10\,\pm\,0.54$ & $0.4211\,\pm\,0.0075$ \\
+ETTh2 & HADT-NQ & $0.11547\,\pm\,0.00277$ & $87.31\,\pm\,0.70$ & $0.2044\,\pm\,0.0010$ \\
+ETTh2 & Linear-NQ & $0.10315\,\pm\,0.00002$ & $87.01\,\pm\,0.03$ & $0.1846\,\pm\,0.0001$ \\
+ETTh2 & Dense-NQ & $0.11985\,\pm\,0.00206$ & $87.88\,\pm\,1.17$ & $0.2166\,\pm\,0.0043$ \\
+\bottomrule
+\end{tabular}
+\end{table*}

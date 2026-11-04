@@ -1,0 +1,22 @@
+\begin{table*}[t]
+\caption{Primary comparison at $H=96$. Values are mean $\pm$ sample standard deviation over seeds 2024, 2025, and 2026. PICP is reported in percent; its spread is in percentage points. Lower pinball, width, and interval score are preferable, but width must be read with coverage. Controls are local quantile adaptations, not official point-forecasting reproductions. Only complete three-seed groups enter this table.}
+\label{tab:main}
+\centering
+\small
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Dataset & Method & Pinball $\downarrow$ & PICP90 (\%) & PINAW90 & Norm. Winkler90 $\downarrow$ \\
+\midrule
+ETTh1 & HADT-NQ & $0.13847\,\pm\,0.00095$ & $86.70\,\pm\,1.64$ & $0.2708\,\pm\,0.0106$ & $0.3886\,\pm\,0.0065$ \\
+ETTh1 & Linear-NQ & $0.13643\,\pm\,0.00003$ & $89.18\,\pm\,0.03$ & $0.3263\,\pm\,0.0005$ & $0.4200\,\pm\,0.0003$ \\
+ETTh1 & Patch-NQ & $0.13294\,\pm\,0.00006$ & $85.33\,\pm\,1.61$ & $0.2627\,\pm\,0.0161$ & $0.3871\,\pm\,0.0018$ \\
+ETTh1 & Dense-NQ & $0.14168\,\pm\,0.00169$ & $85.74\,\pm\,0.95$ & $0.2696\,\pm\,0.0052$ & $0.3915\,\pm\,0.0047$ \\
+ETTh1 & Fixed-NQ & $0.14004\,\pm\,0.00109$ & $87.47\,\pm\,0.32$ & $0.2826\,\pm\,0.0040$ & $0.3876\,\pm\,0.0019$ \\
+ETTh2 & HADT-NQ & $0.10214\,\pm\,0.00437$ & $88.10\,\pm\,4.97$ & $0.1858\,\pm\,0.0170$ & $0.2621\,\pm\,0.0104$ \\
+ETTh2 & Linear-NQ & $0.09238\,\pm\,0.00002$ & $87.93\,\pm\,0.14$ & $0.1716\,\pm\,0.0007$ & $0.2465\,\pm\,0.0000$ \\
+ETTh2 & Patch-NQ & $0.09816\,\pm\,0.00120$ & $83.77\,\pm\,3.90$ & $0.1598\,\pm\,0.0184$ & $0.2690\,\pm\,0.0060$ \\
+ETTh2 & Dense-NQ & $0.10508\,\pm\,0.00153$ & $90.31\,\pm\,1.11$ & $0.2018\,\pm\,0.0073$ & $0.2671\,\pm\,0.0065$ \\
+ETTh2 & Fixed-NQ & $0.10513\,\pm\,0.00092$ & $90.89\,\pm\,0.78$ & $0.2079\,\pm\,0.0043$ & $0.2715\,\pm\,0.0038$ \\
+\bottomrule
+\end{tabular}
+\end{table*}

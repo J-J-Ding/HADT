@@ -1,0 +1,12 @@
+{
+  "required": [
+    2024,
+    2025,
+    2026
+  ],
+  "ddof": 1,
+  "complete_groups": 19,
+  "completed_runs": 60,
+  "traffic_case_seed": 2024,
+  "historical_source_digests": "unknown; not represented as freshly captured"
+}

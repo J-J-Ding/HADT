@@ -1,0 +1,766 @@
+{
+  "access_date": "2026-10-30",
+  "bibliography": "HADT_NQ_ICCRD2027_LaTeX/references.bib",
+  "reference_count": 15,
+  "method": "Crossref DOI metadata, publisher pages, official author repositories/project pages and author-submitted arXiv records. Browser search used only to locate primary sources. OpenReview direct page/API access returned challenges/403 and was cross-checked against primary author sources.",
+  "limitations": [
+    "Bibliographic and claim-scope verification is not empirical replication.",
+    "No DOI was invented for ICLR/TMLR papers. Preprint DOIs are not substituted for venue DOIs.",
+    "Existing manuscript citation integration is performed separately by manuscript owner."
+  ],
+  "entries": [
+    {
+      "key": "koenker1978regression",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://api.crossref.org/works/10.2307/1913643",
+        "https://doi.org/10.2307/1913643",
+        "https://www.jstor.org/stable/i332765"
+      ],
+      "supported_scope": "Regression quantiles and asymmetric absolute-error estimation.",
+      "audit_note": "Added suffix Jr. from JSTOR issue contents; Crossref has a malformed suffix and only the first page, so full pages use JSTOR.",
+      "status": "verified_primary_metadata",
+      "doi": "10.2307/1913643",
+      "crossref_http_status": 200,
+      "crossref_metadata": {
+        "DOI": "10.2307/1913643",
+        "title": [
+          "Regression Quantiles"
+        ],
+        "author": [
+          {
+            "given": "Roger",
+            "family": "Koenker",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "suffix": "join(' '",
+            "given": "Gilbert",
+            "family": "Bassett",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              1978,
+              1
+            ]
+          ]
+        },
+        "container-title": [
+          "Econometrica"
+        ],
+        "volume": "46",
+        "issue": "1",
+        "page": "33",
+        "URL": "https://doi.org/10.2307/1913643"
+      }
+    },
+    {
+      "key": "gneiting2007probabilistic",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://api.crossref.org/works/10.1111/j.1467-9868.2007.00587.x",
+        "https://doi.org/10.1111/j.1467-9868.2007.00587.x"
+      ],
+      "supported_scope": "Calibration and sharpness as complementary evaluation goals.",
+      "audit_note": "Existing bibliographic fields confirmed.",
+      "status": "verified_primary_metadata",
+      "doi": "10.1111/j.1467-9868.2007.00587.x",
+      "crossref_http_status": 200,
+      "crossref_metadata": {
+        "DOI": "10.1111/j.1467-9868.2007.00587.x",
+        "title": [
+          "Probabilistic Forecasts, Calibration and Sharpness"
+        ],
+        "author": [
+          {
+            "given": "Tilmann",
+            "family": "Gneiting",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "University of Washington , Seattle , USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Fadoua",
+            "family": "Balabdaoui",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Georg-August-Universität Göttingen , Germany"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Adrian E.",
+            "family": "Raftery",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University of Washington , Seattle , USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2007,
+              3,
+              5
+            ]
+          ]
+        },
+        "container-title": [
+          "Journal of the Royal Statistical Society Series B: Statistical Methodology"
+        ],
+        "volume": "69",
+        "issue": "2",
+        "page": "243-268",
+        "URL": "https://doi.org/10.1111/j.1467-9868.2007.00587.x"
+      }
+    },
+    {
+      "key": "gneiting2007scoring",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://api.crossref.org/works/10.1198/016214506000001437",
+        "https://doi.org/10.1198/016214506000001437"
+      ],
+      "supported_scope": "Proper scoring rules for probabilistic forecasts and interval evaluation.",
+      "audit_note": "Existing bibliographic fields confirmed.",
+      "status": "verified_primary_metadata",
+      "doi": "10.1198/016214506000001437",
+      "crossref_http_status": 200,
+      "crossref_metadata": {
+        "DOI": "10.1198/016214506000001437",
+        "title": [
+          "Strictly Proper Scoring Rules, Prediction, and Estimation"
+        ],
+        "author": [
+          {
+            "given": "Tilmann",
+            "family": "Gneiting",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Adrian E",
+            "family": "Raftery",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2007,
+              3
+            ]
+          ]
+        },
+        "container-title": [
+          "Journal of the American Statistical Association"
+        ],
+        "volume": "102",
+        "issue": "477",
+        "page": "359-378",
+        "URL": "https://doi.org/10.1198/016214506000001437"
+      }
+    },
+    {
+      "key": "winkler1972decision",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://api.crossref.org/works/10.1080/01621459.1972.10481224",
+        "https://doi.org/10.1080/01621459.1972.10481224"
+      ],
+      "supported_scope": "Decision-theoretic interval estimation and width/miss penalties.",
+      "audit_note": "Existing bibliographic fields confirmed.",
+      "status": "verified_primary_metadata",
+      "doi": "10.1080/01621459.1972.10481224",
+      "crossref_http_status": 200,
+      "crossref_metadata": {
+        "DOI": "10.1080/01621459.1972.10481224",
+        "title": [
+          "A Decision-Theoretic Approach to Interval Estimation"
+        ],
+        "author": [
+          {
+            "given": "Robert L.",
+            "family": "Winkler",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              1972,
+              3
+            ]
+          ]
+        },
+        "container-title": [
+          "Journal of the American Statistical Association"
+        ],
+        "volume": "67",
+        "issue": "337",
+        "page": "187-191",
+        "URL": "https://doi.org/10.1080/01621459.1972.10481224"
+      }
+    },
+    {
+      "key": "salinas2020deepar",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://api.crossref.org/works/10.1016/j.ijforecast.2019.07.001",
+        "https://doi.org/10.1016/j.ijforecast.2019.07.001",
+        "https://www.sciencedirect.com/science/article/pii/S0169207019301888"
+      ],
+      "supported_scope": "Autoregressive recurrent probabilistic forecasting across related time series.",
+      "audit_note": "2020 volume publication retained despite 2019 DOI substring.",
+      "status": "verified_primary_metadata",
+      "doi": "10.1016/j.ijforecast.2019.07.001",
+      "crossref_http_status": 200,
+      "crossref_metadata": {
+        "DOI": "10.1016/j.ijforecast.2019.07.001",
+        "title": [
+          "DeepAR: Probabilistic forecasting with autoregressive recurrent networks"
+        ],
+        "author": [
+          {
+            "given": "David",
+            "family": "Salinas",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Valentin",
+            "family": "Flunkert",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Jan",
+            "family": "Gasthaus",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Tim",
+            "family": "Januschowski",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2020,
+              7
+            ]
+          ]
+        },
+        "container-title": [
+          "International Journal of Forecasting"
+        ],
+        "volume": "36",
+        "issue": "3",
+        "page": "1181-1191",
+        "URL": "https://doi.org/10.1016/j.ijforecast.2019.07.001"
+      }
+    },
+    {
+      "key": "lim2021tft",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://api.crossref.org/works/10.1016/j.ijforecast.2021.03.012",
+        "https://doi.org/10.1016/j.ijforecast.2021.03.012"
+      ],
+      "supported_scope": "Interpretable multi-horizon neural forecasting, including quantile outputs.",
+      "audit_note": "Corrected Sercan Ö. Arık using Crossref spelling; other fields confirmed.",
+      "status": "verified_primary_metadata",
+      "doi": "10.1016/j.ijforecast.2021.03.012",
+      "crossref_http_status": 200,
+      "crossref_metadata": {
+        "DOI": "10.1016/j.ijforecast.2021.03.012",
+        "title": [
+          "Temporal Fusion Transformers for interpretable multi-horizon time series forecasting"
+        ],
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0000-0003-2779-4122",
+            "authenticated-orcid": false,
+            "given": "Bryan",
+            "family": "Lim",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Sercan Ö.",
+            "family": "Arık",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Nicolas",
+            "family": "Loeff",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Tomas",
+            "family": "Pfister",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2021,
+              10
+            ]
+          ]
+        },
+        "container-title": [
+          "International Journal of Forecasting"
+        ],
+        "volume": "37",
+        "issue": "4",
+        "page": "1748-1764",
+        "URL": "https://doi.org/10.1016/j.ijforecast.2021.03.012"
+      }
+    },
+    {
+      "key": "kim2022revin",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://openreview.net/forum?id=cGDAkQo1C0p",
+        "https://seharanul17.github.io/RevIN/"
+      ],
+      "supported_scope": "Reversible instance normalization and denormalization against distribution shift. The original includes learnable affine parameters; the present non-affine version is a stated adaptation.",
+      "audit_note": "Original OpenReview ID confirmed by authors project BibTeX, retained unchanged. Direct OpenReview and API access challenged/403.",
+      "status": "verified_primary_metadata"
+    },
+    {
+      "key": "nie2023patchtst",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://openreview.net/forum?id=Jbdc0vTOcol",
+        "https://arxiv.org/abs/2211.14730",
+        "https://github.com/yuqinie98/PatchTST"
+      ],
+      "supported_scope": "Patch tokenization and shared channel-independent Transformer weights. Does not establish reproduction of original point forecasting results by a quantile adaptation.",
+      "audit_note": "Normalized title to source capitalization and forum URL; retained correct Nam H. Nguyen author order. OpenReview direct access challenged; arXiv and official repository verify authors/title/ICLR2023.",
+      "status": "verified_primary_metadata"
+    },
+    {
+      "key": "zhu2021deformable",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://arxiv.org/abs/2010.04159"
+      ],
+      "supported_scope": "Sparse learned sampling around reference points for object detection. This is antecedent attention machinery, not evidence that this paper first applies deformable attention to time series.",
+      "audit_note": "Authors/title/ICLR2021 confirmed by author-submitted arXiv record.",
+      "status": "verified_primary_metadata"
+    },
+    {
+      "key": "vaswani2017attention",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html"
+      ],
+      "supported_scope": "Transformer multi-head attention architecture. This does not attribute later pre-layer-normalized variants to the 2017 paper.",
+      "audit_note": "Replaced preprint URL with official NeurIPS proceedings and preserved Łukasz Kaiser diacritic.",
+      "status": "verified_primary_metadata"
+    },
+    {
+      "key": "shu2025deformtime",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://openreview.net/forum?id=M62P7iOT7d",
+        "https://openreview.net/pdf?id=M62P7iOT7d",
+        "https://github.com/ClaudiaShu/DeformTime",
+        "https://lampos.net/papers/shu2025deformtime.pdf"
+      ],
+      "supported_scope": "Prior deformable attention for multivariable time-series forecasting and variable dependencies. Requires positioning the contribution as a specific horizon-conditioned marginal quantile combination, not first temporal deformable attention.",
+      "audit_note": "New entry. TMLR April2025 and two authors confirmed by official indexed venue PDF and authors repository BibTeX. Forum challenged directly.",
+      "status": "verified_primary_metadata"
+    },
+    {
+      "key": "cannon2018noncrossing",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://api.crossref.org/works/10.1007/s00477-018-1573-6",
+        "https://doi.org/10.1007/s00477-018-1573-6",
+        "https://link.springer.com/article/10.1007/s00477-018-1573-6"
+      ],
+      "supported_scope": "MCQRNN simultaneously estimates multiple non-crossing nonlinear conditional quantiles. It establishes prior guaranteed neural quantile ordering, without asserting identity to the present median-anchored Softplus gaps.",
+      "audit_note": "New entry verified against Springer and Crossref.",
+      "status": "verified_primary_metadata",
+      "doi": "10.1007/s00477-018-1573-6",
+      "crossref_http_status": 200,
+      "crossref_metadata": {
+        "DOI": "10.1007/s00477-018-1573-6",
+        "title": [
+          "Non-crossing nonlinear regression quantiles by monotone composite quantile regression neural network, with application to rainfall extremes"
+        ],
+        "author": [
+          {
+            "given": "Alex J.",
+            "family": "Cannon",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2018,
+              6,
+              26
+            ]
+          ]
+        },
+        "container-title": [
+          "Stochastic Environmental Research and Risk Assessment"
+        ],
+        "volume": "32",
+        "issue": "11",
+        "page": "3207-3225",
+        "URL": "https://doi.org/10.1007/s00477-018-1573-6"
+      }
+    },
+    {
+      "key": "zeng2023dlinear",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://api.crossref.org/works/10.1609/aaai.v37i9.26317",
+        "https://doi.org/10.1609/aaai.v37i9.26317",
+        "https://ojs.aaai.org/index.php/AAAI/article/view/26317"
+      ],
+      "supported_scope": "Linear and decomposition-based direct long-horizon point forecasting baselines. Quantile DLinear-style variants are adaptations, not original published baseline reproduction.",
+      "audit_note": "New entry verified against AAAI publisher and Crossref; publication is2023, not arXiv2022.",
+      "status": "verified_primary_metadata",
+      "doi": "10.1609/aaai.v37i9.26317",
+      "crossref_http_status": 200,
+      "crossref_metadata": {
+        "DOI": "10.1609/aaai.v37i9.26317",
+        "title": [
+          "Are Transformers Effective for Time Series Forecasting?"
+        ],
+        "author": [
+          {
+            "given": "Ailing",
+            "family": "Zeng",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Muxi",
+            "family": "Chen",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Lei",
+            "family": "Zhang",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Qiang",
+            "family": "Xu",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2023,
+              6,
+              26
+            ]
+          ]
+        },
+        "container-title": [
+          "Proceedings of the AAAI Conference on Artificial Intelligence"
+        ],
+        "volume": "37",
+        "issue": "9",
+        "page": "11121-11128",
+        "URL": "https://doi.org/10.1609/aaai.v37i9.26317"
+      }
+    },
+    {
+      "key": "zhou2021informer",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://api.crossref.org/works/10.1609/aaai.v35i12.17325",
+        "https://doi.org/10.1609/aaai.v35i12.17325",
+        "https://ojs.aaai.org/index.php/AAAI/article/view/17325",
+        "https://github.com/zhouhaoyi/ETDataset"
+      ],
+      "supported_scope": "Informer architecture and provenance citation requested by the official ETT dataset README. Repository supports ETT column and recording descriptions; actual experiment split boundaries require code/data inspection.",
+      "audit_note": "New entry verified against AAAI/Crossref and official dataset README. No separate undated dataset BibTeX invented.",
+      "status": "verified_primary_metadata",
+      "doi": "10.1609/aaai.v35i12.17325",
+      "crossref_http_status": 200,
+      "crossref_metadata": {
+        "DOI": "10.1609/aaai.v35i12.17325",
+        "title": [
+          "Informer: Beyond Efficient Transformer for Long Sequence Time-Series Forecasting"
+        ],
+        "author": [
+          {
+            "given": "Haoyi",
+            "family": "Zhou",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Shanghang",
+            "family": "Zhang",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Jieqi",
+            "family": "Peng",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Shuai",
+            "family": "Zhang",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Jianxin",
+            "family": "Li",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Hui",
+            "family": "Xiong",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Wancai",
+            "family": "Zhang",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2021,
+              5,
+              18
+            ]
+          ]
+        },
+        "container-title": [
+          "Proceedings of the AAAI Conference on Artificial Intelligence"
+        ],
+        "volume": "35",
+        "issue": "12",
+        "page": "11106-11115",
+        "URL": "https://doi.org/10.1609/aaai.v35i12.17325"
+      }
+    },
+    {
+      "key": "loshchilov2019adamw",
+      "access_date": "2026-10-30",
+      "sources": [
+        "https://openreview.net/forum?id=Bkg6RiCqY7",
+        "https://arxiv.org/abs/1711.05101",
+        "https://github.com/loshchil/AdamW-and-SGDW"
+      ],
+      "supported_scope": "Decoupled weight decay (AdamW) used in optimization. Does not support paper-specific tuning efficacy.",
+      "audit_note": "New ICLR2019 entry; arXiv first submission2017 is not venue year. Direct OpenReview challenged; author record/repository confirm title/authors/year.",
+      "status": "verified_primary_metadata"
+    }
+  ]
+}

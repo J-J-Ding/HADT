@@ -1,0 +1,57 @@
+{
+  "paper_architecture": {
+    "kind": "schematic",
+    "source": "scripts/draw_paper_architecture.py"
+  },
+  "paper_calibration": {
+    "kind": "seed mean and sample SD",
+    "source": "results/aggregate_metrics.csv",
+    "datasets": [
+      "ETTh1",
+      "ETTh2"
+    ],
+    "horizon": 96,
+    "methods": [
+      "hadt",
+      "patch",
+      "linear"
+    ]
+  },
+  "paper_forecasts": {
+    "kind": "fixed first test window",
+    "source_records": [
+      {
+        "dataset": "ETTh1",
+        "method": "hadt",
+        "seed": 2025,
+        "control": "patch"
+      },
+      {
+        "dataset": "Traffic",
+        "method": "hadt",
+        "seed": 2024,
+        "control": "linear"
+      }
+    ],
+    "horizon": 96,
+    "variable": "OT"
+  },
+  "paper_depth_pilot": {
+    "kind": "single-seed pilot relative to depth0",
+    "seed": 2024,
+    "source": [
+      "results/depth_pilot_etth1.csv",
+      "results/depth_pilot_traffic.csv"
+    ]
+  },
+  "paper_sampling": {
+    "kind": "learned intermediate arrays",
+    "dataset": "ETTh1",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2025,
+    "sample": 0,
+    "variable": "OT",
+    "head": 0
+  }
+}

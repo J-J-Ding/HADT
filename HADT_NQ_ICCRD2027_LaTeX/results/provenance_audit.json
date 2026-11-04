@@ -1,0 +1,662 @@
+[
+  {
+    "dataset": "ETTh1",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/ETTh1_analysis/full/ETTh1/H96/seed2024",
+    "source_kind": "verified_prior_run",
+    "status": "historical configuration/data/checkpoint import; original code digest unavailable",
+    "code_sha256": null
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/hadt/ETTh1/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/hadt/ETTh1/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "linear",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/linear/ETTh1/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "linear",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/linear/ETTh1/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "linear",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/linear/ETTh1/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "patch",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/patch/ETTh1/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "patch",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/patch/ETTh1/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "patch",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/patch/ETTh1/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "dense",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/dense/ETTh1/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "dense",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/dense/ETTh1/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "dense",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/dense/ETTh1/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "fixed",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/fixed/ETTh1/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "fixed",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/fixed/ETTh1/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "fixed",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/fixed/ETTh1/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/hadt/ETTh2/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/hadt/ETTh2/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/hadt/ETTh2/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "linear",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/linear/ETTh2/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "linear",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/linear/ETTh2/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "linear",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/linear/ETTh2/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "patch",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/patch/ETTh2/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "patch",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/patch/ETTh2/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "patch",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/patch/ETTh2/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "dense",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/dense/ETTh2/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "dense",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/dense/ETTh2/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "dense",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/dense/ETTh2/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "fixed",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/fixed/ETTh2/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "fixed",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/fixed/ETTh2/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "fixed",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/fixed/ETTh2/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "shared",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/shared/ETTh1/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "shared",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/shared/ETTh1/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "shared",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/shared/ETTh1/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "independent",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/independent/ETTh1/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "independent",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/independent/ETTh1/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "independent",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/independent/ETTh1/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "no_revin",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/no_revin/ETTh1/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "no_revin",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/no_revin/ETTh1/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "no_revin",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/no_revin/ETTh1/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "hadt",
+    "horizon": 192,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/hadt/ETTh1/H192/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "hadt",
+    "horizon": 192,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/hadt/ETTh1/H192/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "hadt",
+    "horizon": 192,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/hadt/ETTh1/H192/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "linear",
+    "horizon": 192,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/linear/ETTh1/H192/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "linear",
+    "horizon": 192,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/linear/ETTh1/H192/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "linear",
+    "horizon": 192,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/linear/ETTh1/H192/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "dense",
+    "horizon": 192,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/dense/ETTh1/H192/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "dense",
+    "horizon": 192,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/dense/ETTh1/H192/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "dense",
+    "horizon": 192,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/dense/ETTh1/H192/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "hadt",
+    "horizon": 192,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/hadt/ETTh2/H192/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "hadt",
+    "horizon": 192,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/hadt/ETTh2/H192/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "hadt",
+    "horizon": 192,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/hadt/ETTh2/H192/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "linear",
+    "horizon": 192,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/linear/ETTh2/H192/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "linear",
+    "horizon": 192,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/linear/ETTh2/H192/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "linear",
+    "horizon": 192,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/linear/ETTh2/H192/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "dense",
+    "horizon": 192,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/dense/ETTh2/H192/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "dense",
+    "horizon": 192,
+    "seed": 2025,
+    "source_dir": "outputs/paper_study/dense/ETTh2/H192/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh2",
+    "method": "dense",
+    "horizon": 192,
+    "seed": 2026,
+    "source_dir": "outputs/paper_study/dense/ETTh2/H192/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "Traffic",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/Traffic_depth_comparison/layers3/Traffic/H96/seed2024",
+    "source_kind": "verified_prior_run",
+    "status": "historical configuration/data/checkpoint import; original code digest unavailable",
+    "code_sha256": null
+  },
+  {
+    "dataset": "Traffic",
+    "method": "linear",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/linear/Traffic/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "Traffic",
+    "method": "dense",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_study/dense/Traffic/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_sensitivity/K4/hadt/ETTh1/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_sensitivity/K4/hadt/ETTh1/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_sensitivity/K4/hadt/ETTh1/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2024,
+    "source_dir": "outputs/paper_sensitivity/K12/hadt/ETTh1/H96/seed2024",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2025,
+    "source_dir": "outputs/paper_sensitivity/K12/hadt/ETTh1/H96/seed2025",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  },
+  {
+    "dataset": "ETTh1",
+    "method": "hadt",
+    "horizon": 96,
+    "seed": 2026,
+    "source_dir": "outputs/paper_sensitivity/K12/hadt/ETTh1/H96/seed2026",
+    "source_kind": "paper_run",
+    "status": "canonical pre-fit fingerprint verified",
+    "code_sha256": "4dda4385775218fd43dd6d27354fc4425d7e32a267a4c059dc01e4757d97ad3a"
+  }
+]

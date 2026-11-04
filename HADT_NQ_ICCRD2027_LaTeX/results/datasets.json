@@ -1,0 +1,32 @@
+{
+  "ETTh1": {
+    "sha256": "f18de3ad269cef59bb07b5438d79bb3042d3be49bdeecf01c1cd6d29695ee066",
+    "path": "dataset/ETT-small/ETTh1.csv",
+    "rows": 17420,
+    "variables": 7,
+    "train_end": 10452,
+    "val_end": 13936,
+    "date_start": "2016-07-01 00:00:00",
+    "date_end": "2018-06-26 19:00:00"
+  },
+  "ETTh2": {
+    "sha256": "a3dc2c597b9218c7ce1cd55eb77b283fd459a1d09d753063f944967dd6b9218b",
+    "path": "dataset/ETT-small/ETTh2.csv",
+    "rows": 17420,
+    "variables": 7,
+    "train_end": 10452,
+    "val_end": 13936,
+    "date_start": "2016-07-01 00:00:00",
+    "date_end": "2018-06-26 19:00:00"
+  },
+  "Traffic": {
+    "sha256": "cb06463d56fa17d87f47027cd9389ceae82a69eddee51cdb61480e120dab0b16",
+    "path": "dataset/traffic/traffic.csv",
+    "rows": 17544,
+    "variables": 862,
+    "train_end": 12280,
+    "val_end": 14034,
+    "date_start": "2016-07-01 02:00:00",
+    "date_end": "2018-07-02 01:00:00"
+  }
+}

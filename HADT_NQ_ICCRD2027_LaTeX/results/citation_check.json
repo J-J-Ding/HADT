@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "bib_entries": 15,
+  "cited_keys": [
+    "cannon2018noncrossing",
+    "gneiting2007probabilistic",
+    "gneiting2007scoring",
+    "kim2022revin",
+    "koenker1978regression",
+    "lim2021tft",
+    "loshchilov2019adamw",
+    "nie2023patchtst",
+    "salinas2020deepar",
+    "shu2025deformtime",
+    "vaswani2017attention",
+    "winkler1972decision",
+    "zeng2023dlinear",
+    "zhou2021informer",
+    "zhu2021deformable"
+  ],
+  "unresolved_keys": []
+}

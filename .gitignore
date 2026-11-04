@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+dataset/
+outputs/
+*.log
+.tools/
+HADT_NQ_ICCRD2027_LaTeX/*.aux
+HADT_NQ_ICCRD2027_LaTeX/*.bbl
+HADT_NQ_ICCRD2027_LaTeX/*.blg
+HADT_NQ_ICCRD2027_LaTeX/*.out
+HADT_NQ_ICCRD2027_LaTeX/*.synctex.gz
