@@ -1,5 +1,7 @@
 # Reproduction and evidence
 
+For the 2026-11-05 architecture extension, use `scripts/run_architecture_study.py`, `scripts/export_architecture_study.py` and `scripts/validate_architecture_study.py` from the full repository. See `docs/ARCHITECTURE_STUDY.md` for GPU3/djjTF execution and progress tracking. The original compact source archive and package manifest describe the historical 66-run study, not the new extension. Completed extension records and their source hashes are in `results/architecture_records.json`; pending jobs are not results.
+
 The study uses PyTorch and the package versions in results/software_environment.json. Place the same CSV versions at dataset/ETT-small/ETTh1.csv, dataset/ETT-small/ETTh2.csv and dataset/traffic/traffic.csv; verify the SHA256 values in results/datasets.json. Dataset files and checkpoints are not included in this compact source archive.
 
 From the project root, with the required CUDA-enabled Python environment:

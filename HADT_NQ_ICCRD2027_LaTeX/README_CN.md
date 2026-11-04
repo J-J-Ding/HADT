@@ -1,5 +1,7 @@
 # HADT-NQ / ICCRD 2027 完整实证论文
 
+2026-11-05 扩展说明：下文的66条记录及原交付ZIP/manifest描述历史稿件。本轮另增验证集架构搜索及七数据集、四预测长度的队列；实时完成状态见`results/architecture_status.json`，新增证据见`architecture_records.json`，正文见`architecture_section.tex`。只有已完成的三种子组进入新增汇总。工作区`main.pdf`会随已完成实验持续重编译。协议、恢复和独立核验方式见项目根目录`docs/ARCHITECTURE_STUDY.md`。旧的`package_completed_paper.py`锁定历史版本，不能用于打包本轮扩展。
+
 已使用提供的 ACM `sigconf,anonymous,review` 模板完成英文匿名论文。入口为 **main.pdf**，源码为 **main.tex** 与 sections/。正文包含引言、相关工作、方法及有序性说明、实验设计、实测结果、讨论、局限和结论。
 
 ## 实验范围与证据

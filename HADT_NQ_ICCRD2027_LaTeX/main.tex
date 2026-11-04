@@ -34,6 +34,8 @@ Direct quantile forecasting provides a practical way to represent temporal uncer
 
 \input{results/abstract_results}
 
+\input{results/architecture_abstract}
+
 Results reveal dataset-dependent trade-offs between predictive fit and interval properties.
 
 \end{abstract}
@@ -249,7 +251,7 @@ We vary the number of sampled locations on ETTh1 at $H=96$, retaining the same o
 
 \input{results/table_horizon}
 
-The completed $H=192$ extension in Table~\ref{tab:horizon} increases the prediction length while retaining $L=336$ and the training policy. Its scope is the named controls; horizons of 336 or 720 steps remain unmeasured.
+The original $H=192$ extension in Table~\ref{tab:horizon} increases the prediction length while retaining $L=336$ and the training policy. Its scope is the named controls. The prospective architecture study in Section~\ref{sec:architecture-search} separately tracks additional horizons and includes only completed measurements.
 
 \input{results/table_traffic}
 
@@ -295,6 +297,8 @@ The depth pilot in Figure~\ref{fig:depth} demonstrates that the effect of encode
 
 
 
+\input{results/architecture_section}
+
 \section{Discussion and Limitations}
 
 The experiments support a distinction between \emph{valid ordering}, \emph{calibration}, and \emph{predictive fit}. Ordered quantiles prevent one logical inconsistency in a collection of marginal forecasts. They do not imply that a nominal interval achieves its target coverage. Horizon-specific sparse sampling supplies a particular historical retrieval mechanism, but the direct patch control can be more effective on some data. A useful evaluation therefore needs both architecture-aligned removals and simpler forecasters; neither a non-crossing guarantee nor an attention visualization is evidence of uniform accuracy gains.
@@ -314,6 +318,8 @@ Finally, variables are modeled independently with shared parameters, so useful c
 HADT-NQ combines horizon-conditioned bounded temporal sampling with structurally ordered marginal quantiles. Controlled comparisons distinguish output validity from predictive performance. The repeated comparisons show that simple forecasting controls remain competitive and that empirical coverage may deviate from nominal levels. Meanwhile, the separate encoder-depth pilot demonstrates that the effect of architectural depth can vary across datasets. These findings motivate further investigation of horizon-conditioned temporal retrieval alongside simple direct forecasting architectures, with broader evaluations across datasets, forecasting horizons, and calibration strategies.
 
 
+
+\input{results/architecture_conclusion}
 
 \bibliographystyle{ACM-Reference-Format}
 

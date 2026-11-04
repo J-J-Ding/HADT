@@ -1,0 +1,10 @@
+{
+  "screen_completed": 12,
+  "screen_total": 12,
+  "confirmation_completed": 0,
+  "selection_frozen": false,
+  "test_completed": 0,
+  "test_total": 0,
+  "complete_three_seed_test_groups": 0,
+  "worker_state": "training"
+}

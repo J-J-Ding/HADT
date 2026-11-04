@@ -1,5 +1,7 @@
 # HADT-NQ: Independent Research Codebase
 
+2026-11-05：GPU 3 架构搜索与缺项实验已新增，可持续更新论文。实验协议、运行状态、恢复与核验方式见 [docs/ARCHITECTURE_STUDY.md](docs/ARCHITECTURE_STUDY.md)。实时完成情况以 `HADT_NQ_ICCRD2027_LaTeX/results/architecture_status.json` 为准。
+
 **Horizon-Adaptive Deformable Transformer with Non-Crossing Quantile Regression**
 
 This is a standalone PyTorch research project. It does not depend on DBFI-Net or its training framework.

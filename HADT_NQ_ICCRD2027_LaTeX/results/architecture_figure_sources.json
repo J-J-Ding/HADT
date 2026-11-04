@@ -1,0 +1,6 @@
+{
+  "screening": "results/architecture_records.json: validation records with stage=screen",
+  "confirmation_curves": [],
+  "selection": null,
+  "forecast_sample": "first eligible test window, last saved variable, seed 2024"
+}

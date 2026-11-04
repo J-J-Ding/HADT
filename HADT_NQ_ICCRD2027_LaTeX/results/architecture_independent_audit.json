@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "validation_runs": 6,
+  "test_runs": 0,
+  "aggregate_groups": 0,
+  "audited": [
+    "outputs/architecture_study/screen/cnn3/ETTh1/H96/seed2024",
+    "outputs/architecture_study/screen/cnn_transformer/ETTh1/H96/seed2024",
+    "outputs/architecture_study/screen/identity/ETTh1/H96/seed2024",
+    "outputs/architecture_study/screen/mlp3/ETTh1/H96/seed2024",
+    "outputs/architecture_study/screen/transformer1/ETTh1/H96/seed2024",
+    "outputs/architecture_study/screen/transformer3/ETTh1/H96/seed2024"
+  ],
+  "checks": [
+    "source/data/checkpoint SHA256",
+    "checkpoint validation selection",
+    "train-only scaler",
+    "split boundaries",
+    "fixed forecast sample truth",
+    "quantile ordering",
+    "complete-seed aggregates",
+    "frozen selection digest"
+  ],
+  "scope": "Artifact audit; does not rerun neural predictions over every full test dataset."
+}
