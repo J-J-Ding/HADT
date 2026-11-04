@@ -105,7 +105,8 @@ def plots(screen, confirmation, selected, evaluated):
                 if r['candidate_id'] != name:
                     continue
                 history = pd.read_csv(Path(r['source_dir']) / 'training_history.csv')
-                ax.plot(history.epoch, history.val_pinball, color=colors[r['seed']], label=str(r['seed']), lw=1)
+                ax.plot(history.epoch.to_numpy(), history.val_pinball.to_numpy(),
+                        color=colors[r['seed']], label=str(r['seed']), lw=1)
             ax.set_title(LABELS[name], fontsize=8)
             ax.set_xlabel('Epoch')
             ax.grid(alpha=.2)
@@ -359,6 +360,13 @@ def main():
     atomic_text(OUT / 'architecture_conclusion.tex', conclusion)
     text = '\n\n'.join(lines) + '\n'
     atomic_text(OUT / 'architecture_section.tex', text)
+    audit_key = [selected['candidate_id'] if selected else None, len(aggregated), bool(evaluated)]
+    audit_marker = ROOT / 'independent_audit_counts.json'
+    previous_audit = json.loads(audit_marker.read_text()) if audit_marker.exists() else None
+    if (selected or evaluated) and previous_audit != audit_key:
+        subprocess.run([sys.executable, 'scripts/validate_architecture_study.py'], check=True,
+                       env=dict(os.environ, CUDA_VISIBLE_DEVICES=''))
+        atomic_text(audit_marker, json.dumps(audit_key))
     # Rebuild when the completed evidence or selection changes. Build failures remain visible.
     stamp = hashlib.sha256(text.encode()).hexdigest()
     marker = ROOT / 'paper_build.sha256'

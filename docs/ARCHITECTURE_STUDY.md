@@ -38,6 +38,8 @@ CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=3 OMP_NUM_THREADS=4 \
 
 每次完成实验后自动调用`export_architecture_study.py`，更新：
 
+冻结选型、首次测试完成及每新增完整三种子组时，会自动调用独立核验脚本；核验失败则停止队列，不发布未经核验的新PDF。
+
 - `results/architecture_section.tex`：搜索协议、候选表、完成的三种子测试表和已测结论。
 - `results/architecture_records.json`、`architecture_aggregates.csv`、`architecture_status.json`：原始记录、完整组均值/样本标准差、进度。
 - `figures/architecture_*.pdf/.png`：筛选、验证学习曲线、选中结构与固定测试窗口预测图。

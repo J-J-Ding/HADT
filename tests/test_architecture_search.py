@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import torch
 
@@ -144,6 +145,16 @@ class ArchitectureSearchTests(unittest.TestCase):
                           horizon=96, seed=2024, code_sha256='c', data_sha256='d')
             with self.assertRaises(ValueError):
                 verify([forged])
+
+    def test_confirmation_curves_render_with_installed_pandas_and_matplotlib(self):
+        from scripts import export_architecture_study as exporter
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            (directory / 'training_history.csv').write_text('epoch,val_pinball\n1,0.2\n2,0.1\n')
+            record = dict(candidate_id='mlp3', seed=2024, best_val_pinball=.1, source_dir=temporary)
+            with patch.object(exporter, 'FIG', directory):
+                exporter.plots([], [record], None, [])
+            self.assertGreater((directory / 'architecture_learning_curves.pdf').stat().st_size, 1000)
 
 
 if __name__ == '__main__':
