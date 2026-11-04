@@ -226,7 +226,7 @@ def main():
     curve_sources = []
     for record in confirmation:
         target = figure_data / (record['candidate_id'] + '_seed' + str(record['seed']) + '_history.csv')
-        shutil.copyfile(Path(record['source_dir']) / 'training_history.csv', target)
+        atomic_text(target, (Path(record['source_dir']) / 'training_history.csv').read_text())
         curve_sources.append(dict(candidate_id=record['candidate_id'], seed=record['seed'], history=str(target.relative_to(PAPER))))
     source_metadata = dict(screening='results/architecture_records.json: validation records with stage=screen',
                            confirmation_curves=curve_sources, selection=selected,
