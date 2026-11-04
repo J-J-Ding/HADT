@@ -307,7 +307,7 @@ def main():
                     selection_source=str(ROOT / 'selection.json'), selection_uses_test=False), indent=2))
         lines.append('The prospective transfer queue compares the selected candidate, original HADT-NQ and Linear-NQ '
                      '(deduplicated when selection matches a control), with three seeds on ETTh1/ETTh2 at '
-                     '$H\\in\\{96,192,336,720\\}$ and the same four horizons on ETTm1/ETTm2/Weather/Electricity/Traffic. '
+                     '$H\\in\\{96,192,336,720\\}$ and the same four horizons on ETTm1, ETTm2, Weather, Electricity, and Traffic. '
                      'Configuration selection is frozen across datasets and horizons. All use the same chronological ratio splits '
                      'and full-variable evaluation defined above. The selected model receives a validation-search budget '
                      'that the fixed controls do not receive; these comparisons therefore assess transfer after selection, '
@@ -335,11 +335,17 @@ def main():
         if selected:
             for (dataset, horizon), group in frame.groupby(['dataset', 'horizon']):
                 index = {r['candidate_id']: r for r in group.to_dict('records')}
-                winner, original = index.get(selected['candidate_id']), index.get('transformer3')
-                if winner is not None and original is not None and selected['candidate_id'] != 'transformer3':
-                    change = 100 * (winner['QuantileLoss_standardized_mean'] / original['QuantileLoss_standardized_mean'] - 1)
+                winner = index.get(selected['candidate_id'])
+                contrasts = []
+                if winner is not None:
+                    for comparator, label in [('transformer3', 'the original HADT-NQ'), ('linear', 'Linear-NQ')]:
+                        reference = index.get(comparator)
+                        if reference is not None and comparator != selected['candidate_id']:
+                            change = 100 * (winner['QuantileLoss_standardized_mean'] / reference['QuantileLoss_standardized_mean'] - 1)
+                            contrasts.append(f'{change:+.2f}\\% relative to {label}')
+                if contrasts:
                     lines.append(f"On {dataset} at $H={horizon}$, the selected candidate changes mean test pinball by "
-                                 f"{change:+.2f}\\% relative to the original (negative denotes improvement). "
+                                 + ' and '.join(contrasts) + ' (negative denotes improvement). '
                                  'These seed summaries do not establish statistical significance or universal superiority.')
     if selected and any(r['candidate_id'] == selected['candidate_id'] and r['dataset'] == 'ETTh1' and r['horizon'] == 96 and r['seed'] == 2024 for r in evaluated):
         lines.append(r'\begin{figure*}[t]\centering\includegraphics[width=.85\textwidth]{figures/architecture_forecast.pdf}'
@@ -349,6 +355,7 @@ def main():
     plots(screen, confirmation, selected, evaluated)
     abstract = ''
     conclusion = ''
+    method = ''
     if selected:
         abstract = ('A separate validation-only architecture search selects ' + LABELS[selected['candidate_id']] +
                     '; its completed transfer evaluations are reported separately.\n')
@@ -356,8 +363,27 @@ def main():
                       LABELS[selected['candidate_id']] + '. The selected configuration is frozen across subsequent '
                       'datasets and horizons, and its completed test results are reported separately from the original study. '
                       'Broader optimality is not established.\n')
+        c = selected['candidate']
+        if c['encoder'] == 'mlp' and c['decoder'] == 'deformable':
+            model_config = selected_config['model']
+            method = (r'\paragraph{Validation-selected working configuration.} '
+                      'The separate search in Section~\\ref{sec:architecture-search} freezes '
+                      + LABELS[selected['candidate_id']] + ' as the working variant. '
+                      f"It uses $D={model_config['d_model']}$ and three pre-normalized residual per-token FFNs "
+                      f"with hidden width {model_config['d_ff']}, GELU, dropout 0.1, and final layer normalization. "
+                      'Each block uses affine maps and computes '
+                      '\\begin{equation}\\begin{aligned}'
+                      'A&=\\operatorname{Drop}(\\operatorname{GELU}(W_1\\operatorname{LN}(Z))),\\\\'
+                      "Z'&=Z+\\operatorname{Drop}(W_2 A)."
+                      '\\end{aligned}\\end{equation} '
+                      'These FFNs do not mix patch positions; temporal retrieval occurs in the horizon-conditioned '
+                      'deformable decoder. Patch length, stride, eight decoder heads, $K=8$, offset bound, '
+                      'RevIN and the ordered head are retained. The reference Transformer remains the comparator '
+                      'in historical tables. Width and learning rate were selected jointly with encoder type, '
+                      'so this configuration comparison does not isolate an MLP-only causal effect.\n')
     atomic_text(OUT / 'architecture_abstract.tex', abstract)
     atomic_text(OUT / 'architecture_conclusion.tex', conclusion)
+    atomic_text(OUT / 'architecture_method.tex', method)
     text = '\n\n'.join(lines) + '\n'
     atomic_text(OUT / 'architecture_section.tex', text)
     audit_key = [selected['candidate_id'] if selected else None, len(aggregated), bool(evaluated)]
@@ -368,7 +394,8 @@ def main():
                        env=dict(os.environ, CUDA_VISIBLE_DEVICES=''))
         atomic_text(audit_marker, json.dumps(audit_key))
     # Rebuild when the completed evidence or selection changes. Build failures remain visible.
-    stamp = hashlib.sha256(text.encode()).hexdigest()
+    tex_inputs = [PAPER / 'main.tex', *sorted((PAPER / 'sections').glob('*.tex')), *sorted(OUT.glob('*.tex'))]
+    stamp = hashlib.sha256(''.join(path.read_text() for path in tex_inputs).encode()).hexdigest()
     marker = ROOT / 'paper_build.sha256'
     if not marker.exists() or marker.read_text() != stamp:
         with open(ROOT / 'paper_build.log', 'w') as log:

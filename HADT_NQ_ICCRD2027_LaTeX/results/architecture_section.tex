@@ -14,15 +14,15 @@ Screening uses seed 2024 and at most eight epochs. The three candidates with low
 \toprule
 Candidate & Parameters & Screen val. & Confirm val. \\
 \midrule
-MLP-3, D64, lr 3e-4 & 142407 & 0.11941 & -- \\
-CNN-direct & 3930144 & 0.12045 & -- \\
-MLP-3 & 456775 & 0.12065 & -- \\
+MLP-3, D64, lr 3e-4 & 142407 & 0.11941 & $0.11892\pm0.00046$ \\
+CNN-direct & 3930144 & 0.12045 & $0.11981\pm0.00081$ \\
+MLP-3 & 456775 & 0.12065 & $0.11922\pm0.00022$ \\
 Patch-direct & 3932448 & 0.12108 & -- \\
 MLP-direct & 258976 & 0.12124 & -- \\
 CNN-3, D64, lr 3e-4 & 191559 & 0.12222 & -- \\
 Transformer-1 & 390727 & 0.12372 & -- \\
 CNN-3 & 653383 & 0.12395 & -- \\
-Transformer-3 (original) & 655687 & 0.12481 & -- \\
+Transformer-3 (original) & 655687 & 0.12481 & $0.12607\pm0.00147$ \\
 No encoder & 257991 & 0.12492 & -- \\
 Linear-NQ & 226464 & 0.12506 & -- \\
 CNN + Transformer & 654151 & 0.12749 & -- \\
@@ -33,4 +33,32 @@ CNN + Transformer & 654151 & 0.12749 & -- \\
 
 \begin{figure*}[t]\centering\includegraphics[width=.85\textwidth]{figures/architecture_screening.pdf}\caption{Completed eight-epoch validation screening runs. Bars rank validation loss; they are not test comparisons.}\Description{Horizontal bars compare completed architecture candidates on ETTh1 validation pinball.}\end{figure*}
 
-At this export, 12 of 12 screening runs and 0 confirmation runs have completed. There are 0 completed full-test runs and 0 complete three-seed test groups in the extension.
+At this export, 12 of 12 screening runs and 12 confirmation runs have completed. There are 11 completed full-test runs and 3 complete three-seed test groups in the extension.
+
+The frozen selection is MLP-3, D64, lr 3e-4, with mean confirmation validation pinball 0.11892. Its architecture is shown separately from the original HADT-NQ schematic in Figure~\ref{fig:architecture-selected}. Substituting standard modules is an empirical architecture choice, not a claim of a new component.
+
+\begin{figure*}[t]\centering\includegraphics[width=.98\textwidth]{figures/architecture_selected.pdf}\caption{Architecture frozen by ETTh1 validation selection. The original HADT-NQ remains the reference in Figure~\ref{fig:architecture}.}\Description{Computation graph of the validation-selected architecture.}\label{fig:architecture-selected}\end{figure*}
+
+The prospective transfer queue compares the selected candidate, original HADT-NQ and Linear-NQ (deduplicated when selection matches a control), with three seeds on ETTh1/ETTh2 at $H\in\{96,192,336,720\}$ and the same four horizons on ETTm1, ETTm2, Weather, Electricity, and Traffic. Configuration selection is frozen across datasets and horizons. All use the same chronological ratio splits and full-variable evaluation defined above. The selected model receives a validation-search budget that the fixed controls do not receive; these comparisons therefore assess transfer after selection, rather than equal hyperparameter-search effort. Pending jobs contribute no values or conclusions.
+
+\begin{figure*}[t]\centering\includegraphics[width=.98\textwidth]{figures/architecture_learning_curves.pdf}\caption{Validation learning curves of completed confirmation runs. Colors identify training seeds; checkpoints minimize each run's validation loss. These are not test curves.}\Description{Epoch-wise validation losses for each shortlisted candidate and completed seed.}\end{figure*}
+
+\begin{table*}[t]
+\centering\small
+\caption{Completed architecture-study test groups, $H=96$ (block 1). Mean $\pm$ sample SD over three seeds; PICP is percent. Selection used validation only; no incomplete group is aggregated.}
+\label{tab:architecture-test-96-0}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Dataset & Candidate & Pinball & PICP90 (\%) & Norm. Winkler90 \\
+\midrule
+ETTh1 & Linear-NQ & $0.13641\pm0.00012$ & $89.22\pm0.04$ & $0.4199\pm0.0009$ \\
+ETTh1 & MLP-3, D64, lr 3e-4 & $0.13254\pm0.00083$ & $86.98\pm0.63$ & $0.3704\pm0.0027$ \\
+ETTh1 & Transformer-3 (original) & $0.13847\pm0.00095$ & $86.70\pm1.64$ & $0.3886\pm0.0065$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+
+On ETTh1 at $H=96$, the selected candidate changes mean test pinball by -4.28\% relative to the original HADT-NQ and -2.83\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+\begin{figure*}[t]\centering\includegraphics[width=.85\textwidth]{figures/architecture_forecast.pdf}\caption{Selected-model forecast for the first eligible ETTh1 test window, final variable, seed 2024. The sample was fixed independently of predictive quality; shading is the central 90\% interval.}\Description{Observed series, median and ordered prediction interval from the selected architecture.}\end{figure*}

@@ -37,16 +37,18 @@ produce the token sequence. Following channel-independent patch modeling
 encoder processes $BC$ sequences independently. Thus, parameter sharing
 does not introduce attention between variables.
 
-The encoder contains three pre-normalized Transformer blocks, each with
+The original reference encoder contains three pre-normalized Transformer blocks, each with
 multi-head self-attention, residual connections, and a two-layer GELU
 feed-forward network (FFN), followed by a final layer normalization.
-The evaluated configuration fixes $L=336$, $P=16$, $S=8$, hence $N=41$,
+The reference configuration fixes $L=336$, $P=16$, $S=8$, hence $N=41$,
 with width $D=128$, $M=8$ attention heads, FFN width 256, and dropout 0.1.
 Let $\mathbf{Z}\in\mathbb{R}^{N\times D}$ denote one encoded variable
 history; its batch and variable indices are suppressed below.
 Variables share a temporal feature extractor and retain their individual
 normalization statistics. A forecast for one variable cannot explicitly
 condition on another variable's recent trajectory.
+
+\input{results/architecture_method}
 
 \subsection{Horizon-Conditioned Temporal Sampling}
 Instead of generating future states autoregressively, the decoder builds

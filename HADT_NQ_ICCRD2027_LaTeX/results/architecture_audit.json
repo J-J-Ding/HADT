@@ -1,5 +1,5 @@
 {
   "status": "passed",
-  "checked_records": 12,
+  "checked_records": 40,
   "scope": "Recorded validation histories, provenance fingerprints and source test metrics; independent neural re-evaluation is separate."
 }

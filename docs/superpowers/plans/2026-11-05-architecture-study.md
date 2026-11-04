@@ -29,24 +29,30 @@
 
 Files: create models/architecture_search.py, tests/test_architecture_search.py.
 
-- [ ] Write and run failing tests for all candidates' shape, order, channel independence, gradients, selection missing seeds and test-score independence.
-- [ ] Implement residual MLP/CNN/hybrid encoders and direct heads, retaining existing model construction.
-- [ ] Run tests on CPU in djjTF, then full existing suite with CUDA hidden.
+- [x] Write and run failing tests for all candidates' shape, order, channel independence, gradients, selection missing seeds and test-score independence.
+- [x] Implement residual MLP/CNN/hybrid encoders and direct heads, retaining existing model construction.
+- [x] Run tests on CPU in djjTF, then full existing suite with CUDA hidden.
 
 ### Task 2: Durable experiment queue
 
 Files: create scripts/run_architecture_study.py, study protocol and progress in outputs/architecture_study/.
 
-- [ ] Implement screening, repeated confirmation, frozen validation selection, and transfer matrix.
-- [ ] Check source/data/config digests, GPU3/environment guard, process lock and atomic writes.
-- [ ] Save validation-only artifacts before any selected-model test evaluation; export after every job.
-- [ ] Start detached worker and inspect first completed real run and GPU process.
+- [x] Implement screening, repeated confirmation, frozen validation selection, and transfer matrix.
+- [x] Check source/data/config digests, GPU3/environment guard, process lock and atomic writes.
+- [x] Save validation-only artifacts before any selected-model test evaluation; export after every job.
+- [x] Start detached worker and inspect first completed real run and GPU process.
 
 ### Task 3: Manuscript synchronization
 
 Files: create scripts/export_architecture_study.py; modify main.tex and add results/architecture_* artifacts plus figures.
 
-- [ ] Export candidate validation scores, selection protocol, completed test groups and truthful pending status.
-- [ ] Draw candidate comparison, selected architecture and fixed-window forecasts.
-- [ ] Independently compare aggregates/checkpoints/provenance, compile PDF and inspect pages.
-- [ ] Record measured conclusions and outstanding matrix, commit source and manuscript updates.
+- [x] Export candidate validation scores, selection protocol, completed test groups and truthful pending status.
+- [x] Draw candidate comparison, selected architecture and fixed-window forecasts.
+- [x] Independently compare aggregates/checkpoints/provenance, compile PDF and inspect pages (current completed evidence).
+- [x] Record measured conclusions and outstanding matrix, commit source and manuscript updates.
+
+## Experiment completion (separate from implementation)
+
+- [x] Twelve screening runs and twelve confirmation runs; selection frozen before test.
+- [x] ETTh1 H96: selected variant, original Transformer and Linear-NQ, three seeds each.
+- [ ] Remaining transfer matrix. Live progress: outputs/architecture_study/progress.json. Do not infer experiment completion from implementation checkboxes.

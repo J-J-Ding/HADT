@@ -98,7 +98,7 @@ The forecasts are marginal, with calibration assessed empirically.
 
 \includegraphics[width=0.98\textwidth]{figures/paper_architecture.pdf}
 
-\caption{Schematic of HADT-NQ. Variables are encoded independently with shared weights. Horizon-conditioned offsets select interpolated historical keys and values before the ordered quantile head. }
+\caption{Original reference configuration of HADT-NQ. Variables are encoded independently with shared weights. Horizon-conditioned offsets select interpolated historical keys and values before the ordered quantile head. The validation-selected configuration is specified separately in Section~\ref{sec:architecture-search}.}
 
 \Description{A shared per-variable normalization and patch encoder feeds a horizon-conditioned deformable attention decoder and a median-anchored ordered quantile head.}
 
@@ -152,7 +152,7 @@ Additional ETTh1 removals replace horizon embeddings with a shared zero embeddin
 
 \subsection{Optimization and Reproducibility}
 
-Models are trained in PyTorch 2.7.1 with CUDA 12.8 on an NVIDIA RTX 5090. The protocol fixes $D=128$, eight heads, three encoder blocks, $P=16$, $S=8$, $K=8$, dropout 0.1, and maximum offset 1.5 patch tokens. AdamW~\cite{loshchilov2019adamw} is used with a learning rate of $10^{-4}$ and a weight decay of $10^{-5}$. The batch size is 32, the gradient norm is clipped at 1.0, and training runs for at most 30 epochs. The checkpoint with the lowest validation pinball loss is retained. A plateau-based learning rate scheduler uses a patience of 2 and a reduction factor of 0.5, while early stopping uses a patience of 7. Each method receives the same policy, not necessarily the same realized stopping epoch.
+Models are trained in PyTorch 2.7.1 with CUDA 12.8 on an NVIDIA RTX 5090. The original controlled-study protocol fixes $D=128$, eight heads, three encoder blocks, $P=16$, $S=8$, $K=8$, dropout 0.1, and maximum offset 1.5 patch tokens. AdamW~\cite{loshchilov2019adamw} is used with a learning rate of $10^{-4}$ and a weight decay of $10^{-5}$. The batch size is 32, the gradient norm is clipped at 1.0, and training runs for at most 30 epochs. The checkpoint with the lowest validation pinball loss is retained. A plateau-based learning rate scheduler uses a patience of 2 and a reduction factor of 0.5, while early stopping uses a patience of 7. Each method receives the same policy, not necessarily the same realized stopping epoch. The validation-selected variant's deviations are recorded separately in Section~\ref{sec:architecture-search}.
 
 
 
