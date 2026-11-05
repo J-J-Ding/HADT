@@ -33,7 +33,7 @@ CNN + Transformer & 654151 & 0.12749 & -- \\
 
 \begin{figure*}[t]\centering\includegraphics[width=.85\textwidth]{figures/architecture_screening.pdf}\caption{Completed eight-epoch validation screening runs. Bars rank validation loss; they are not test comparisons.}\Description{Horizontal bars compare completed architecture candidates on ETTh1 validation pinball.}\end{figure*}
 
-At this export, 12 of 12 screening runs and 12 confirmation runs have completed. There are 11 completed full-test runs and 3 complete three-seed test groups in the extension.
+At this export, 12 of 12 screening runs and 12 confirmation runs have completed. There are 93 completed full-test runs and 31 complete three-seed test groups in the extension.
 
 The frozen selection is MLP-3, D64, lr 3e-4, with mean confirmation validation pinball 0.11892. Its architecture is shown separately from the original HADT-NQ schematic in Figure~\ref{fig:architecture-selected}. Substituting standard modules is an empirical architecture choice, not a claim of a new component.
 
@@ -54,11 +54,96 @@ Dataset & Candidate & Pinball & PICP90 (\%) & Norm. Winkler90 \\
 ETTh1 & Linear-NQ & $0.13641\pm0.00012$ & $89.22\pm0.04$ & $0.4199\pm0.0009$ \\
 ETTh1 & MLP-3, D64, lr 3e-4 & $0.13254\pm0.00083$ & $86.98\pm0.63$ & $0.3704\pm0.0027$ \\
 ETTh1 & Transformer-3 (original) & $0.13847\pm0.00095$ & $86.70\pm1.64$ & $0.3886\pm0.0065$ \\
+ETTh2 & Linear-NQ & $0.09238\pm0.00007$ & $88.18\pm0.34$ & $0.2465\pm0.0002$ \\
+ETTh2 & MLP-3, D64, lr 3e-4 & $0.09588\pm0.00039$ & $87.12\pm1.04$ & $0.2489\pm0.0005$ \\
+ETTh2 & Transformer-3 (original) & $0.10214\pm0.00437$ & $88.10\pm4.97$ & $0.2621\pm0.0104$ \\
+ETTm1 & Linear-NQ & $0.11627\pm0.00014$ & $87.94\pm0.07$ & $0.3556\pm0.0004$ \\
+ETTm1 & MLP-3, D64, lr 3e-4 & $0.10899\pm0.00070$ & $86.22\pm1.26$ & $0.3070\pm0.0042$ \\
+ETTm1 & Transformer-3 (original) & $0.11158\pm0.00091$ & $86.96\pm1.56$ & $0.3154\pm0.0054$ \\
+ETTm2 & Linear-NQ & $0.07529\pm0.00006$ & $87.94\pm0.29$ & $0.1919\pm0.0003$ \\
+ETTm2 & MLP-3, D64, lr 3e-4 & $0.07643\pm0.00043$ & $86.08\pm0.98$ & $0.1929\pm0.0009$ \\
+ETTm2 & Transformer-3 (original) & $0.07738\pm0.00141$ & $85.92\pm0.90$ & $0.1947\pm0.0006$ \\
+Weather & MLP-3, D64, lr 3e-4 & $0.05756\pm0.00010$ & $87.99\pm0.73$ & $0.2246\pm0.0002$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+
+\begin{table*}[t]
+\centering\small
+\caption{Completed architecture-study test groups, $H=192$ (block 1). Mean $\pm$ sample SD over three seeds; PICP is percent. Selection used validation only; no incomplete group is aggregated.}
+\label{tab:architecture-test-192-0}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Dataset & Candidate & Pinball & PICP90 (\%) & Norm. Winkler90 \\
+\midrule
+ETTh1 & Linear-NQ & $0.14847\pm0.00009$ & $88.96\pm0.11$ & $0.4619\pm0.0011$ \\
+ETTh1 & MLP-3, D64, lr 3e-4 & $0.14481\pm0.00102$ & $86.48\pm0.16$ & $0.4053\pm0.0057$ \\
+ETTh1 & Transformer-3 (original) & $0.15191\pm0.00219$ & $88.14\pm0.56$ & $0.4238\pm0.0076$ \\
+ETTh2 & Linear-NQ & $0.10323\pm0.00003$ & $87.02\pm0.49$ & $0.2729\pm0.0004$ \\
+ETTh2 & MLP-3, D64, lr 3e-4 & $0.10754\pm0.00062$ & $86.85\pm0.83$ & $0.2846\pm0.0021$ \\
+ETTh2 & Transformer-3 (original) & $0.11547\pm0.00277$ & $87.31\pm0.70$ & $0.2959\pm0.0094$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+
+\begin{table*}[t]
+\centering\small
+\caption{Completed architecture-study test groups, $H=336$ (block 1). Mean $\pm$ sample SD over three seeds; PICP is percent. Selection used validation only; no incomplete group is aggregated.}
+\label{tab:architecture-test-336-0}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Dataset & Candidate & Pinball & PICP90 (\%) & Norm. Winkler90 \\
+\midrule
+ETTh1 & Linear-NQ & $0.16060\pm0.00010$ & $88.54\pm0.08$ & $0.5045\pm0.0011$ \\
+ETTh1 & MLP-3, D64, lr 3e-4 & $0.15756\pm0.00204$ & $87.41\pm1.64$ & $0.4432\pm0.0040$ \\
+ETTh1 & Transformer-3 (original) & $0.16453\pm0.00066$ & $85.18\pm2.16$ & $0.4652\pm0.0014$ \\
+ETTh2 & Linear-NQ & $0.11188\pm0.00009$ & $86.50\pm0.04$ & $0.2931\pm0.0004$ \\
+ETTh2 & MLP-3, D64, lr 3e-4 & $0.11881\pm0.00170$ & $86.41\pm0.79$ & $0.3181\pm0.0037$ \\
+ETTh2 & Transformer-3 (original) & $0.12529\pm0.00192$ & $86.97\pm1.00$ & $0.3331\pm0.0110$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+
+\begin{table*}[t]
+\centering\small
+\caption{Completed architecture-study test groups, $H=720$ (block 1). Mean $\pm$ sample SD over three seeds; PICP is percent. Selection used validation only; no incomplete group is aggregated.}
+\label{tab:architecture-test-720-0}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Dataset & Candidate & Pinball & PICP90 (\%) & Norm. Winkler90 \\
+\midrule
+ETTh1 & Linear-NQ & $0.18915\pm0.00019$ & $84.35\pm0.22$ & $0.5947\pm0.0002$ \\
+ETTh1 & MLP-3, D64, lr 3e-4 & $0.18647\pm0.00145$ & $82.94\pm1.75$ & $0.5360\pm0.0039$ \\
+ETTh1 & Transformer-3 (original) & $0.19165\pm0.00133$ & $78.89\pm0.12$ & $0.5572\pm0.0041$ \\
+ETTh2 & Linear-NQ & $0.12604\pm0.00001$ & $87.27\pm0.04$ & $0.3275\pm0.0001$ \\
+ETTh2 & MLP-3, D64, lr 3e-4 & $0.13004\pm0.00188$ & $89.63\pm0.72$ & $0.3453\pm0.0054$ \\
+ETTh2 & Transformer-3 (original) & $0.13507\pm0.00324$ & $89.79\pm1.02$ & $0.3579\pm0.0074$ \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
 
 On ETTh1 at $H=96$, the selected candidate changes mean test pinball by -4.28\% relative to the original HADT-NQ and -2.83\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTh1 at $H=192$, the selected candidate changes mean test pinball by -4.67\% relative to the original HADT-NQ and -2.47\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTh1 at $H=336$, the selected candidate changes mean test pinball by -4.24\% relative to the original HADT-NQ and -1.89\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTh1 at $H=720$, the selected candidate changes mean test pinball by -2.71\% relative to the original HADT-NQ and -1.42\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTh2 at $H=96$, the selected candidate changes mean test pinball by -6.13\% relative to the original HADT-NQ and +3.78\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTh2 at $H=192$, the selected candidate changes mean test pinball by -6.87\% relative to the original HADT-NQ and +4.18\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTh2 at $H=336$, the selected candidate changes mean test pinball by -5.17\% relative to the original HADT-NQ and +6.19\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTh2 at $H=720$, the selected candidate changes mean test pinball by -3.72\% relative to the original HADT-NQ and +3.18\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTm1 at $H=96$, the selected candidate changes mean test pinball by -2.33\% relative to the original HADT-NQ and -6.27\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTm2 at $H=96$, the selected candidate changes mean test pinball by -1.23\% relative to the original HADT-NQ and +1.52\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
 
 \begin{figure*}[t]\centering\includegraphics[width=.85\textwidth]{figures/architecture_forecast.pdf}\caption{Selected-model forecast for the first eligible ETTh1 test window, final variable, seed 2024. The sample was fixed independently of predictive quality; shading is the central 90\% interval.}\Description{Observed series, median and ordered prediction interval from the selected architecture.}\end{figure*}
