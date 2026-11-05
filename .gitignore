@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 dataset/
 outputs/
+/预测结果浏览.html
 *.log
 .tools/
 HADT_NQ_ICCRD2027_LaTeX/*.aux

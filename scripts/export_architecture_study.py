@@ -393,6 +393,10 @@ def main():
         subprocess.run([sys.executable, 'scripts/validate_architecture_study.py'], check=True,
                        env=dict(os.environ, CUDA_VISIBLE_DEVICES=''))
         atomic_text(audit_marker, json.dumps(audit_key))
+    # Saved forecasts are rendered on CPU; compatible prior images are reused.
+    from scripts.plot_run_forecasts import render_completed
+    status['prediction_plots_completed'] = render_completed(evaluated, workers=1)
+    atomic_text(OUT / 'architecture_status.json', json.dumps(status, indent=2))
     # Rebuild when the completed evidence or selection changes. Build failures remain visible.
     tex_inputs = [PAPER / 'main.tex', *sorted((PAPER / 'sections').glob('*.tex')), *sorted(OUT.glob('*.tex'))]
     stamp = hashlib.sha256(''.join(path.read_text() for path in tex_inputs).encode()).hexdigest()
@@ -407,7 +411,7 @@ def main():
     for directory in ['models', 'data_provider', 'engine', 'metrics', 'losses', 'utils', 'experiments', 'configs', 'tests']:
         source_paths.extend(p for p in Path(directory).glob('*') if p.suffix in ('.py', '.yaml', '.json'))
     source_paths += [Path('scripts') / name for name in ['run_architecture_study.py', 'export_architecture_study.py',
-                     'validate_architecture_study.py', 'run_paper_experiments.py', 'build_paper.sh']]
+                     'validate_architecture_study.py', 'plot_run_forecasts.py', 'run_paper_experiments.py', 'build_paper.sh']]
     source_paths += [Path('requirements.txt'), Path('docs/ARCHITECTURE_STUDY.md')]
     archive = PAPER / 'supplementary/architecture_source.zip'
     temporary = archive.with_suffix('.tmp')

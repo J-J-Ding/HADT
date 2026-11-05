@@ -1,5 +1,29 @@
 # GPU 3 架构搜索与论文同步
 
+## 查看每次实验的预测曲线
+
+在浏览器打开项目根目录的 **`预测结果浏览.html`**，可以按数据集、预测长度、模型和种子筛选；点击总览图片进入各变量的详细曲线和PDF下载。
+
+每次已经完成测试的实验，其图片保存在该运行目录的 `figures/predictions/`：
+
+- `overview.png`：固定第一个测试窗口的变量总览。
+- `channel_006.png/.pdf`等：按原始变量编号命名，每张包含固定首、中、末三个测试窗口。
+- `index.html`：这次实验的图片详情。
+- `plot_complete.json`：图的来源指纹、变量编号及窗口编号。
+
+图示包含最近96步历史、真实未来值、预测中位数、50%和90%预测区间，使用原始量纲。高维数据集展示预测数组中预先均匀选出的至多8个变量；图示不覆盖所有变量或全部滑动窗口，完整测试指标仍覆盖全部变量和窗口。仅做验证筛选、尚未测试的运行不生成测试预测图。
+
+CPU批量补图入口（可以重复运行，源数组及渲染版本一致时复用已有图片）：
+
+```bash
+CUDA_VISIBLE_DEVICES='' MPLCONFIGDIR=/tmp/hadt_prediction_mpl \
+  /home/dingjunjie/anaconda3/envs/djjTF/bin/python scripts/plot_run_forecasts.py --workers 2
+```
+
+后续每次测试完成时，论文导出器会在CPU上自动生成这次实验的曲线并更新浏览入口；已有图片按源数据和绘图脚本指纹复用。
+
+浏览文件和原始图片依赖服务器的 `outputs/` 目录；该目录仍不上传Git。浏览入口属于本地生成结果。
+
 本轮使用 `/home/dingjunjie/anaconda3/envs/djjTF/bin/python`，仅暴露物理 GPU 3。GPU 0–2 不参与。
 
 ## 实验顺序
