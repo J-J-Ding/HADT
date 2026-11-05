@@ -6,12 +6,31 @@ import unittest
 from unittest.mock import patch
 
 import torch
+import numpy as np
 
 from models.architecture_search import candidates, build_candidate, select_by_validation
 from scripts.run_paper_experiments import configuration
 
 
 class ArchitectureSearchTests(unittest.TestCase):
+    def test_saved_observation_audit_accounts_for_float32_roundtrip_and_rejects_corruption(self):
+        from scripts.validate_architecture_study import assert_saved_observations
+        mean = np.array([405.123456789], dtype=np.float64)
+        scale = np.array([123.456789012], dtype=np.float64)
+        raw = np.array([[0.], [100.], [400.]], dtype=np.float32)
+        # Reproduce the actual dataset transform and saved original-unit representation.
+        from data_provider.scaler import StandardScaler
+        scaler = StandardScaler()
+        scaler.mean_, scaler.scale_ = mean, scale
+        saved = scaler.inverse_transform(scaler.transform(raw))
+        assert_saved_observations(saved, raw, mean, scale)
+        corrupted = saved.copy()
+        corrupted[0, 0] += .001
+        with self.assertRaises(AssertionError):
+            assert_saved_observations(corrupted, raw, mean, scale)
+        with self.assertRaises(AssertionError):
+            assert_saved_observations(saved[::-1], raw, mean, scale)
+
     def test_candidates_order_shape_gradients_and_channel_independence(self):
         torch.set_num_threads(2)
         for candidate in candidates():

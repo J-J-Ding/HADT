@@ -15,6 +15,21 @@ from scripts.run_architecture_study import sha, source_digest, atomic_json
 from scripts.export_architecture_study import records, groups, verify, OUT, ROOT
 
 
+def assert_saved_observations(saved, raw, mean, scale):
+    """Audit the documented float32 input transform followed by float64 inversion.
+
+    A fixed tolerance against raw zeros incorrectly rejects legitimate cancellation
+    error in high-range variables. Reconstruct the exact stored representation
+    independently instead; shifted samples and corrupted observations still fail.
+    """
+    values = np.asarray(raw, dtype=np.float32)
+    mean64 = np.asarray(mean, dtype=np.float64)
+    scale64 = np.asarray(scale, dtype=np.float64)
+    standardized = (values - mean64.astype(np.float32)) / scale64.astype(np.float32)
+    expected = standardized.astype(np.float64) * scale64 + mean64
+    np.testing.assert_allclose(saved, expected, rtol=1e-12, atol=1e-12)
+
+
 def main():
     validation = records('validation_complete')
     tested = records('complete')
@@ -65,8 +80,10 @@ def main():
             assert (np.diff(sample['quantiles'], axis=-1) >= -1e-10).all()
             for i, window in enumerate(sample['sample_indices']):
                 start = data['val_end'] + int(window)
-                np.testing.assert_allclose(sample['target'][i], data['raw'][start:start + horizon, channels], atol=1e-5, rtol=1e-5)
-                np.testing.assert_allclose(sample['history'][i], data['raw'][start - cfg['data']['seq_len']:start, channels], atol=1e-5, rtol=1e-5)
+                mean = data['scaler'].mean_[channels]
+                scale = data['scaler'].scale_[channels]
+                assert_saved_observations(sample['target'][i], data['raw'][start:start + horizon, channels], mean, scale)
+                assert_saved_observations(sample['history'][i], data['raw'][start - cfg['data']['seq_len']:start, channels], mean, scale)
             completed = json.loads((path / 'complete.json').read_text())
             assert completed['selection_sha256'] == sha(ROOT / 'selection.json')
             assert completed['test_windows'] == windows
@@ -85,7 +102,7 @@ def main():
     report = dict(status='passed', validation_runs=len(validation), test_runs=len(tested),
                   aggregate_groups=len(aggregates), audited=audited,
                   checks=['source/data/checkpoint SHA256', 'checkpoint validation selection',
-                          'train-only scaler', 'split boundaries', 'fixed forecast sample truth',
+                          'train-only scaler', 'split boundaries', 'fixed forecast sample truth with exact float32 roundtrip',
                           'quantile ordering', 'complete-seed aggregates', 'frozen selection digest'],
                   scope='Artifact audit; does not rerun neural predictions over every full test dataset.')
     atomic_json(OUT / 'architecture_independent_audit.json', report)
