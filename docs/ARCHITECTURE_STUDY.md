@@ -24,7 +24,35 @@ CUDA_VISIBLE_DEVICES='' MPLCONFIGDIR=/tmp/hadt_prediction_mpl \
 
 浏览文件和原始图片依赖服务器的 `outputs/` 目录；该目录仍不上传Git。浏览入口属于本地生成结果。
 
-本轮使用 `/home/dingjunjie/anaconda3/envs/djjTF/bin/python`，仅暴露物理 GPU 3。GPU 0–2 不参与。
+本轮使用 `/home/dingjunjie/anaconda3/envs/djjTF/bin/python`。最初仅用物理GPU 3；用户随后授权检测并利用空闲GPU 0/1/2/3，训练配置和数据协议保持不变。
+
+## 自动检测空闲显卡并行运行
+
+常驻调度器为 `scripts/gpu_queue_scheduler.py`，默认每30秒查询一次显卡。额外显卡需要连续两次检测满足：利用率不高于10%、显存占用不高于1024 MiB、可用显存至少12 GiB、没有其他非桌面计算进程。不会终止其他人的进程。GPU3保留现有授权的基础运行槽，也受至少12 GiB可用显存限制。
+
+没有额外空闲卡时，现有GPU3队列继续运行；首次有额外卡满足条件时，等待当前实验完成并让它的论文导出子进程正常结束，再切换到多卡调度。每张卡每次分配一个独立实验。继承式GPU锁和逐实验锁防止重启期间重复分配。每个工作进程只暴露分配到的GPU UUID，程序内统一使用cuda:0。
+
+查看实时状态：
+
+```bash
+cat outputs/architecture_study/scheduler_state.json
+tail -f outputs/architecture_study/scheduler.log
+```
+
+`scheduler_state.json`含当前GPU占用、最近检测时间、空闲计数、活动GPU与具体实验。`watching_legacy`表示保持原GPU3进程并监测其他卡，`running_parallel`表示已接管队列；并行卡数由实际空闲情况决定。`attention_required`表示某项运行或论文发布失败，调度器停止分配新任务并保留错误，不冒充已完成。
+
+启动或恢复（调度器锁会阻止重复启动）：
+
+```bash
+CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=4 \
+  /home/dingjunjie/anaconda3/envs/djjTF/bin/python -u scripts/gpu_queue_scheduler.py --interval 30
+```
+
+只读查询、不启动训练：`python scripts/gpu_queue_scheduler.py --once`（建议使用上述djjTF解释器）。
+
+工作进程日志与状态位于 `outputs/architecture_study/parallel_workers/<任务ID>/`。新运行目录中的 `execution.json`记录物理显卡、UUID、是否复用了训练检查点及调度器指纹；历史签名不重写。`execution_policy.json`记录新的资源授权。论文发布持有独占锁，完成记录提交使用共享锁，因此并行训练期间独立核验读取的是一致快照。图片与LaTeX仍由同一个串行导出器更新。
+
+接管后 `worker.pid`指向调度器，实际训练PID见`scheduler_state.json`；`scheduler.pid.json`也记录调度器PID。不要删除运行中的GPU锁或实验锁文件。调度器意外退出时，已经开始的子任务仍可完成；重启会识别仍存活的工作进程。
 
 ## 实验顺序
 

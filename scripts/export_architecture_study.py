@@ -1,5 +1,6 @@
 """Incrementally synchronize measured architecture-study artifacts into the manuscript."""
 import hashlib
+import fcntl
 import json
 import os
 from pathlib import Path
@@ -212,7 +213,7 @@ def verify(rows):
     return checked
 
 
-def main():
+def _main():
     ROOT.mkdir(parents=True, exist_ok=True)
     OUT.mkdir(parents=True, exist_ok=True)
     FIG.mkdir(parents=True, exist_ok=True)
@@ -252,6 +253,12 @@ def main():
                   selection_frozen=selected is not None, test_completed=len(evaluated), test_total=len(pending),
                   complete_three_seed_test_groups=len(aggregated))
     status['worker_state'] = json.loads((ROOT / 'current_job.json').read_text()).get('status') if (ROOT / 'current_job.json').exists() else 'not started'
+    if (ROOT / 'execution_policy.json').exists():
+        atomic_text(OUT / 'architecture_execution_policy.json', (ROOT / 'execution_policy.json').read_text())
+    scheduler_state = ROOT / 'scheduler_state.json'
+    if scheduler_state.exists():
+        state = json.loads(scheduler_state.read_text())
+        status['gpu_scheduler'] = {k: state.get(k) for k in ['status', 'pid', 'workers', 'interval_seconds', 'last_check_utc']}
     if (ROOT / 'failure.json').exists():
         status['failure'] = json.loads((ROOT / 'failure.json').read_text())
     atomic_text(OUT / 'architecture_status.json', json.dumps(status, indent=2))
@@ -290,6 +297,13 @@ def main():
                      r'\Description{Horizontal bars compare completed architecture candidates on ETTh1 validation pinball.}\end{figure*}')
     lines.append(f"At this export, {len(screen)} of 12 screening runs and {len(confirmation)} confirmation runs have completed. "
                  f"There are {len(evaluated)} completed full-test runs and {len(aggregated)} complete three-seed test groups in the extension.")
+    if (ROOT / 'execution_policy.json').exists():
+        lines.append('The extension permits independent runs on physical GPU indices 0--3 of the same RTX 5090 server. '
+                     'Additional GPUs are assigned only after two idle observations, with one run per assigned GPU; '
+                     'the existing GPU-3 allocation is retained. Scheduling changes neither the frozen candidate '
+                     'nor the data partitions, optimization policy or seed set. New worker execution records '
+                     'retain physical GPU UUIDs and whether training checkpoints were reused. '
+                     'Hardware timing remains descriptive because other users share the server.')
     if selected:
         lines.append('The frozen selection is ' + LABELS[selected['candidate_id']] +
                      f", with mean confirmation validation pinball {selected['mean_val']:.5f}. "
@@ -411,7 +425,7 @@ def main():
     for directory in ['models', 'data_provider', 'engine', 'metrics', 'losses', 'utils', 'experiments', 'configs', 'tests']:
         source_paths.extend(p for p in Path(directory).glob('*') if p.suffix in ('.py', '.yaml', '.json'))
     source_paths += [Path('scripts') / name for name in ['run_architecture_study.py', 'export_architecture_study.py',
-                     'validate_architecture_study.py', 'plot_run_forecasts.py', 'run_paper_experiments.py', 'build_paper.sh']]
+                     'validate_architecture_study.py', 'plot_run_forecasts.py', 'gpu_queue_scheduler.py', 'run_paper_experiments.py', 'build_paper.sh']]
     source_paths += [Path('requirements.txt'), Path('docs/ARCHITECTURE_STUDY.md')]
     archive = PAPER / 'supplementary/architecture_source.zip'
     temporary = archive.with_suffix('.tmp')
@@ -425,6 +439,13 @@ def main():
                 zipped.write(path, path.as_posix())
     temporary.replace(archive)
     print('ARCHITECTURE EXPORT', json.dumps(status), flush=True)
+
+
+def main():
+    ROOT.mkdir(parents=True, exist_ok=True)
+    with (ROOT / 'publication.lock').open('a') as publication:
+        fcntl.flock(publication, fcntl.LOCK_EX)
+        _main()
 
 
 if __name__ == '__main__':

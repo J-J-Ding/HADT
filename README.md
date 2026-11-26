@@ -4,6 +4,8 @@
 
 预测曲线：在服务器项目目录打开 `预测结果浏览.html`，按数据集/长度/模型/种子浏览；各次实验的PNG与PDF位于对应运行目录的 `figures/predictions/`。
 
+动态多卡调度：`scripts/gpu_queue_scheduler.py`每30秒检测空闲GPU，符合条件时并行运行独立实验。实时状态见`outputs/architecture_study/scheduler_state.json`，完整说明见上述实验文档。
+
 **Horizon-Adaptive Deformable Transformer with Non-Crossing Quantile Regression**
 
 This is a standalone PyTorch research project. It does not depend on DBFI-Net or its training framework.

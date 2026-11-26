@@ -66,6 +66,8 @@ def render_run(record):
     output = run / 'figures/predictions'
     output.mkdir(parents=True, exist_ok=True)
     source = run / 'forecast_samples.npz'
+    if not source.is_file():
+        source = run / 'figures/forecast_samples.npz'
     signature = dict(source_sha256=digest(source), renderer_sha256=digest(__file__))
     marker = output / 'plot_complete.json'
     with (output / '.plot.lock').open('a') as lock:
@@ -126,7 +128,7 @@ def render_run(record):
                     '显示最近96步历史；首、中、末测试窗口固定选取，各面板纵轴单位为原始量纲。'
                     '图示不替代全部测试窗口的指标。</p>' + ''.join(entries))
         atomic_text(marker, json.dumps(dict(**signature, sample_indices=windows, channel_indices=channels,
-                    feature_columns=names, files=files, scope='All saved variables (up to 8), fixed first/middle/last test windows.'), indent=2))
+                    feature_columns=names, files=files, scope='All saved variables, fixed first/middle/last test windows.'), indent=2))
     return dict(record, plot_dir=str(output))
 
 
@@ -142,9 +144,14 @@ def write_gallery(records, gallery=DEFAULT_GALLERY):
         relative = quote(os.path.relpath(output, gallery.parent).replace(os.sep, '/'), safe='/')
         label = f"{r['dataset']} · H{r['horizon']} · {r['candidate_id']} · seed{r['seed']}"
         attributes = ' '.join(f'data-{key}="{html.escape(str(r[key]), quote=True)}"' for key in ['dataset', 'horizon', 'candidate_id', 'seed'])
+        evaluation_link = ''
+        if (Path(r['source_dir']) / 'evaluation.html').is_file():
+            evaluation_url = quote(os.path.relpath(Path(r['source_dir']) / 'evaluation.html', gallery.parent).replace(os.sep, '/'), safe='/')
+            evaluation_link = f'<p><a href="{evaluation_url}">查看完整测试指标和简单基线对比</a></p>'
         cards.append(f'<article {attributes}><h2>{html.escape(label)}</h2><a href="{relative}/index.html">'
                      f'<img loading="lazy" src="{relative}/overview.png" alt="{html.escape(label, quote=True)}">'
-                     '</a><p><a href="' + relative + '/index.html">查看各变量的首、中、末窗口曲线和 PDF</a></p></article>')
+                     '</a><p><a href="' + relative + '/index.html">查看各变量的首、中、末窗口曲线和 PDF</a></p>'
+                     + evaluation_link + '</article>')
         available.append(r)
     selectors = []
     for key, label in [('dataset', '数据集'), ('horizon', '预测长度'), ('candidate_id', '模型'), ('seed', '随机种子')]:
@@ -158,7 +165,7 @@ def write_gallery(records, gallery=DEFAULT_GALLERY):
                 'article{background:white;padding:15px;border:1px solid #dde2e8}h2{font-size:17px}img{width:100%;height:auto}'
                 '@media(max-width:550px){main{display:block}article{margin-bottom:20px}}</style>'
                 '<h1>实验预测曲线浏览</h1><p>已生成 ' + str(len(available)) + ' 次完整测试的预测图片。'
-                '每次展示已保存的至多8个变量、固定首/中/末测试窗口；不是所有高维变量或全部滑动窗口。'
+                '每次展示已保存的变量（数量随实验设置）、固定首/中/末测试窗口；不是全部滑动窗口。'
                 '黑线为真实未来值，蓝线为中位数，阴影为50%/90%预测区间，灰线为历史值。点击图片查看各变量详情。</p>'
                 '<div class="filters">' + ''.join(selectors) + '</div><p id="count"></p><main>' + ''.join(cards) + '</main>'
                 '<script>const filters=[...document.querySelectorAll("select")],cards=[...document.querySelectorAll("article")];'
@@ -188,8 +195,19 @@ def main():
     parser.add_argument('--root', type=Path, default=DEFAULT_ROOT)
     parser.add_argument('--gallery', type=Path, default=DEFAULT_GALLERY)
     parser.add_argument('--workers', type=int, default=2)
+    parser.add_argument('--extra-root', type=Path, action='append', default=[],
+                        help='Also include standard main.py runs under this output directory; repeatable.')
     args = parser.parse_args()
     records = [json.loads(p.read_text()) for p in sorted(args.root.glob('*/*/*/H*/seed*/complete.json'))]
+    for root in args.extra_root:
+        for path in sorted(root.rglob('resolved_config.json')):
+            run = path.parent
+            if not (run / 'metrics.json').is_file() or not (run / 'figures/forecast_samples.npz').is_file():
+                continue
+            resolved = json.loads(path.read_text())
+            records.append(dict(source_dir=str(run.resolve()), dataset=resolved['dataset'],
+                                horizon=resolved['pred_len'], seed=resolved['seed'],
+                                candidate_id=resolved['config']['project']['name']))
     count = render_completed(records, args.gallery, args.workers)
     print(f'Generated plots for {count} completed runs; gallery: {args.gallery}', flush=True)
 

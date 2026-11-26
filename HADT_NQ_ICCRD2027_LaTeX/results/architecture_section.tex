@@ -33,7 +33,7 @@ CNN + Transformer & 654151 & 0.12749 & -- \\
 
 \begin{figure*}[t]\centering\includegraphics[width=.85\textwidth]{figures/architecture_screening.pdf}\caption{Completed eight-epoch validation screening runs. Bars rank validation loss; they are not test comparisons.}\Description{Horizontal bars compare completed architecture candidates on ETTh1 validation pinball.}\end{figure*}
 
-At this export, 12 of 12 screening runs and 12 confirmation runs have completed. There are 93 completed full-test runs and 31 complete three-seed test groups in the extension.
+At this export, 12 of 12 screening runs and 12 confirmation runs have completed. There are 252 completed full-test runs and 84 complete three-seed test groups in the extension.
 
 The frozen selection is MLP-3, D64, lr 3e-4, with mean confirmation validation pinball 0.11892. Its architecture is shown separately from the original HADT-NQ schematic in Figure~\ref{fig:architecture-selected}. Substituting standard modules is an empirical architecture choice, not a claim of a new component.
 
@@ -63,7 +63,28 @@ ETTm1 & Transformer-3 (original) & $0.11158\pm0.00091$ & $86.96\pm1.56$ & $0.315
 ETTm2 & Linear-NQ & $0.07529\pm0.00006$ & $87.94\pm0.29$ & $0.1919\pm0.0003$ \\
 ETTm2 & MLP-3, D64, lr 3e-4 & $0.07643\pm0.00043$ & $86.08\pm0.98$ & $0.1929\pm0.0009$ \\
 ETTm2 & Transformer-3 (original) & $0.07738\pm0.00141$ & $85.92\pm0.90$ & $0.1947\pm0.0006$ \\
+Electricity & Linear-NQ & $0.07504\pm0.00001$ & $90.05\pm0.03$ & $0.2565\pm0.0000$ \\
+Electricity & MLP-3, D64, lr 3e-4 & $0.07258\pm0.00015$ & $89.03\pm0.95$ & $0.2348\pm0.0006$ \\
+Electricity & Transformer-3 (original) & $0.07054\pm0.00014$ & $88.78\pm0.61$ & $0.2274\pm0.0006$ \\
+Traffic & Linear-NQ & $0.09713\pm0.00001$ & $95.28\pm0.02$ & $0.2631\pm0.0000$ \\
+Traffic & MLP-3, D64, lr 3e-4 & $0.08538\pm0.00026$ & $88.56\pm0.76$ & $0.2199\pm0.0011$ \\
+Traffic & Transformer-3 (original) & $0.08385\pm0.00024$ & $88.74\pm1.30$ & $0.2152\pm0.0007$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+
+\begin{table*}[t]
+\centering\small
+\caption{Completed architecture-study test groups, $H=96$ (block 2). Mean $\pm$ sample SD over three seeds; PICP is percent. Selection used validation only; no incomplete group is aggregated.}
+\label{tab:architecture-test-96-1}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Dataset & Candidate & Pinball & PICP90 (\%) & Norm. Winkler90 \\
+\midrule
+Weather & Linear-NQ & $0.06784\pm0.00005$ & $84.80\pm0.12$ & $0.2620\pm0.0002$ \\
 Weather & MLP-3, D64, lr 3e-4 & $0.05756\pm0.00010$ & $87.99\pm0.73$ & $0.2246\pm0.0002$ \\
+Weather & Transformer-3 (original) & $0.05853\pm0.00046$ & $86.12\pm1.79$ & $0.2283\pm0.0025$ \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -83,6 +104,34 @@ ETTh1 & Transformer-3 (original) & $0.15191\pm0.00219$ & $88.14\pm0.56$ & $0.423
 ETTh2 & Linear-NQ & $0.10323\pm0.00003$ & $87.02\pm0.49$ & $0.2729\pm0.0004$ \\
 ETTh2 & MLP-3, D64, lr 3e-4 & $0.10754\pm0.00062$ & $86.85\pm0.83$ & $0.2846\pm0.0021$ \\
 ETTh2 & Transformer-3 (original) & $0.11547\pm0.00277$ & $87.31\pm0.70$ & $0.2959\pm0.0094$ \\
+ETTm1 & Linear-NQ & $0.12717\pm0.00006$ & $87.86\pm0.04$ & $0.3920\pm0.0004$ \\
+ETTm1 & MLP-3, D64, lr 3e-4 & $0.11562\pm0.00076$ & $87.52\pm0.89$ & $0.3236\pm0.0036$ \\
+ETTm1 & Transformer-3 (original) & $0.12111\pm0.00092$ & $86.67\pm1.15$ & $0.3382\pm0.0021$ \\
+ETTm2 & Linear-NQ & $0.08414\pm0.00006$ & $88.68\pm0.07$ & $0.2171\pm0.0002$ \\
+ETTm2 & MLP-3, D64, lr 3e-4 & $0.08559\pm0.00030$ & $87.37\pm1.05$ & $0.2183\pm0.0005$ \\
+ETTm2 & Transformer-3 (original) & $0.08816\pm0.00087$ & $85.94\pm0.65$ & $0.2249\pm0.0022$ \\
+Electricity & Linear-NQ & $0.07938\pm0.00001$ & $89.49\pm0.03$ & $0.2739\pm0.0001$ \\
+Electricity & MLP-3, D64, lr 3e-4 & $0.07854\pm0.00029$ & $88.78\pm0.59$ & $0.2546\pm0.0008$ \\
+Electricity & Transformer-3 (original) & $0.07682\pm0.00023$ & $89.43\pm0.29$ & $0.2473\pm0.0007$ \\
+Traffic & Linear-NQ & $0.09909\pm0.00004$ & $95.06\pm0.01$ & $0.2696\pm0.0001$ \\
+Traffic & MLP-3, D64, lr 3e-4 & $0.09039\pm0.00020$ & $88.34\pm0.41$ & $0.2332\pm0.0002$ \\
+Traffic & Transformer-3 (original) & $0.08993\pm0.00031$ & $87.38\pm0.32$ & $0.2306\pm0.0008$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+
+\begin{table*}[t]
+\centering\small
+\caption{Completed architecture-study test groups, $H=192$ (block 2). Mean $\pm$ sample SD over three seeds; PICP is percent. Selection used validation only; no incomplete group is aggregated.}
+\label{tab:architecture-test-192-1}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Dataset & Candidate & Pinball & PICP90 (\%) & Norm. Winkler90 \\
+\midrule
+Weather & Linear-NQ & $0.08179\pm0.00009$ & $82.67\pm0.04$ & $0.3212\pm0.0007$ \\
+Weather & MLP-3, D64, lr 3e-4 & $0.07217\pm0.00009$ & $86.57\pm0.76$ & $0.2850\pm0.0008$ \\
+Weather & Transformer-3 (original) & $0.07316\pm0.00042$ & $85.20\pm0.78$ & $0.2885\pm0.0023$ \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -102,6 +151,34 @@ ETTh1 & Transformer-3 (original) & $0.16453\pm0.00066$ & $85.18\pm2.16$ & $0.465
 ETTh2 & Linear-NQ & $0.11188\pm0.00009$ & $86.50\pm0.04$ & $0.2931\pm0.0004$ \\
 ETTh2 & MLP-3, D64, lr 3e-4 & $0.11881\pm0.00170$ & $86.41\pm0.79$ & $0.3181\pm0.0037$ \\
 ETTh2 & Transformer-3 (original) & $0.12529\pm0.00192$ & $86.97\pm1.00$ & $0.3331\pm0.0110$ \\
+ETTm1 & Linear-NQ & $0.13755\pm0.00005$ & $87.91\pm0.03$ & $0.4254\pm0.0001$ \\
+ETTm1 & MLP-3, D64, lr 3e-4 & $0.12527\pm0.00025$ & $87.71\pm1.00$ & $0.3506\pm0.0019$ \\
+ETTm1 & Transformer-3 (original) & $0.13062\pm0.00114$ & $86.28\pm0.27$ & $0.3661\pm0.0059$ \\
+ETTm2 & Linear-NQ & $0.09279\pm0.00001$ & $88.98\pm0.07$ & $0.2413\pm0.0002$ \\
+ETTm2 & MLP-3, D64, lr 3e-4 & $0.09436\pm0.00018$ & $88.59\pm0.61$ & $0.2427\pm0.0011$ \\
+ETTm2 & Transformer-3 (original) & $0.09759\pm0.00118$ & $85.81\pm2.95$ & $0.2514\pm0.0056$ \\
+Electricity & Linear-NQ & $0.08453\pm0.00004$ & $89.22\pm0.05$ & $0.2906\pm0.0000$ \\
+Electricity & MLP-3, D64, lr 3e-4 & $0.08413\pm0.00013$ & $89.63\pm0.12$ & $0.2703\pm0.0004$ \\
+Electricity & Transformer-3 (original) & $0.08392\pm0.00070$ & $87.57\pm0.41$ & $0.2681\pm0.0019$ \\
+Traffic & Linear-NQ & $0.10105\pm0.00004$ & $94.90\pm0.03$ & $0.2749\pm0.0001$ \\
+Traffic & MLP-3, D64, lr 3e-4 & $0.09380\pm0.00052$ & $88.11\pm1.15$ & $0.2408\pm0.0008$ \\
+Traffic & Transformer-3 (original) & $0.09375\pm0.00081$ & $88.53\pm0.13$ & $0.2377\pm0.0016$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+
+\begin{table*}[t]
+\centering\small
+\caption{Completed architecture-study test groups, $H=336$ (block 2). Mean $\pm$ sample SD over three seeds; PICP is percent. Selection used validation only; no incomplete group is aggregated.}
+\label{tab:architecture-test-336-1}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Dataset & Candidate & Pinball & PICP90 (\%) & Norm. Winkler90 \\
+\midrule
+Weather & Linear-NQ & $0.09521\pm0.00001$ & $81.47\pm0.03$ & $0.3813\pm0.0004$ \\
+Weather & MLP-3, D64, lr 3e-4 & $0.08597\pm0.00047$ & $85.31\pm1.64$ & $0.3437\pm0.0053$ \\
+Weather & Transformer-3 (original) & $0.08748\pm0.00086$ & $84.85\pm1.85$ & $0.3504\pm0.0081$ \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -121,6 +198,34 @@ ETTh1 & Transformer-3 (original) & $0.19165\pm0.00133$ & $78.89\pm0.12$ & $0.557
 ETTh2 & Linear-NQ & $0.12604\pm0.00001$ & $87.27\pm0.04$ & $0.3275\pm0.0001$ \\
 ETTh2 & MLP-3, D64, lr 3e-4 & $0.13004\pm0.00188$ & $89.63\pm0.72$ & $0.3453\pm0.0054$ \\
 ETTh2 & Transformer-3 (original) & $0.13507\pm0.00324$ & $89.79\pm1.02$ & $0.3579\pm0.0074$ \\
+ETTm1 & Linear-NQ & $0.15208\pm0.00008$ & $88.02\pm0.01$ & $0.4758\pm0.0004$ \\
+ETTm1 & MLP-3, D64, lr 3e-4 & $0.13951\pm0.00037$ & $87.32\pm0.59$ & $0.3936\pm0.0032$ \\
+ETTm1 & Transformer-3 (original) & $0.14999\pm0.00112$ & $84.09\pm0.31$ & $0.4191\pm0.0050$ \\
+ETTm2 & Linear-NQ & $0.10536\pm0.00000$ & $88.73\pm0.02$ & $0.2780\pm0.0001$ \\
+ETTm2 & MLP-3, D64, lr 3e-4 & $0.10823\pm0.00122$ & $87.89\pm0.45$ & $0.2805\pm0.0043$ \\
+ETTm2 & Transformer-3 (original) & $0.11537\pm0.00143$ & $84.55\pm1.57$ & $0.3043\pm0.0025$ \\
+Electricity & Linear-NQ & $0.09467\pm0.00003$ & $89.16\pm0.03$ & $0.3257\pm0.0001$ \\
+Electricity & MLP-3, D64, lr 3e-4 & $0.09509\pm0.00045$ & $88.96\pm1.14$ & $0.3023\pm0.0011$ \\
+Electricity & Transformer-3 (original) & $0.09814\pm0.00054$ & $88.40\pm0.57$ & $0.3056\pm0.0014$ \\
+Traffic & Linear-NQ & $0.10599\pm0.00015$ & $94.53\pm0.04$ & $0.2860\pm0.0004$ \\
+Traffic & MLP-3, D64, lr 3e-4 & $0.10102\pm0.00006$ & $87.98\pm1.06$ & $0.2571\pm0.0006$ \\
+Traffic & Transformer-3 (original) & $0.10083\pm0.00094$ & $87.68\pm1.14$ & $0.2543\pm0.0034$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+
+\begin{table*}[t]
+\centering\small
+\caption{Completed architecture-study test groups, $H=720$ (block 2). Mean $\pm$ sample SD over three seeds; PICP is percent. Selection used validation only; no incomplete group is aggregated.}
+\label{tab:architecture-test-720-1}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Dataset & Candidate & Pinball & PICP90 (\%) & Norm. Winkler90 \\
+\midrule
+Weather & Linear-NQ & $0.11404\pm0.00005$ & $79.09\pm0.03$ & $0.4747\pm0.0005$ \\
+Weather & MLP-3, D64, lr 3e-4 & $0.10472\pm0.00129$ & $82.91\pm0.63$ & $0.4276\pm0.0056$ \\
+Weather & Transformer-3 (original) & $0.10635\pm0.00036$ & $81.72\pm1.15$ & $0.4305\pm0.0011$ \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -144,6 +249,42 @@ On ETTh2 at $H=720$, the selected candidate changes mean test pinball by -3.72\%
 
 On ETTm1 at $H=96$, the selected candidate changes mean test pinball by -2.33\% relative to the original HADT-NQ and -6.27\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
 
+On ETTm1 at $H=192$, the selected candidate changes mean test pinball by -4.53\% relative to the original HADT-NQ and -9.08\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTm1 at $H=336$, the selected candidate changes mean test pinball by -4.10\% relative to the original HADT-NQ and -8.93\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTm1 at $H=720$, the selected candidate changes mean test pinball by -6.99\% relative to the original HADT-NQ and -8.27\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
 On ETTm2 at $H=96$, the selected candidate changes mean test pinball by -1.23\% relative to the original HADT-NQ and +1.52\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTm2 at $H=192$, the selected candidate changes mean test pinball by -2.92\% relative to the original HADT-NQ and +1.72\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTm2 at $H=336$, the selected candidate changes mean test pinball by -3.32\% relative to the original HADT-NQ and +1.69\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On ETTm2 at $H=720$, the selected candidate changes mean test pinball by -6.19\% relative to the original HADT-NQ and +2.72\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On Electricity at $H=96$, the selected candidate changes mean test pinball by +2.89\% relative to the original HADT-NQ and -3.28\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On Electricity at $H=192$, the selected candidate changes mean test pinball by +2.24\% relative to the original HADT-NQ and -1.05\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On Electricity at $H=336$, the selected candidate changes mean test pinball by +0.25\% relative to the original HADT-NQ and -0.48\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On Electricity at $H=720$, the selected candidate changes mean test pinball by -3.12\% relative to the original HADT-NQ and +0.44\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On Traffic at $H=96$, the selected candidate changes mean test pinball by +1.82\% relative to the original HADT-NQ and -12.10\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On Traffic at $H=192$, the selected candidate changes mean test pinball by +0.51\% relative to the original HADT-NQ and -8.78\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On Traffic at $H=336$, the selected candidate changes mean test pinball by +0.05\% relative to the original HADT-NQ and -7.17\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On Traffic at $H=720$, the selected candidate changes mean test pinball by +0.20\% relative to the original HADT-NQ and -4.68\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On Weather at $H=96$, the selected candidate changes mean test pinball by -1.66\% relative to the original HADT-NQ and -15.16\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On Weather at $H=192$, the selected candidate changes mean test pinball by -1.35\% relative to the original HADT-NQ and -11.77\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On Weather at $H=336$, the selected candidate changes mean test pinball by -1.72\% relative to the original HADT-NQ and -9.70\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
+
+On Weather at $H=720$, the selected candidate changes mean test pinball by -1.54\% relative to the original HADT-NQ and -8.17\% relative to Linear-NQ (negative denotes improvement). These seed summaries do not establish statistical significance or universal superiority.
 
 \begin{figure*}[t]\centering\includegraphics[width=.85\textwidth]{figures/architecture_forecast.pdf}\caption{Selected-model forecast for the first eligible ETTh1 test window, final variable, seed 2024. The sample was fixed independently of predictive quality; shading is the central 90\% interval.}\Description{Observed series, median and ordered prediction interval from the selected architecture.}\end{figure*}

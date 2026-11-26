@@ -3,8 +3,9 @@
   "screen_total": 12,
   "confirmation_completed": 12,
   "selection_frozen": true,
-  "test_completed": 93,
+  "test_completed": 252,
   "test_total": 252,
-  "complete_three_seed_test_groups": 31,
-  "worker_state": "resuming_completed_cache"
+  "complete_three_seed_test_groups": 84,
+  "worker_state": "complete",
+  "prediction_plots_completed": 252
 }
