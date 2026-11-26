@@ -1,0 +1,164 @@
+{
+  "history": 336,
+  "choices": {
+    "96": {
+      "accuracy": "seasonal_skip",
+      "detail": "seasonal_skip",
+      "constraints_satisfied": true,
+      "ranking": [
+        {
+          "candidate": "linear_skip",
+          "pinball": 0.11590908884822661,
+          "delta_mae": 0.21414138847721328,
+          "jump_mae": 0.6378402455987661,
+          "PICP90": 0.8773027640779927,
+          "score": 0.9620841203676329
+        },
+        {
+          "candidate": "local_fine",
+          "pinball": 0.11958791222021115,
+          "delta_mae": 0.23253726045418213,
+          "jump_mae": 0.6632960656635903,
+          "PICP90": 0.8853778798821583,
+          "score": 1.0033176336715317
+        },
+        {
+          "candidate": "reference",
+          "pinball": 0.11891539812350203,
+          "delta_mae": 0.23417756151135882,
+          "jump_mae": 0.6582946219967999,
+          "PICP90": 0.8742630510943434,
+          "score": 0.9999999999999999
+        },
+        {
+          "candidate": "seasonal_skip",
+          "pinball": 0.11569613827765796,
+          "delta_mae": 0.21237714675779681,
+          "jump_mae": 0.64074787395761,
+          "PICP90": 0.8799909077922504,
+          "score": 0.9597655142344959
+        }
+      ]
+    },
+    "192": {
+      "accuracy": "linear_skip",
+      "detail": "linear_skip",
+      "constraints_satisfied": true,
+      "ranking": [
+        {
+          "candidate": "linear_skip",
+          "pinball": 0.1274800244596018,
+          "delta_mae": 0.2185597045278661,
+          "jump_mae": 0.6642460500806062,
+          "PICP90": 0.8751017520329318,
+          "score": 0.9586886863343793
+        },
+        {
+          "candidate": "local_fine",
+          "pinball": 0.13185262145593415,
+          "delta_mae": 0.24496108658633955,
+          "jump_mae": 0.6983956603348148,
+          "PICP90": 0.8992120129760579,
+          "score": 1.0085651134880502
+        },
+        {
+          "candidate": "reference",
+          "pinball": 0.130565909123054,
+          "delta_mae": 0.2469124595168454,
+          "jump_mae": 0.6764298748468782,
+          "PICP90": 0.8754381889915598,
+          "score": 0.9999999999999999
+        },
+        {
+          "candidate": "seasonal_skip",
+          "pinball": 0.12828979554626066,
+          "delta_mae": 0.21693609841345576,
+          "jump_mae": 0.6627614778944064,
+          "PICP90": 0.8798456110604986,
+          "score": 0.9614954947740574
+        }
+      ]
+    },
+    "336": {
+      "accuracy": "linear_skip",
+      "detail": "linear_skip",
+      "constraints_satisfied": true,
+      "ranking": [
+        {
+          "candidate": "linear_skip",
+          "pinball": 0.13608447211548041,
+          "delta_mae": 0.21837531380817707,
+          "jump_mae": 0.6762832763605499,
+          "PICP90": 0.8827069332019883,
+          "score": 0.9473238234345759
+        },
+        {
+          "candidate": "local_fine",
+          "pinball": 0.137921419438123,
+          "delta_mae": 0.24490279426648717,
+          "jump_mae": 0.6942850375293675,
+          "PICP90": 0.898812764229223,
+          "score": 0.9798127791729334
+        },
+        {
+          "candidate": "reference",
+          "pinball": 0.14004668176303495,
+          "delta_mae": 0.25578844730748734,
+          "jump_mae": 0.7016736694095371,
+          "PICP90": 0.8956205457730885,
+          "score": 0.9999999999999999
+        },
+        {
+          "candidate": "seasonal_skip",
+          "pinball": 0.136699363940713,
+          "delta_mae": 0.2164957315859218,
+          "jump_mae": 0.6884901007272078,
+          "PICP90": 0.8968988913444069,
+          "score": 0.9506672922352208
+        }
+      ]
+    },
+    "720": {
+      "accuracy": "local_fine",
+      "detail": "seasonal_skip",
+      "constraints_satisfied": true,
+      "ranking": [
+        {
+          "candidate": "linear_skip",
+          "pinball": 0.14865212100006273,
+          "delta_mae": 0.22397536728999554,
+          "jump_mae": 0.7115011654221708,
+          "PICP90": 0.8706919926901845,
+          "score": 0.9494834230729376
+        },
+        {
+          "candidate": "local_fine",
+          "pinball": 0.14584020713813103,
+          "delta_mae": 0.24294664133859287,
+          "jump_mae": 0.6990505580809542,
+          "PICP90": 0.8748463407866662,
+          "score": 0.9493333450055323
+        },
+        {
+          "candidate": "reference",
+          "pinball": 0.15287645082321477,
+          "delta_mae": 0.26266557294636034,
+          "jump_mae": 0.7239110880598097,
+          "PICP90": 0.8687967268482639,
+          "score": 0.9999999999999999
+        },
+        {
+          "candidate": "seasonal_skip",
+          "pinball": 0.14842953026732328,
+          "delta_mae": 0.22176971032588932,
+          "jump_mae": 0.7059996632254806,
+          "PICP90": 0.8728098299798118,
+          "score": 0.9460248005218639
+        }
+      ]
+    }
+  },
+  "test_used": false,
+  "timing": "Additional per-horizon deployment rule declared during confirmation and frozen before first test; original global selection unchanged",
+  "global_selection_sha256": "911e6bc47e88748eb7069cf8ca445d38cc1d34dced2805c37d7a422892606424"
+}

@@ -19,7 +19,7 @@ def parse_args():
     parser.add_argument("--dataset", default="ETTh1")
     parser.add_argument("--pred_len", type=int, default=96)
     parser.add_argument("--seed", type=int, default=2024)
-    parser.add_argument("--model", choices=["hadt_nq","patchtst","timemixer","dlinear","itransformer"])
+    parser.add_argument("--model", choices=["hadt_nq","hadt_detail","patchtst","timemixer","dlinear","itransformer"])
     return parser.parse_args()
 
 

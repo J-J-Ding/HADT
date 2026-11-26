@@ -1,0 +1,23 @@
+{
+  "history": 336,
+  "horizons": [
+    96,
+    192,
+    336,
+    720
+  ],
+  "confirmation_records": 48,
+  "test_records": 48,
+  "source_verified": true,
+  "artifacts_verified": true,
+  "three_seed_groups_complete": true,
+  "test_used_for_selection": false,
+  "selection_sha256": "911e6bc47e88748eb7069cf8ca445d38cc1d34dced2805c37d7a422892606424",
+  "scope": "Best within the prespecified finite validation search, not a global optimum",
+  "analysis_scripts_sha256": {
+    "scripts/run_etth1_detail_search.py": "8ff5f46dfd2c8385092b06fb151e20c9c159edcd185fcbca9aca22a0540a2e8c",
+    "scripts/freeze_etth1_horizon_choices.py": "86876ab5ed45052a739556c19801d2d62cd8b429717baf0c878205b8c62e2583",
+    "scripts/evaluate_etth1_detail_search.py": "0af5804cb38ceb18280a1bddc08ffa2de41e3efe0c3dd034b5e0bcf2e2e18a0b",
+    "scripts/report_etth1_detail_search.py": "54386068bc8ea0a1821985dab2e5762e46e0c212b2c8756c7f3a8a84056fb4c8"
+  }
+}

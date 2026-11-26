@@ -52,6 +52,7 @@ class Trainer:
         config,
         run_dir,
         logger,
+        train_objective=None,
     ):
         self.model = model
         self.optimizer = optimizer
@@ -60,6 +61,7 @@ class Trainer:
         self.config = config
         self.run_dir = Path(run_dir)
         self.logger = logger
+        self.train_objective = train_objective or forecasting_loss
 
         train_cfg = config["training"]
         policy = resolve_policy(model, config)
@@ -104,7 +106,7 @@ class Trainer:
                         device_type="cuda", dtype=torch.float16
                     ):
                         prediction = self.model(x)
-                        loss = forecasting_loss(
+                        loss = self.train_objective(
                             prediction, y, self.quantiles
                         )
                     if not torch.isfinite(loss):
@@ -118,7 +120,7 @@ class Trainer:
                     self.scaler.update()
                 else:
                     prediction = self.model(x)
-                    loss = forecasting_loss(
+                    loss = self.train_objective(
                         prediction, y, self.quantiles
                     )
                     if not torch.isfinite(loss):

@@ -51,6 +51,9 @@ def validate_config(config):
         params=model.get("params",model)
         if "params" in model:
             allowed=set(inspect.signature(HADTNQ).parameters)-{"seq_len","pred_len"}
+            if name == "hadt_detail":
+                from models.hadt_detail import DetailHADTNQ
+                allowed |= set(inspect.signature(DetailHADTNQ).parameters)-{"kwargs"}
             if set(params)-allowed-{"encoder_kind"}:
                 raise ValueError("Unknown HADT params")
         p=int(params.get("patch_len",16)); stride=int(params.get("stride",8))

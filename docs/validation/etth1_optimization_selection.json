@@ -1,0 +1,47 @@
+{
+  "history": 336,
+  "accuracy": "linear_skip",
+  "detail": "linear_skip",
+  "recommended": "linear_skip",
+  "detail_constraints_satisfied": true,
+  "ranking": [
+    {
+      "candidate": "linear_skip",
+      "pinball_ratio": 0.9737899646188355,
+      "delta_mae_ratio": 0.876511699836984,
+      "jump_mae_ratio": 0.9743969810179977,
+      "score": 0.9543950133023813,
+      "mean_pinball": 0.1320314266058429,
+      "mean_coverage90": 0.8764508605007744
+    },
+    {
+      "candidate": "seasonal_skip",
+      "pinball_ratio": 0.9756264245395377,
+      "delta_mae_ratio": 0.8690479975827176,
+      "jump_mae_ratio": 0.9774017874718953,
+      "score": 0.9544882754414095,
+      "mean_pinball": 0.13227870700798872,
+      "mean_coverage90": 0.8823863100442421
+    },
+    {
+      "candidate": "local_fine",
+      "pinball_ratio": 0.9885773037179714,
+      "delta_mae_ratio": 0.9668656868704513,
+      "jump_mae_ratio": 0.9987996785784172,
+      "score": 0.9852572178345118,
+      "mean_pinball": 0.13380054006309985,
+      "mean_coverage90": 0.8895622494685261
+    },
+    {
+      "candidate": "reference",
+      "pinball_ratio": 1.0,
+      "delta_mae_ratio": 1.0,
+      "jump_mae_ratio": 1.0,
+      "score": 0.9999999999999999,
+      "mean_pinball": 0.13560110995820143,
+      "mean_coverage90": 0.8785296281768139
+    }
+  ],
+  "test_used": false,
+  "scope": "Best within the prespecified finite validation search, not a global optimum"
+}

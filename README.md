@@ -1,5 +1,7 @@
 # HADT-NQ: Independent Research Codebase
 
+2026-11-26：ETTh1四预测长度优化已完成，统一历史窗口336，新增局部卷积及中位数残差候选，三种子确认与完整测试。推荐配置为`configs/optimized_etth1.yaml`；各H精度配置另见`configs/optimized_etth1_H*_accuracy.yaml`。结果、取舍和复现命令见 [ETTh1优化说明](docs/ETTH1_OPTIMIZATION.md)。
+
 2026-11-26：已按 [V1规范](specs/V1-项目结构重构与四类外部基线接入.md) 重构模型目录，并接入 PatchTST、TimeMixer、DLinear、iTransformer 官方点预测主干。四者均在原始点预测头之后追加与 HADT 相同的非交叉分位数头。运行、来源与验证说明见 [外部基线接入说明](docs/BASELINE_INTEGRATION.md)。本次单轮集成试跑不属于正式论文基准实验。
 
 2026-11-05：GPU 3 架构搜索与缺项实验已新增，可持续更新论文。实验协议、运行状态、恢复与核验方式见 [docs/ARCHITECTURE_STUDY.md](docs/ARCHITECTURE_STUDY.md)。实时完成情况以 `HADT_NQ_ICCRD2027_LaTeX/results/architecture_status.json` 为准。

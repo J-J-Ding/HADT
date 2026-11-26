@@ -1,0 +1,33 @@
+{
+  "history": 336,
+  "ranking": [
+    {
+      "candidate": "336",
+      "pinball_ratio": 1.0,
+      "delta_mae_ratio": 1.0,
+      "jump_mae_ratio": 1.0,
+      "score": 0.9999999999999999,
+      "mean_pinball": 0.13538506018226468,
+      "mean_coverage90": 0.8887570523184105
+    },
+    {
+      "candidate": "96",
+      "pinball_ratio": 1.0160458906407084,
+      "delta_mae_ratio": 0.9689808146658039,
+      "jump_mae_ratio": 1.0126394164781087,
+      "score": 1.0062922280294675,
+      "mean_pinball": 0.13764851648840473,
+      "mean_coverage90": 0.8887521522525983
+    },
+    {
+      "candidate": "512",
+      "pinball_ratio": 1.0081938013550542,
+      "delta_mae_ratio": 1.0255734644833883,
+      "jump_mae_ratio": 0.9916190662504171,
+      "score": 1.0100122604702573,
+      "mean_pinball": 0.13658306289316263,
+      "mean_coverage90": 0.9033794163898908
+    }
+  ],
+  "test_used": false
+}

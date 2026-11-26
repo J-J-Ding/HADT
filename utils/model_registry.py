@@ -5,7 +5,7 @@ from utils.baseline_config import native_config
 from utils.losses import DEFAULT_QUANTILES
 
 EXTERNAL_MODELS = ('patchtst','timemixer','dlinear','itransformer')
-MODEL_NAMES = ('hadt_nq',) + EXTERNAL_MODELS + ('linear_nq','patch_nq','dense_nq','fixed_nq')
+MODEL_NAMES = ('hadt_nq','hadt_detail') + EXTERNAL_MODELS + ('linear_nq','patch_nq','dense_nq','fixed_nq')
 
 
 def build_hadt(config, pred_len):
@@ -31,7 +31,15 @@ def build_model(config, pred_len, n_vars):
         raise ValueError(f'Unknown model: {name}; choose {MODEL_NAMES}')
     if list(c.get('quantiles',DEFAULT_QUANTILES)) != list(DEFAULT_QUANTILES):
         raise ValueError('The frozen seven quantiles are required')
-    if name in EXTERNAL_MODELS:
+    if name == 'hadt_detail':
+        from models.hadt_detail import DetailHADTNQ
+        from models.hadt_nq import HADTNQ
+        params=dict(c.get('params',{}))
+        allowed=(set(inspect.signature(HADTNQ).parameters)|set(inspect.signature(DetailHADTNQ).parameters))-{'kwargs','seq_len','pred_len'}
+        if set(params)-allowed:raise ValueError('Unknown detail model params')
+        model=DetailHADTNQ(seq_len=config['data']['seq_len'],pred_len=pred_len,**params)
+        model.native_config=params
+    elif name in EXTERNAL_MODELS:
         from importlib import import_module
         classes=dict(patchtst='PatchTSTModel',timemixer='TimeMixerModel',dlinear='DLinearModel',itransformer='ITransformerModel')
         native=native_config(config,pred_len,n_vars)
