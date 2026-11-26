@@ -1,0 +1,70 @@
+{
+  "scope": "One dataset/horizon/seed; untuned configs, capped budget. Historical HADT references differ in architecture/batch/LR policy. No significance or SOTA claim.",
+  "runs": [
+    {
+      "model": "dlinear",
+      "mode": "point",
+      "gpu": 0,
+      "epochs_run": 30,
+      "best_epoch": 29,
+      "source_and_artifacts_verified": true
+    },
+    {
+      "model": "dlinear",
+      "mode": "quantile",
+      "gpu": 0,
+      "epochs_run": 30,
+      "best_epoch": 30,
+      "source_and_artifacts_verified": true
+    },
+    {
+      "model": "patchtst",
+      "mode": "point",
+      "gpu": 1,
+      "epochs_run": 8,
+      "best_epoch": 1,
+      "source_and_artifacts_verified": true
+    },
+    {
+      "model": "patchtst",
+      "mode": "quantile",
+      "gpu": 1,
+      "epochs_run": 24,
+      "best_epoch": 17,
+      "source_and_artifacts_verified": true
+    },
+    {
+      "model": "itransformer",
+      "mode": "point",
+      "gpu": 2,
+      "epochs_run": 10,
+      "best_epoch": 3,
+      "source_and_artifacts_verified": true
+    },
+    {
+      "model": "itransformer",
+      "mode": "quantile",
+      "gpu": 2,
+      "epochs_run": 30,
+      "best_epoch": 29,
+      "source_and_artifacts_verified": true
+    },
+    {
+      "model": "timemixer",
+      "mode": "point",
+      "gpu": 3,
+      "epochs_run": 10,
+      "best_epoch": 3,
+      "source_and_artifacts_verified": true
+    },
+    {
+      "model": "timemixer",
+      "mode": "quantile",
+      "gpu": 3,
+      "epochs_run": 11,
+      "best_epoch": 4,
+      "source_and_artifacts_verified": true
+    }
+  ],
+  "passed": true
+}

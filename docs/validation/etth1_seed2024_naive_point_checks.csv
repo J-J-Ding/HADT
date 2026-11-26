@@ -1,0 +1,3 @@
+model,MSE_standardized,MAE_standardized,evaluation_elements
+Last-value persistence,1.6558518751492475,0.8453581025889892,2277408
+Seasonal naive (24h),0.6211385161674863,0.48492462178038276,2277408

@@ -111,3 +111,28 @@ python scripts/plot_run_forecasts.py --extra-root outputs/baseline_comparison \
 - GPU3单轮集成验证与检查报告保存在`outputs/baseline_refactor_validation/`。可审阅摘要在 `docs/validation/baseline_refactor_validation.json`。
 
 本次未开展正式多种子外部基准矩阵，未更新论文排名或指标。
+
+## ETTh1 单种子收敛检查
+
+已完成四个外部模型各一组原生点预测与一组分位数适配，共8次完整训练测试。设置为L336→H96、seed2024、最多30轮、patience7，各模型分别使用GPU0/1/2/3。点模式与分位数模式各自重新初始化，未预训练或冻结主干。没有进行验证集超参数搜索。
+
+```bash
+conda activate djjTF
+python scripts/run_baseline_training.py --gpus 0 1 2 3
+python scripts/report_baseline_training.py
+```
+
+完整结果页位于 `outputs/baseline_etth1_30ep_seed2024/report.html`，曲线浏览页为同目录`index.html`。该目录还有训练/验证曲线PNG和PDF、全部指标CSV、最佳权重及产物验证记录。训练完毕不必重新运行；再次运行相同配置会核验已完成缓存。
+
+| 分位数模型 | 测试Pinball | PICP90 | 实际训练轮次 | 验证最佳轮次 |
+|---|---:|---:|---:|---:|
+| DLinear-NQ | 0.138462 | 88.59% | 30 | 30 |
+| PatchTST-NQ | 0.176547 | 80.68% | 24 | 17 |
+| iTransformer-NQ | 0.151473 | 80.64% | 30 | 29 |
+| TimeMixer-NQ | 0.185641 | 91.68% | 11 | 4 |
+
+HADT-Transformer历史同数据/长度/种子参考为0.137750、PICP90=86.72%；HADT-MLP为0.133193、PICP90=87.71%。其批量、编码器与学习率等配置不同，报告中单独标识，不能当作严格匹配调参预算的排名。
+
+原生点预测的测试标准化MSE为DLinear 0.424873、PatchTST 0.433450、iTransformer 0.434916、TimeMixer 0.423498；同一测试集的24小时季节朴素预测为0.621139。因此原生主干具备学习能力，当前分位数适配的差距不能简单解释成主干无效。
+
+DLinear、iTransformer的分位数模式到达训练上限，不能声称已证明收敛。PatchTST和TimeMixer按验证集早停。所有结果只有一个种子、一个数据集和长度，原生标量点输出到分位数头的信息瓶颈仍存在；未据此更新论文结论。持久化CSV及验证摘要位于`docs/validation/etth1_seed2024_*`。
