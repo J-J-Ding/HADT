@@ -33,28 +33,32 @@ def atomic_text(path, value):
 
 
 def validate_arrays(data):
-    history, target, q = data['history'], data['target'], data['quantiles']
-    if history.ndim != 3 or target.ndim != 3 or q.shape != (*target.shape, 7):
+    point = 'point_predictions' in data
+    history, target = data['history'], data['target']
+    q = data['point_predictions'] if point else data['quantiles']
+    if history.ndim != 3 or target.ndim != 3 or q.shape != (target.shape if point else (*target.shape, 7)):
         raise ValueError('Expected history [S,L,C], target [S,H,C], quantiles [S,H,C,7]')
     s, h, c = target.shape
     if min(s, h, c) < 1 or history.shape[0] != s or history.shape[2] != c:
         raise ValueError('History and prediction dimensions disagree')
     if len(data['sample_indices']) != s or len(data['channel_indices']) != c or len(data['feature_columns']) != c:
         raise ValueError('Sample/channel labels disagree with arrays')
-    if not all(np.isfinite(a).all() for a in [history, target, q]) or (np.diff(q, axis=-1) < -1e-10).any():
+    if not all(np.isfinite(a).all() for a in [history, target, q]) or (not point and (np.diff(q, axis=-1) < -1e-10).any()):
         raise ValueError('Non-finite data or crossed quantiles; refusing to draw')
 
 
 def panel(ax, data, window, channel, history_steps=96):
     history = data['history'][window, -history_steps:, channel]
     truth = data['target'][window, :, channel]
-    q = data['quantiles'][window, :, channel]
+    point = 'point_predictions' in data
+    q = data['point_predictions'][window, :, channel] if point else data['quantiles'][window, :, channel]
     future = np.arange(len(truth))
     ax.plot(np.arange(-len(history), 0), history, color='#777777', lw=1, label='Observed history')
-    ax.fill_between(future, q[:, 0], q[:, 6], color='#376b87', alpha=.15, label='90% prediction interval')
-    ax.fill_between(future, q[:, 2], q[:, 4], color='#376b87', alpha=.27, label='50% prediction interval')
+    if not point:
+        ax.fill_between(future, q[:, 0], q[:, 6], color='#376b87', alpha=.15, label='90% prediction interval')
+        ax.fill_between(future, q[:, 2], q[:, 4], color='#376b87', alpha=.27, label='50% prediction interval')
     ax.plot(future, truth, color='#202020', lw=1.15, label='Observed future')
-    ax.plot(future, q[:, 3], color='#17679a', lw=1.15, label='Forecast median')
+    ax.plot(future, q if point else q[:, 3], color='#17679a', lw=1.15, label='Point prediction' if point else 'Forecast median')
     ax.axvline(0, ls='--', color='#777777', lw=.8)
     ax.grid(alpha=.15)
     ax.set_xlabel('Step relative to forecast start')
@@ -121,10 +125,11 @@ def render_run(record):
             entries.append(f'<section><h2>{html.escape(names[j])} · channel {channel}</h2>'
                            f'<a href="{basename}.pdf">下载 PDF</a> · <a href="{basename}.png">打开 PNG</a>'
                            f'<img loading="lazy" src="{basename}.png" alt="三个固定窗口的预测曲线"></section>')
+        forecast_description = '真实值（黑）、点预测（蓝）。' if 'point_predictions' in data else '真实值（黑）、预测中位数（蓝）、50%/90%预测区间。'
         atomic_text(output / 'index.html', '<!doctype html><meta charset="utf-8"><title>' + html.escape(title) + '</title>'
                     '<style>body{max-width:1400px;margin:30px auto;font:16px sans-serif;padding:20px;background:#fafafa}'
                     'img{display:block;width:100%;height:auto}section{margin:28px 0;background:white;padding:16px}</style>'
-                    '<h1>' + html.escape(title) + '</h1><p>真实值（黑）、预测中位数（蓝）、50%/90%预测区间。'
+                    '<h1>' + html.escape(title) + '</h1><p>' + forecast_description +
                     '显示最近96步历史；首、中、末测试窗口固定选取，各面板纵轴单位为原始量纲。'
                     '图示不替代全部测试窗口的指标。</p>' + ''.join(entries))
         atomic_text(marker, json.dumps(dict(**signature, sample_indices=windows, channel_indices=channels,
@@ -207,7 +212,7 @@ def main():
             resolved = json.loads(path.read_text())
             records.append(dict(source_dir=str(run.resolve()), dataset=resolved['dataset'],
                                 horizon=resolved['pred_len'], seed=resolved['seed'],
-                                candidate_id=resolved['config']['project']['name']))
+                                candidate_id=resolved.get('model_name',resolved['config']['project']['name'])+':'+resolved.get('variant','legacy')))
     count = render_completed(records, args.gallery, args.workers)
     print(f'Generated plots for {count} completed runs; gallery: {args.gallery}', flush=True)
 

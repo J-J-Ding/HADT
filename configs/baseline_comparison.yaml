@@ -1,0 +1,11 @@
+description: Finite integration matrix; not paper benchmark scores
+configs:
+- configs/baselines/dlinear.yaml
+- configs/baselines/patchtst.yaml
+- configs/baselines/itransformer.yaml
+- configs/baselines/timemixer.yaml
+dataset: ETTh1
+pred_len: 96
+seeds:
+- 2024
+integration_epochs: 1

@@ -1,5 +1,7 @@
 # HADT-NQ: Independent Research Codebase
 
+2026-11-26：已按 [V1规范](specs/V1-项目结构重构与四类外部基线接入.md) 重构模型目录，并接入 PatchTST、TimeMixer、DLinear、iTransformer 官方点预测主干。四者均在原始点预测头之后追加与 HADT 相同的非交叉分位数头。运行、来源与验证说明见 [外部基线接入说明](docs/BASELINE_INTEGRATION.md)。本次单轮集成试跑不属于正式论文基准实验。
+
 2026-11-05：GPU 3 架构搜索与缺项实验已新增，可持续更新论文。实验协议、运行状态、恢复与核验方式见 [docs/ARCHITECTURE_STUDY.md](docs/ARCHITECTURE_STUDY.md)。实时完成情况以 `HADT_NQ_ICCRD2027_LaTeX/results/architecture_status.json` 为准。
 
 预测曲线：在服务器项目目录打开 `预测结果浏览.html`，按数据集/长度/模型/种子浏览；各次实验的PNG与PDF位于对应运行目录的 `figures/predictions/`。
@@ -24,51 +26,42 @@ This is a standalone PyTorch research project. It does not depend on DBFI-Net or
 ## 2. Project structure
 
 ```text
-HADT_NQ/
-├── configs/
-│   └── default.yaml
-├── data_provider/
-│   ├── csv_dataset.py
-│   ├── data_factory.py
-│   └── scaler.py
-├── engine/
-│   ├── checkpoint.py
-│   ├── evaluator.py
-│   └── trainer.py
-├── experiments/
-│   └── runner.py
-├── losses/
-│   └── quantile_loss.py
-├── metrics/
-│   └── interval_metrics.py
-├── models/
+1030TPF/
+├── models/                   # Complete forecasting models
 │   ├── hadt_nq.py
-│   ├── horizon_deformable.py
-│   ├── noncrossing_head.py
-│   ├── patch_embedding.py
-│   ├── revin.py
-│   └── transformer_encoder.py
+│   ├── patchtst.py
+│   ├── timemixer.py
+│   ├── dlinear.py
+│   ├── itransformer.py
+│   └── *_nq.py              # Historical internal controls
+├── layers/                   # Model-specific layers
+│   ├── hadt_nq/
+│   ├── patchtst/
+│   ├── timemixer/
+│   ├── dlinear/
+│   └── itransformer/
+├── utils/                    # Shared losses, metrics, normalization, heads, registry
+├── data_provider/            # CSV, chronological windows, training-only scaler
+├── engine/                   # Training, checkpointing, evaluation, visualization
+├── experiments/              # Runner, historical controls and architecture selection
+├── configs/
+│   ├── default.yaml          # Historical HADT default preserved
+│   ├── baselines/            # Four external model configurations
+│   └── baseline_comparison.yaml
+├── third_party/              # Pinned upstream sources and licenses
 ├── scripts/
-│   ├── run_experiment.sh
-│   └── run_smoke_test.py
 ├── tests/
-│   ├── test_data.py
-│   └── test_model.py
-├── utils/
-│   ├── config.py
-│   ├── logger.py
-│   ├── seed.py
-│   └── smoke_test.py
+├── specs/                    # Reviewed change specifications and original frozen spec
+├── docs/
 ├── main.py
-├── PROJECT_SPEC.md
 └── requirements.txt
 ```
 
 ## 3. Environment
 
 Recommended:
-- Python 3.10 or 3.11
-- PyTorch 2.2+
+- Python 3.9+ (validated in the existing `djjTF` environment)
+- PyTorch 2.3+ (this implementation was validated with 2.7.1+cu128)
 - CUDA-enabled PyTorch if training on NVIDIA GPU
 
 Install:

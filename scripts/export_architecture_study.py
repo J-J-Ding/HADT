@@ -422,7 +422,7 @@ def _main():
         atomic_text(marker, stamp)
     # Keep this extension reproducible without altering the historical delivery archive.
     source_paths = []
-    for directory in ['models', 'data_provider', 'engine', 'metrics', 'losses', 'utils', 'experiments', 'configs', 'tests']:
+    for directory in ['models', 'data_provider', 'engine', 'layers', 'utils', 'experiments', 'configs', 'tests']:
         source_paths.extend(p for p in Path(directory).glob('*') if p.suffix in ('.py', '.yaml', '.json'))
     source_paths += [Path('scripts') / name for name in ['run_architecture_study.py', 'export_architecture_study.py',
                      'validate_architecture_study.py', 'plot_run_forecasts.py', 'gpu_queue_scheduler.py', 'run_paper_experiments.py', 'build_paper.sh']]

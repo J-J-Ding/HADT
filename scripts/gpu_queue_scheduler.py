@@ -226,7 +226,7 @@ def run_one(index, gpu_index, gpu_uuid):
         return 75
     import torch
     from scripts import run_architecture_study as study
-    from models.architecture_search import candidates
+    from experiments.architecture_search import candidates
     if Path(sys.prefix).name != 'djjTF' or os.environ.get('CUDA_VISIBLE_DEVICES') != gpu_uuid or not torch.cuda.is_available() or torch.cuda.device_count() != 1:
         raise RuntimeError('Worker requires djjTF and exactly its assigned GPU UUID')
     torch.set_num_threads(4)
@@ -280,7 +280,7 @@ def run_one(index, gpu_index, gpu_uuid):
 def monitor(interval):
     from scripts import run_architecture_study as study
     from scripts.export_architecture_study import verify, records
-    from models.architecture_search import select_by_validation
+    from experiments.architecture_search import select_by_validation
     protocol, selection = read(ROOT / 'protocol.json'), read(ROOT / 'selection.json')
     queue = read(ROOT / 'evaluation_queue.json')
     if study.source_digest() != protocol['source_hash'] or queue != study.evaluation_queue(selection['candidate_id']):

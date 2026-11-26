@@ -8,7 +8,7 @@ from unittest.mock import patch
 import torch
 import numpy as np
 
-from models.architecture_search import candidates, build_candidate, select_by_validation
+from experiments.architecture_search import candidates, build_candidate, select_by_validation
 from scripts.run_paper_experiments import configuration
 
 
@@ -114,7 +114,7 @@ class ArchitectureSearchTests(unittest.TestCase):
             self.assertIn((dataset, 96, 'transformer3', 2024), keys)
 
     def test_dilated_convolution_matches_reference_values_and_gradients(self):
-        from models.architecture_search import LinearConv1d
+        from experiments.architecture_search import LinearConv1d
         for kernel, dilation in [(3, 1), (3, 2), (3, 4), (1, 1)]:
             reference = torch.nn.Conv1d(3, 5, kernel, padding=(kernel // 2) * dilation,
                                         dilation=dilation).double()

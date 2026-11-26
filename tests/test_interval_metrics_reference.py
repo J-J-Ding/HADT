@@ -2,7 +2,7 @@
 import unittest
 import numpy as np
 from data_provider.scaler import StandardScaler
-from metrics.interval_metrics import IntervalMetricAccumulator
+from utils.metrics import IntervalMetricAccumulator
 
 
 class TestIntervalMetricReference(unittest.TestCase):

@@ -144,7 +144,7 @@ A fresh run can take much longer than the original delivery window, depending on
                   'run_traffic_depth_comparison.py','plot_cross_dataset_depths.py','build_paper.sh',
                   'inspect_dataset.py','run_smoke_test.py']
     code_files=[]
-    for d in ['models','data_provider','engine','metrics','losses','utils','experiments','configs','tests']:
+    for d in ['models','data_provider','engine','layers','utils','experiments','configs','tests']:
         code_files.extend(p for p in Path(d).rglob('*') if p.is_file() and p.suffix in ('.py','.yaml'))
     code_files.extend(Path('scripts')/n for n in script_names)
     code_files.extend([Path('requirements.txt'),Path('main.py')])

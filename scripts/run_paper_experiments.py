@@ -9,7 +9,7 @@ from data_provider.data_factory import build_data_bundle
 from engine.trainer import Trainer
 from engine.checkpoint import load_checkpoint
 from engine.evaluator import evaluate_test
-from models.paper_baselines import make_paper_model
+from experiments.paper_controls import make_paper_model
 from utils.config import load_config
 from utils.logger import create_logger
 from utils.seed import set_seed
@@ -22,8 +22,8 @@ def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
 def code_digest():
-    paths=[*Path('models').glob('*.py'),Path('engine/trainer.py'),Path('engine/evaluator.py'),
-           Path('losses/quantile_loss.py'),Path('metrics/interval_metrics.py'),
+    paths=[*Path('models').rglob('*.py'),*Path('layers').rglob('*.py'),*Path('utils').rglob('*.py'),*Path('experiments').rglob('*.py'),Path('engine/trainer.py'),Path('engine/evaluator.py'),
+           Path('utils/losses.py'),Path('utils/metrics.py'),
            *Path('data_provider').glob('*.py')]
     return hashlib.sha256(''.join(str(p)+digest(p) for p in sorted(paths)).encode()).hexdigest()
 

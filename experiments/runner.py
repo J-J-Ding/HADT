@@ -5,7 +5,9 @@ import json
 import torch
 
 from data_provider.data_factory import build_data_bundle
-from models.hadt_nq import HADTNQ
+from utils.model_registry import build_model
+from utils.channel_policy import resolve_policy
+from utils.provenance import identity, atomic_json, sha256
 from engine.trainer import Trainer
 from engine.checkpoint import load_checkpoint
 from engine.evaluator import evaluate_test
@@ -24,33 +26,14 @@ def _resolve_device(config):
 
 
 def _build_model(config, pred_len):
-    data_cfg = config["data"]
-    model_cfg = config["model"]
-    model = HADTNQ(
-        seq_len=int(data_cfg["seq_len"]),
-        pred_len=int(pred_len),
-        patch_len=int(model_cfg["patch_len"]),
-        stride=int(model_cfg["stride"]),
-        d_model=int(model_cfg["d_model"]),
-        n_heads=int(model_cfg["n_heads"]),
-        e_layers=int(model_cfg["e_layers"]),
-        d_ff=int(model_cfg["d_ff"]),
-        dropout=float(model_cfg["dropout"]),
-        n_points=model_cfg["n_points"],
-        max_offset=float(model_cfg["max_offset"]),
-        max_horizon=int(model_cfg["max_horizon"]),
-        horizon_chunk_size=int(model_cfg["horizon_chunk_size"]),
-        gradient_checkpointing=bool(model_cfg["gradient_checkpointing"]),
-        min_quantile_gap=float(model_cfg["min_quantile_gap"]),
-        quantiles=tuple(model_cfg["quantiles"]),
-    )
-
-    model.ablation = config.get("ablation")
-    return model
+    # Legacy HADT-only entry used by frozen experimental scripts.
+    from utils.model_registry import build_hadt
+    return build_hadt(config, pred_len)
 
 
 def run_single_experiment(config, dataset_name, pred_len, seed):
     config = copy.deepcopy(config)
+    config["model"].setdefault("quantiles", [0.05,0.1,0.25,0.5,0.75,0.9,0.95])
     if "torch_threads" in config["runtime"]:
         torch.set_num_threads(int(config["runtime"]["torch_threads"]))
     set_seed(seed)
@@ -68,7 +51,30 @@ def run_single_experiment(config, dataset_name, pred_len, seed):
         / f"H{pred_len}"
         / f"seed{seed}"
     )
+    named = "name" in config["model"]
+    model = build_model(config, pred_len, bundle.n_vars).to(device)
+    policy = resolve_policy(model, config)
+    config["resolved_channel_policy"] = policy
+    if named:
+        run_dir = (output_root / config["experiment"]["run_name"] / model.model_name /
+                   model.variant / dataset_name / f"H{pred_len}" / f"seed{seed}")
     run_dir.mkdir(parents=True, exist_ok=True)
+    signature, provenance = identity(config, dataset_name, pred_len, seed)
+    marker = run_dir / "run_identity.json"
+    if marker.exists():
+        if json.loads(marker.read_text())["fingerprint"] != signature:
+            raise ValueError(f"Run identity conflict; choose a new run_name: {run_dir}")
+    elif named and any(run_dir.iterdir()):
+        raise ValueError(f"Nonempty run without identity; refusing overwrite: {run_dir}")
+    if named and (run_dir / "complete.json").exists():
+        completed = json.loads((run_dir / "complete.json").read_text())
+        for name, digest in completed["artifact_sha256"].items():
+            if not (run_dir/name).is_file() or sha256(run_dir/name) != digest:
+                raise ValueError(f"Completed artifact mismatch: {run_dir/name}")
+        return json.loads((run_dir/"metrics.json").read_text())
+    atomic_json(marker, dict(fingerprint=signature))
+    atomic_json(run_dir / "source_manifest.json", provenance)
+
 
     logger = create_logger(run_dir / "train.log")
     logger.info(
@@ -78,7 +84,6 @@ def run_single_experiment(config, dataset_name, pred_len, seed):
     logger.info(f"CUDA_VISIBLE_DEVICES={__import__('os').environ.get('CUDA_VISIBLE_DEVICES')} GPU={torch.cuda.get_device_name(device) if device.type == 'cuda' else 'CPU'}")
     logger.info(f"Feature columns: {bundle.feature_columns}")
 
-    model = _build_model(config, pred_len).to(device)
     n_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
 
     resolved = {
@@ -89,12 +94,22 @@ def run_single_experiment(config, dataset_name, pred_len, seed):
         "n_rows": bundle.n_rows,
         "feature_columns": bundle.feature_columns,
         "split_bounds": bundle.split_bounds,
-        "n_patches": model.n_patches,
-        "n_points": model.n_points,
-        "head_dim": model.d_model // int(config["model"]["n_heads"]),
+        "model_name": model.model_name,
+        "variant": model.variant,
+        "output_mode": model.output_mode,
+        "native_config": getattr(model,"native_config",None),
+        "quantile_adapter": getattr(model,"quantile_adapter","native_features"),
+        "head_input_dim": getattr(getattr(getattr(model,"quantile_head",None),"projection",None),"in_features",None),
+        "n_patches": getattr(model,"n_patches",None),
+        "n_points": getattr(model,"n_points",None),
+        "head_dim": getattr(getattr(model,"decoder",None),"head_dim",None),
         "trainable_parameters": n_params,
         "config": config,
         "scaler": bundle.scaler.state_dict(),
+        "runtime_versions": {"torch":torch.__version__,"cuda":torch.version.cuda},
+        "device":str(device),
+        "visible_devices":__import__('os').environ.get('CUDA_VISIBLE_DEVICES'),
+        "scope":config.get('experiment',{}).get('scope','training_and_full_test'),
     }
     with open(run_dir / "resolved_config.json", "w", encoding="utf-8") as f:
         json.dump(resolved, f, indent=2, ensure_ascii=False)
@@ -133,7 +148,7 @@ def run_single_experiment(config, dataset_name, pred_len, seed):
         loader=bundle.test_loader,
         device=device,
         scaler=bundle.scaler,
-        channel_chunk_size=int(config["evaluation"]["channel_chunk_size"]),
+        channel_chunk_size=policy["evaluation_chunk_size"],
         quantiles=tuple(config["model"]["quantiles"]),
         output_dir=run_dir,
         save_horizon_metrics=bool(
@@ -145,7 +160,10 @@ def run_single_experiment(config, dataset_name, pred_len, seed):
         "dataset": dataset_name,
         "pred_len": int(pred_len),
         "seed": int(seed),
-        "best_val_pinball": float(best_val),
+        "best_val_mse" if model.output_mode=="point" else "best_val_pinball": float(best_val),
+        "model_name": model.model_name,
+        "variant": model.variant,
+        "output_mode": model.output_mode,
         "training_seconds": float(train_seconds),
         "trainable_parameters": int(n_params),
     })
@@ -156,6 +174,20 @@ def run_single_experiment(config, dataset_name, pred_len, seed):
         from engine.visualization import create_run_figures
         create_run_figures(model, bundle, device, run_dir, metrics,
                            max_channels=config.get("visualization", {}).get("max_channels"))
+    artifacts = ["best_checkpoint.pt","metrics.json","resolved_config.json","training_history.csv","source_manifest.json","run_identity.json"]
+    if config.get("visualization",{}).get("enabled",True):
+        from scripts.plot_run_forecasts import render_run
+        render_run(dict(source_dir=str(run_dir.resolve()),dataset=dataset_name,horizon=pred_len,
+                        seed=seed,candidate_id=model.model_name+":"+model.variant))
+        artifacts.extend(str(p.relative_to(run_dir)) for p in sorted((run_dir/"figures").rglob("*"))
+                         if p.is_file() and p.suffix in (".png",".pdf",".html",".json",".npz"))
+    if (run_dir/"horizon_metrics.csv").exists():
+        artifacts.append("horizon_metrics.csv")
+    artifact_hashes={name:sha256(run_dir/name) for name in artifacts}
+    atomic_json(run_dir/"complete.json",dict(fingerprint=signature,scope=config.get("experiment",{}).get("scope","training_and_full_test"),model_name=model.model_name,
+                variant=model.variant,output_mode=model.output_mode,dataset=dataset_name,
+                horizon=pred_len,seed=seed,source_dir=str(run_dir.resolve()),
+                candidate_id=model.model_name+":"+model.variant,artifact_sha256=artifact_hashes))
     logger.info(f"Test metrics: {metrics}")
     return metrics
 

@@ -1,0 +1,89 @@
+project:
+  name: HADT_NQ
+  version: '1.1'
+data:
+  root_path: ./dataset
+  time_column: date
+  feature_mode: M
+  seq_len: 336
+  split_ratios:
+    ETT:
+    - 0.6
+    - 0.2
+    - 0.2
+    other:
+    - 0.7
+    - 0.1
+    - 0.2
+  datasets:
+  - ETTh1
+  files:
+    ETTh1: ETT-small/ETTh1.csv
+    ETTh2: ETT-small/ETTh2.csv
+    ETTm1: ETT-small/ETTm1.csv
+    ETTm2: ETT-small/ETTm2.csv
+    Electricity: electricity/electricity.csv
+    Traffic: traffic/traffic.csv
+    Weather: weather/weather.csv
+model:
+  name: timemixer
+  output_mode: quantile
+  quantile_head: median_positive_gap
+  quantile_adapter: post_point_shared_head
+  quantiles:
+  - 0.05
+  - 0.1
+  - 0.25
+  - 0.5
+  - 0.75
+  - 0.9
+  - 0.95
+  params:
+    d_model: 128
+    e_layers: 2
+    d_ff: 256
+    dropout: 0.1
+    channel_independence: 1
+    down_sampling_layers: 2
+    down_sampling_window: 2
+    down_sampling_method: avg
+    decomp_method: moving_avg
+    moving_avg: 25
+    top_k: 5
+    use_norm: 1
+    use_future_temporal_feature: false
+    embed: timeF
+    freq: h
+training:
+  batch_size: 16
+  channel_sample_size: 16
+  epochs: 30
+  learning_rate: 0.0001
+  weight_decay: 1.0e-05
+  early_stopping_patience: 7
+  gradient_clip: 1.0
+  amp: false
+  scheduler_factor: 0.5
+  scheduler_patience: 2
+  min_learning_rate: 1.0e-06
+  channel_policy: auto
+evaluation:
+  batch_size: 16
+  channel_chunk_size: 8
+  save_horizon_metrics: true
+  channel_policy: auto
+experiment:
+  horizons:
+  - 96
+  seeds:
+  - 2024
+  output_dir: ./outputs
+  run_name: baseline_comparison
+runtime:
+  device: cuda:0
+  num_workers: 0
+  pin_memory: true
+  torch_threads: 4
+visualization:
+  enabled: true
+  max_channels: 3

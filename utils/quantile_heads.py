@@ -42,3 +42,19 @@ class MedianAnchoredNonCrossingHead(nn.Module):
         upper = median + torch.cumsum(upper_gaps, dim=-1)
 
         return torch.cat([lower, median, upper], dim=-1)
+
+
+def ordered_from_raw(raw, min_gap=1e-4):
+    median=raw[...,:1]
+    gaps=F.softplus(raw[...,1:])+min_gap
+    lower=(median-torch.cumsum(gaps[...,:3],dim=-1)).flip(-1)
+    upper=median+torch.cumsum(gaps[...,3:],dim=-1)
+    return torch.cat((lower,median,upper),dim=-1)
+
+
+def initialize_raw_projection(layer, horizon):
+    nn.init.normal_(layer.weight,mean=0.,std=1e-3)
+    gap=math.log(math.expm1(.55))
+    with torch.no_grad():
+        bias=torch.tensor([0.,gap,gap,gap,gap,gap,gap],dtype=layer.bias.dtype)
+        layer.bias.copy_(bias.repeat(horizon))

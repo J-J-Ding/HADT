@@ -1,7 +1,7 @@
 import torch
 
 from models.hadt_nq import HADTNQ
-from losses.quantile_loss import multi_quantile_pinball_loss
+from utils.losses import multi_quantile_pinball_loss
 
 
 def run_smoke_test(device=None):

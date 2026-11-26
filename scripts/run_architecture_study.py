@@ -19,7 +19,7 @@ from data_provider.data_factory import build_data_bundle
 from engine.checkpoint import load_checkpoint
 from engine.evaluator import evaluate_test
 from engine.trainer import Trainer
-from models.architecture_search import candidates, candidate_config, build_candidate, select_by_validation
+from experiments.architecture_search import candidates, candidate_config, build_candidate, select_by_validation
 from scripts.run_paper_experiments import configuration, samples
 from utils.logger import create_logger
 from utils.seed import set_seed
@@ -46,8 +46,8 @@ def sha(path):
 
 def source_digest():
     paths = []
-    for directory in ['models', 'data_provider', 'engine', 'metrics', 'losses', 'utils']:
-        paths.extend(Path(directory).glob('*.py'))
+    for directory in ['models', 'data_provider', 'engine', 'layers', 'utils', 'experiments']:
+        paths.extend(Path(directory).rglob('*.py'))
     paths.extend([Path(__file__), Path('scripts/run_paper_experiments.py'), Path('experiments/runner.py')])
     paths.extend([Path('configs/etth1_gpu3.yaml'), Path('configs/traffic_gpu3.yaml')])
     return hashlib.sha256(''.join(str(p) + sha(p) for p in sorted(set(paths))).encode()).hexdigest()

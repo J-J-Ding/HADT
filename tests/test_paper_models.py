@@ -12,7 +12,7 @@ class TestPaperModels(unittest.TestCase):
         return c
 
     def test_controls_shape_order_and_channel_independence(self):
-        from models.paper_baselines import make_paper_model
+        from experiments.paper_controls import make_paper_model
         x=torch.randn(2,32,3)
         for method in ['hadt','linear','patch','dense','fixed','shared','independent','no_revin']:
             with self.subTest(method=method):
@@ -26,14 +26,14 @@ class TestPaperModels(unittest.TestCase):
                 self.assertTrue(any(p.grad is not None and p.grad.abs().sum()>0 for p in m.parameters()))
 
     def test_shared_query_has_no_horizon_distinction_at_inference(self):
-        from models.paper_baselines import make_paper_model
+        from experiments.paper_controls import make_paper_model
         m=make_paper_model(self.cfg(),8,'shared').eval()
         q=m(torch.randn(2,32,3))
         torch.testing.assert_close(q,q[:,:1].expand_as(q),rtol=1e-5,atol=1e-6)
 
     def test_dense_equals_zero_offset_all_token_sparse_attention(self):
-        from models.paper_baselines import DenseHorizonAttention
-        from models.horizon_deformable import HorizonDeformableAttention
+        from layers.hadt_nq.dense_horizon import DenseHorizonAttention
+        from layers.hadt_nq.horizon_deformable import HorizonDeformableAttention
         args=dict(d_model=16,n_heads=2,n_points=7,max_horizon=8,dropout=0.,horizon_chunk_size=3)
         sparse=HorizonDeformableAttention(**args).eval()
         dense=DenseHorizonAttention(**args).eval()

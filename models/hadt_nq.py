@@ -1,14 +1,14 @@
 import torch
 import torch.nn as nn
 
-from models.revin import RevINNoAffine
-from models.patch_embedding import OverlappingPatchEmbedding
-from models.transformer_encoder import TemporalTransformerEncoder
-from models.horizon_deformable import (
+from utils.revin import RevINNoAffine
+from layers.hadt_nq.patch_embedding import OverlappingPatchEmbedding
+from layers.hadt_nq.transformer_encoder import TemporalTransformerEncoder
+from layers.hadt_nq.horizon_deformable import (
     HorizonDeformableAttention,
     derive_n_points,
 )
-from models.noncrossing_head import MedianAnchoredNonCrossingHead
+from utils.quantile_heads import MedianAnchoredNonCrossingHead
 
 
 class HADTNQ(nn.Module):

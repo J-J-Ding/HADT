@@ -23,3 +23,12 @@ def multi_quantile_pinball_loss(prediction, target, quantiles=DEFAULT_QUANTILES)
     error = target.unsqueeze(-1) - prediction
     loss = torch.maximum(tau * error, (tau - 1.0) * error)
     return loss.mean()
+
+
+def forecasting_loss(prediction, target, quantiles=DEFAULT_QUANTILES):
+    """Point MSE or the existing seven-quantile pinball, with explicit shapes."""
+    if prediction.ndim == 3:
+        if prediction.shape != target.shape:
+            raise ValueError('Point prediction and target shapes must match')
+        return torch.nn.functional.mse_loss(prediction, target)
+    return multi_quantile_pinball_loss(prediction, target, quantiles)

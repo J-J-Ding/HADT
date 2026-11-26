@@ -1,0 +1,591 @@
+{
+  "scope": "Implementation/integration validation only; one training epoch, full ETTh1 splits, GPU3. Not paper benchmark ranking.",
+  "tests": {
+    "before": 38,
+    "after": 49,
+    "passed": true
+  },
+  "official_parity": {
+    "scope": "Native point backbones only; isolated pinned official implementations with identical weights/inputs. Optional unused Reformer import stub documented in script.",
+    "cases": [
+      {
+        "model": "dlinear",
+        "configuration_overrides": {},
+        "upstream_commit": "0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6",
+        "strict_state_loading": true,
+        "shape": [
+          2,
+          24,
+          5
+        ],
+        "max_absolute_error": 0.0,
+        "bitwise_equal": true,
+        "reference_optional_reformer_stub": false,
+        "passed": true
+      },
+      {
+        "model": "dlinear",
+        "configuration_overrides": {
+          "individual": true
+        },
+        "upstream_commit": "0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6",
+        "strict_state_loading": true,
+        "shape": [
+          2,
+          24,
+          5
+        ],
+        "max_absolute_error": 0.0,
+        "bitwise_equal": true,
+        "reference_optional_reformer_stub": false,
+        "passed": true
+      },
+      {
+        "model": "patchtst",
+        "configuration_overrides": {},
+        "upstream_commit": "204c21efe0b39603ad6e2ca640ef5896646ab1a9",
+        "strict_state_loading": true,
+        "shape": [
+          2,
+          24,
+          5
+        ],
+        "max_absolute_error": 0.0,
+        "bitwise_equal": true,
+        "reference_optional_reformer_stub": false,
+        "passed": true
+      },
+      {
+        "model": "patchtst",
+        "configuration_overrides": {
+          "decomposition": true,
+          "individual": true
+        },
+        "upstream_commit": "204c21efe0b39603ad6e2ca640ef5896646ab1a9",
+        "strict_state_loading": true,
+        "shape": [
+          2,
+          24,
+          5
+        ],
+        "max_absolute_error": 0.0,
+        "bitwise_equal": true,
+        "reference_optional_reformer_stub": false,
+        "passed": true
+      },
+      {
+        "model": "itransformer",
+        "configuration_overrides": {},
+        "upstream_commit": "c2426e68ca13f74aaec08045c5c724d8ad328124",
+        "strict_state_loading": true,
+        "shape": [
+          2,
+          24,
+          5
+        ],
+        "max_absolute_error": 0.0,
+        "bitwise_equal": true,
+        "reference_optional_reformer_stub": false,
+        "passed": true
+      },
+      {
+        "model": "itransformer",
+        "configuration_overrides": {
+          "use_norm": false,
+          "output_attention": true
+        },
+        "upstream_commit": "c2426e68ca13f74aaec08045c5c724d8ad328124",
+        "strict_state_loading": true,
+        "shape": [
+          2,
+          24,
+          5
+        ],
+        "max_absolute_error": 0.0,
+        "bitwise_equal": true,
+        "reference_optional_reformer_stub": false,
+        "passed": true
+      },
+      {
+        "model": "timemixer",
+        "configuration_overrides": {},
+        "upstream_commit": "e24610583b36fdd8c76cc17a8df4e65759a5f460",
+        "strict_state_loading": true,
+        "shape": [
+          2,
+          24,
+          5
+        ],
+        "max_absolute_error": 0.0,
+        "bitwise_equal": true,
+        "reference_optional_reformer_stub": false,
+        "passed": true
+      },
+      {
+        "model": "timemixer",
+        "configuration_overrides": {
+          "channel_independence": 0,
+          "down_sampling_method": "max"
+        },
+        "upstream_commit": "e24610583b36fdd8c76cc17a8df4e65759a5f460",
+        "strict_state_loading": true,
+        "shape": [
+          2,
+          24,
+          5
+        ],
+        "max_absolute_error": 0.0,
+        "bitwise_equal": true,
+        "reference_optional_reformer_stub": false,
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "legacy_regression": {
+    "cases": [
+      {
+        "model": "transformer3",
+        "checkpoint": "outputs/architecture_study/transfer/transformer3/ETTh2/H96/seed2024/best_checkpoint.pt",
+        "snapshot": "1fbada44c526599f37bdbfac3f4b3fd72291eb02",
+        "strict_loading": true,
+        "state_keys_identical": true,
+        "prediction_and_aux_bitwise_equal": true,
+        "passed": true
+      },
+      {
+        "model": "mlp64_lr3e4",
+        "checkpoint": "outputs/architecture_study/confirm/mlp64_lr3e4/ETTh1/H96/seed2024/best_checkpoint.pt",
+        "snapshot": "1fbada44c526599f37bdbfac3f4b3fd72291eb02",
+        "strict_loading": true,
+        "state_keys_identical": true,
+        "prediction_and_aux_bitwise_equal": true,
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "integration": [
+    {
+      "model": "dlinear",
+      "run_dir": "outputs/baseline_integration_v1_release/dlinear/quantile/ETTh1/H96/seed2024",
+      "scope": "integration_only_one_epoch_full_ETTh1_splits_not_paper_benchmark",
+      "artifact_hashes_verified": 27,
+      "source_matches_final_code": true,
+      "best_checkpoint": true,
+      "metrics": {
+        "QuantileLoss_standardized": 0.16638954235561884,
+        "CrossingRate": 0.0,
+        "PICP50": 0.6693561276679453,
+        "MPIW50": 4.299121294332865,
+        "PINAW50": 0.1628650894011074,
+        "Winkler50": 7.028817862291663,
+        "NormalizedWinkler50": 0.2596232548142658,
+        "PICP80": 0.887723236240498,
+        "MPIW80": 8.476467914744342,
+        "PINAW80": 0.32203241372811103,
+        "Winkler80": 11.05666872599527,
+        "NormalizedWinkler80": 0.4042053518037759,
+        "PICP90": 0.9608989693546347,
+        "MPIW90": 12.536481363460855,
+        "PINAW90": 0.4785867841085728,
+        "Winkler90": 14.370982270857606,
+        "NormalizedWinkler90": 0.5320144413627992,
+        "dataset": "ETTh1",
+        "pred_len": 96,
+        "seed": 2024,
+        "best_val_pinball": 0.15689477339875,
+        "model_name": "dlinear",
+        "variant": "quantile",
+        "output_mode": "quantile",
+        "training_seconds": 2.060171127319336,
+        "trainable_parameters": 64718
+      },
+      "forecast_shape": [
+        3,
+        96,
+        3,
+        7
+      ],
+      "head_input_dim": 1
+    },
+    {
+      "model": "itransformer",
+      "run_dir": "outputs/baseline_integration_v1_release/itransformer/quantile/ETTh1/H96/seed2024",
+      "scope": "integration_only_one_epoch_full_ETTh1_splits_not_paper_benchmark",
+      "artifact_hashes_verified": 27,
+      "source_matches_final_code": true,
+      "best_checkpoint": true,
+      "metrics": {
+        "QuantileLoss_standardized": 0.20878048483359296,
+        "CrossingRate": 0.0,
+        "PICP50": 0.4537531263611966,
+        "MPIW50": 4.296124594306492,
+        "PINAW50": 0.16650679422239528,
+        "Winkler50": 9.821697372367483,
+        "NormalizedWinkler50": 0.3486577857275311,
+        "PICP80": 0.7844716449577765,
+        "MPIW80": 8.549747551615328,
+        "PINAW80": 0.3314973745490925,
+        "Winkler80": 12.810825598124927,
+        "NormalizedWinkler80": 0.4698196327480204,
+        "PICP90": 0.940116571119448,
+        "MPIW90": 12.683296832164382,
+        "PINAW90": 0.4920578390925439,
+        "Winkler90": 14.272271458373549,
+        "NormalizedWinkler90": 0.5501061860672023,
+        "dataset": "ETTh1",
+        "pred_len": 96,
+        "seed": 2024,
+        "best_val_pinball": 0.1962129973352184,
+        "model_name": "itransformer",
+        "variant": "quantile",
+        "output_mode": "quantile",
+        "training_seconds": 8.205209255218506,
+        "trainable_parameters": 320750
+      },
+      "forecast_shape": [
+        3,
+        96,
+        3,
+        7
+      ],
+      "head_input_dim": 1
+    },
+    {
+      "model": "patchtst",
+      "run_dir": "outputs/baseline_integration_v1_release/patchtst/quantile/ETTh1/H96/seed2024",
+      "scope": "integration_only_one_epoch_full_ETTh1_splits_not_paper_benchmark",
+      "artifact_hashes_verified": 27,
+      "source_matches_final_code": true,
+      "best_checkpoint": true,
+      "metrics": {
+        "QuantileLoss_standardized": 0.18649836669508743,
+        "CrossingRate": 0.0,
+        "PICP50": 0.5348365334626031,
+        "MPIW50": 4.273244241143375,
+        "PINAW50": 0.16479721406752018,
+        "Winkler50": 9.1260771003107,
+        "NormalizedWinkler50": 0.3074247421882584,
+        "PICP80": 0.8279877826019756,
+        "MPIW80": 8.343472706754241,
+        "PINAW80": 0.3233044683567466,
+        "Winkler80": 12.436274273429405,
+        "NormalizedWinkler80": 0.4345033585028911,
+        "PICP90": 0.9469510952802485,
+        "MPIW90": 12.325529160195268,
+        "PINAW90": 0.4796490266690847,
+        "Winkler90": 14.35114468268475,
+        "NormalizedWinkler90": 0.5359188896974362,
+        "dataset": "ETTh1",
+        "pred_len": 96,
+        "seed": 2024,
+        "best_val_pinball": 0.1975635739862831,
+        "model_name": "patchtst",
+        "variant": "quantile",
+        "output_mode": "quantile",
+        "training_seconds": 5.200838088989258,
+        "trainable_parameters": 788732
+      },
+      "forecast_shape": [
+        3,
+        96,
+        3,
+        7
+      ],
+      "head_input_dim": 1
+    },
+    {
+      "model": "timemixer",
+      "run_dir": "outputs/baseline_integration_v1_release/timemixer/quantile/ETTh1/H96/seed2024",
+      "scope": "integration_only_one_epoch_full_ETTh1_splits_not_paper_benchmark",
+      "artifact_hashes_verified": 27,
+      "source_matches_final_code": true,
+      "best_checkpoint": true,
+      "metrics": {
+        "QuantileLoss_standardized": 0.193825366021813,
+        "CrossingRate": 0.0,
+        "PICP50": 0.4975423815144234,
+        "MPIW50": 4.342800095987255,
+        "PINAW50": 0.16660959512203716,
+        "Winkler50": 9.412380642679482,
+        "NormalizedWinkler50": 0.3216281611367578,
+        "PICP80": 0.814423678146384,
+        "MPIW80": 8.415537939697261,
+        "PINAW80": 0.3256794043176452,
+        "Winkler80": 12.66776924979509,
+        "NormalizedWinkler80": 0.4458777199837144,
+        "PICP90": 0.9405438112099369,
+        "MPIW90": 12.338154069610663,
+        "PINAW90": 0.4806213434452155,
+        "Winkler90": 14.739819647778377,
+        "NormalizedWinkler90": 0.5483619240142137,
+        "dataset": "ETTh1",
+        "pred_len": 96,
+        "seed": 2024,
+        "best_val_pinball": 0.1981688440593515,
+        "model_name": "timemixer",
+        "variant": "quantile",
+        "output_mode": "quantile",
+        "training_seconds": 10.959497213363647,
+        "trainable_parameters": 828233
+      },
+      "forecast_shape": [
+        3,
+        96,
+        3,
+        7
+      ],
+      "head_input_dim": 1
+    }
+  ],
+  "upstream_sources": {
+    "patchtst": {
+      "repository": "https://github.com/yuqinie98/PatchTST",
+      "commit": "204c21efe0b39603ad6e2ca640ef5896646ab1a9",
+      "license_file": "third_party/licenses/patchtst-LICENSE",
+      "files": [
+        {
+          "upstream": "PatchTST_supervised/layers/PatchTST_layers.py",
+          "local": "layers/patchtst/patch_layers.py",
+          "upstream_sha256": "21c06c70a90c60ee2a269b5c600c702834dea22cdfd72915e6b0f8b4a28db3f6",
+          "selected_definitions": null,
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        },
+        {
+          "upstream": "PatchTST_supervised/layers/RevIN.py",
+          "local": "layers/patchtst/revin.py",
+          "upstream_sha256": "e64c0ccded9228b347134e7368420d3fb10f70c75145b5ff2d8bdd8c3af59df6",
+          "selected_definitions": null,
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        },
+        {
+          "upstream": "PatchTST_supervised/layers/PatchTST_backbone.py",
+          "local": "layers/patchtst/backbone.py",
+          "upstream_sha256": "df67173153787c2356bdfb6491159cd754332ef7382986efe879e1fbea8ebf26",
+          "selected_definitions": null,
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        },
+        {
+          "upstream": "PatchTST_supervised/models/PatchTST.py",
+          "local": "models/patchtst.py",
+          "upstream_sha256": "49d8bb865e1226d6338842f4b33c4bc6992cefb048dc2a4a5a8c410ca708586b",
+          "selected_definitions": null,
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        }
+      ],
+      "adaptation": "Native point forecast followed by shared MedianAnchoredNonCrossingHead(input_dim=1); no point projection expansion.",
+      "implementation_notes": [
+        "Trailing whitespace normalized; project wrapper appended to native model entries. Native forecast math retained except explicitly documented changes."
+      ]
+    },
+    "timemixer": {
+      "repository": "https://github.com/kwuking/TimeMixer",
+      "commit": "e24610583b36fdd8c76cc17a8df4e65759a5f460",
+      "license_file": "third_party/licenses/timemixer-LICENSE",
+      "files": [
+        {
+          "upstream": "layers/Autoformer_EncDec.py",
+          "local": "layers/timemixer/decomposition.py",
+          "upstream_sha256": "48745b4bb647355e9845792a855df9c59fd7df7fcc664c765351fec390c4073e",
+          "selected_definitions": [
+            "moving_avg",
+            "series_decomp"
+          ],
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        },
+        {
+          "upstream": "layers/Embed.py",
+          "local": "layers/timemixer/embedding.py",
+          "upstream_sha256": "ab492ea2f68459bbcf3cbffdd1beb75b24d0d70248d017a313a3b470316aaa2b",
+          "selected_definitions": null,
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        },
+        {
+          "upstream": "layers/StandardNorm.py",
+          "local": "layers/timemixer/normalization.py",
+          "upstream_sha256": "cc1c0bc65b7b094bbe83f988fb05b86272a59638c030c3781aa52ce8880379df",
+          "selected_definitions": null,
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        },
+        {
+          "upstream": "models/TimeMixer.py",
+          "local": "layers/timemixer/mixing.py",
+          "upstream_sha256": "817d62f4aac54c8566e560f6d3785856e31c8ee51460279ee3d0a4823f11d4be",
+          "selected_definitions": [
+            "DFT_series_decomp",
+            "MultiScaleSeasonMixing",
+            "MultiScaleTrendMixing",
+            "PastDecomposableMixing"
+          ],
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        },
+        {
+          "upstream": "models/TimeMixer.py",
+          "local": "models/timemixer.py",
+          "upstream_sha256": "817d62f4aac54c8566e560f6d3785856e31c8ee51460279ee3d0a4823f11d4be",
+          "selected_definitions": [
+            "Model"
+          ],
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        }
+      ],
+      "adaptation": "Native point forecast followed by shared MedianAnchoredNonCrossingHead(input_dim=1); no point projection expansion.",
+      "implementation_notes": [
+        "Trailing whitespace normalized; project wrapper appended to native model entries. Native forecast math retained except explicitly documented changes."
+      ]
+    },
+    "dlinear": {
+      "repository": "https://github.com/cure-lab/LTSF-Linear",
+      "commit": "0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6",
+      "license_file": "third_party/licenses/dlinear-LICENSE",
+      "files": [
+        {
+          "upstream": "models/DLinear.py",
+          "local": "layers/dlinear/decomposition.py",
+          "upstream_sha256": "0893b53cb6473d6bdca7aeca514cb3ee12efa6df227c29c4469571c9711451cc",
+          "selected_definitions": [
+            "moving_avg",
+            "series_decomp"
+          ],
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        },
+        {
+          "upstream": "models/DLinear.py",
+          "local": "models/dlinear.py",
+          "upstream_sha256": "0893b53cb6473d6bdca7aeca514cb3ee12efa6df227c29c4469571c9711451cc",
+          "selected_definitions": [
+            "Model"
+          ],
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        }
+      ],
+      "adaptation": "Native point forecast followed by shared MedianAnchoredNonCrossingHead(input_dim=1); no point projection expansion.",
+      "implementation_notes": [
+        "Trailing whitespace normalized; project wrapper appended to native model entries. Native forecast math retained except explicitly documented changes."
+      ]
+    },
+    "itransformer": {
+      "repository": "https://github.com/thuml/iTransformer",
+      "commit": "c2426e68ca13f74aaec08045c5c724d8ad328124",
+      "license_file": "third_party/licenses/itransformer-LICENSE",
+      "files": [
+        {
+          "upstream": "layers/Embed.py",
+          "local": "layers/itransformer/embedding.py",
+          "upstream_sha256": "2de7e5049a696d320a23a8bdb6e08e823cf7fa3f246a0a49555fcd729c5c8398",
+          "selected_definitions": [
+            "DataEmbedding_inverted"
+          ],
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        },
+        {
+          "upstream": "utils/masking.py",
+          "local": "layers/itransformer/masking.py",
+          "upstream_sha256": "02f453e52cfaec65e34132923add80e7132f188706680fa86d7bd884976e09ef",
+          "selected_definitions": [
+            "TriangularCausalMask"
+          ],
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        },
+        {
+          "upstream": "layers/SelfAttention_Family.py",
+          "local": "layers/itransformer/attention.py",
+          "upstream_sha256": "38ac67428d528b8e145e4944ca059b40629a8446c891142602d5aaadc38dfd9e",
+          "selected_definitions": [
+            "FullAttention",
+            "AttentionLayer"
+          ],
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        },
+        {
+          "upstream": "layers/Transformer_EncDec.py",
+          "local": "layers/itransformer/encoder.py",
+          "upstream_sha256": "985c31f4ae187b08afaa9663dc960a40544b2ec33ab55389ceab3930edc1ce02",
+          "selected_definitions": [
+            "Encoder",
+            "EncoderLayer"
+          ],
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        },
+        {
+          "upstream": "model/iTransformer.py",
+          "local": "models/itransformer.py",
+          "upstream_sha256": "6f34777a5a12c253a293f79e7e1fd5b6f79ac100b443951e051e269e7e2542db",
+          "selected_definitions": null,
+          "changes": "Import namespace relocation; selected definitions only where listed; Model renamed to native point class in model entry."
+        }
+      ],
+      "adaptation": "Native point forecast followed by shared MedianAnchoredNonCrossingHead(input_dim=1); no point projection expansion.",
+      "implementation_notes": [
+        "Native division uses an out-of-place expression instead of /= to preserve gradients with respect to history inputs; eval parity checked.",
+        "Optional upstream Reformer/Flowformer dependencies omitted because only FullAttention is used.",
+        "Trailing whitespace normalized; project wrapper appended to native model entries. Native forecast math retained except explicitly documented changes."
+      ]
+    }
+  },
+  "source_manifest": {
+    "data_provider/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data_provider/csv_dataset.py": "598d7bae7dce30fa49a4c703a2e6fcfc1ec8fd55f5c7038c856936fec79321ba",
+    "data_provider/data_factory.py": "0d140e5a870edbe9d36f30200755a86d466f398f5696ac50f470b1d9de7b8c48",
+    "data_provider/scaler.py": "ee26ac6b1e2fb73fc18962da7cd456e855c757baa92290c6818f8f163a436d2e",
+    "engine/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "engine/checkpoint.py": "6be90b891d7171ecd73367601af98c4e193b16b5f8e98d7498d44a4f96dfba2b",
+    "engine/evaluator.py": "159436daf939959501122d9e52adda13e453fcf54059e6f00d9e32e0b4aa4097",
+    "engine/trainer.py": "094e73c6bc7b628bae2504cd333ac65541740027a32786eb23f1d9a0a08a6efd",
+    "engine/visualization.py": "b35948aae5fe51c5b7e48036df99882a96235b1cadc7eb7b2a600b066ed26c6f",
+    "experiments/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "experiments/architecture_search.py": "f56b9de392284dc6a2ab9f22923d0a7ad753a3a5490f4bbd3fe3b7fe665eeeba",
+    "experiments/paper_controls.py": "d637535899d7608dcd45ac1a46ca2a5bc3a5044d58fd5373e644e6b117ed06f5",
+    "experiments/runner.py": "84aa7949bce5e6e8d26119c913fa0c484b05d6346cc9791383a409fe4a7e8958",
+    "layers/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "layers/dlinear/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "layers/dlinear/decomposition.py": "53dd825f89511fe46988f6067fead063528e5a5963e9164c88c9e6f3c527e4fd",
+    "layers/hadt_nq/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "layers/hadt_nq/dense_horizon.py": "5f0c251067f06a98cef6f96a0ade24be66a488a3212daaf01f9f1db42c7d6832",
+    "layers/hadt_nq/horizon_deformable.py": "222ec4247f585aab3784e4cc7e8cccf53dca4577a4ec2355af2b130b510cea5f",
+    "layers/hadt_nq/patch_embedding.py": "cd1fee15786da7cb81c5a4a3b49574749ebfdc2981d2b763945419c48642ee02",
+    "layers/hadt_nq/residual_encoder.py": "527f265e8c16f635876ca9cf9956bcc6fdfb6d011af4356f1264a44b1d0c6c98",
+    "layers/hadt_nq/transformer_encoder.py": "474ed376e9a0f3ae6c753de63a30ab3fcbb9e871eb06c9f46ca2558781fbc0e8",
+    "layers/itransformer/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "layers/itransformer/attention.py": "cd1e69f85d6cb0604275fdd50219782f1e0254883a32b6c2e61b98cae41ee5a5",
+    "layers/itransformer/embedding.py": "5a77c26e0ab59260d961f614b9eb935b9281ad1d3ead9f8a90b803ae0e9ef549",
+    "layers/itransformer/encoder.py": "c9946e5b4429a2ec8b8762cdde3c298f2ad8fba599817003e5498c621b2b2819",
+    "layers/itransformer/masking.py": "50ca23a2b8021cc2a22ec0d9b667c7af51c71a4e26aec16de3410196c9d41f1e",
+    "layers/patchtst/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "layers/patchtst/backbone.py": "c6302adaff776c6a8e1cd519714fca8c2f2736d5b7dcd70482da802f92910a8c",
+    "layers/patchtst/patch_layers.py": "598315b07aa5c890ee2f5c986a0cffaba7c60db14dfa109cd405c78d744bad02",
+    "layers/patchtst/revin.py": "b3c734bafe81735dee3de6bbe58c5f56472af162f8bfab91a49b5db74105d81b",
+    "layers/timemixer/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "layers/timemixer/decomposition.py": "5c7a127a29e4ba3d297faa8aeeb341f86f4207693fb95d89564c80fe544de3c9",
+    "layers/timemixer/embedding.py": "f1ecb1a28d1c85d50b45fffd4cc23c47b759052af2287962e49d939d835adcc6",
+    "layers/timemixer/mixing.py": "671e63f31e56f577a23fc505d00d2a203a5a92d450d1d32ec4c7ce918ebd3b56",
+    "layers/timemixer/normalization.py": "84b9d861828dea7aea6e90742ecdf9b16634ded7240b79071f238d89ae3e5f27",
+    "main.py": "3b1e40eb9dec314a7411606f28eb5abb76046c5e52392a8efbefd9ba17c7ec8d",
+    "models/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "models/dense_nq.py": "bf7094071c9ea5ef247610695f85686e5e0118cf8cd44a0cf50752d3ac111d4a",
+    "models/dlinear.py": "16e786fcdbf5841481b01d5b138303803f0530690c482ffabaf942f041e3a78a",
+    "models/fixed_nq.py": "f269bb22ca25861f8c77a0f5164d8b77a841464869fb4bda887944e1790dc481",
+    "models/hadt_nq.py": "e04ba29f31a92df1a8d82c47c8908bdfaf8187e2166ee9c10993be6f48dfddfb",
+    "models/itransformer.py": "d1171028b1295ba6ddba94f641ed5d7f539ade61c60bf665a17c7e904dc514c0",
+    "models/linear_nq.py": "e567dd99df2fc15902709ea84dc3b018272f0e2131cde630f9e9ce9d98680d63",
+    "models/patch_nq.py": "c3d9c7ea9672d6b709d7dfda480095410337947be48ae0748df3d5a1f990613e",
+    "models/patchtst.py": "62dc0edc3da6572642efaaed45f6eea4f644cd71773a088e57c19306b64c260c",
+    "models/timemixer.py": "98af9a7c1bd01309873732ba39b99d25cf74a1eeee525e965d88e74889c18221",
+    "third_party/BASELINE_SOURCES.json": "3d7a6fff98b398aeecda86ed0e87a83159a320858b7d3d70aa54d4971f86b466",
+    "utils/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "utils/baseline_config.py": "aa4ab848b00cb63273a7f00f65a7d136429f682074015ce00c86cd965f1ba149",
+    "utils/channel_policy.py": "f4d1fe3c4d06387cbe8a014bd272d2160d1495a44e680376030f07a6d12de5a4",
+    "utils/config.py": "549bb353f55128d83ffe6f0cd551a03c6fbc73c1c24660a9cf8968b9aa3ea311",
+    "utils/forecast_model.py": "2a4310e85e7945b4faf9efc165b24c4ba5933dd4860b4f521392dfdbf99f0417",
+    "utils/logger.py": "ce6a8df32b109d14ecee981b1a218e9d95c1ba5bae2ecfdaec69e95c609bf874",
+    "utils/losses.py": "5a8bc108276d3070ce3d9aeaf983defc48151d46e9b1596c08939576def5741b",
+    "utils/metrics.py": "2ea423dfb873d2a131faf3c6a44af56a203514646f14f43c79fdcb09fca1d345",
+    "utils/model_registry.py": "084713bdaeeaa21a9909f88f38a24beb3c9b8b7e7c631c5f03b3af51cecf9905",
+    "utils/provenance.py": "c6d5703d14ab9cbac471799142a1660ee7bba6f5d904639eccecc3c7f6130bd6",
+    "utils/quantile_heads.py": "5632a7e5608862125782c49ffe08a115c7c86a697fb78c40665adeb4e2092b2e",
+    "utils/revin.py": "0c474fd6b61721fff6ced284528f090d293f59217fc1543540cad3d87bdb67c4",
+    "utils/seed.py": "bc12f0b6dc274befb89446778fcdc1ad4f3ea805a9b8772564524215c490e818",
+    "utils/smoke_test.py": "09b25c1444eca29a6bb5214cfbbede9c4c2b2341e1e0c0f7d21a48955952c348"
+  }
+}
