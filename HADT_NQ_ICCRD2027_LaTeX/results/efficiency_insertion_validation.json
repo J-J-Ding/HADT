@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "pages_including_references": 10,
+  "introduction_unchanged": true,
+  "introduction_sha256": "6cc8842850202a95b70ff5cfa5bec7581ddf1183e75aea4124cc675761f586e8",
+  "figure_count": 5,
+  "new_figure_label": "fig:complexity",
+  "efficiency_figure_sha256": "b69563371b06b0670c0a809d1383bbb780f7ddfbaf35f71c740d038489746a70",
+  "pdf_sha256": "aa9bc483c56021ad145ce2a76dc4788199465c389228d8d204a90d1a11e24d9b",
+  "undefined_citations": 0,
+  "undefined_references": 0,
+  "interpretation": "ETTh1 H96 parameter-accuracy tradeoff only; no latency or memory claim."
+}

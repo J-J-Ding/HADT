@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering\small
+\caption{Complete ETTh1 component study; pinball mean $\pm$ sample SD and mean crossing percentage over three seeds.}
+\label{tab:full-ablation}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Variant & Pinball 96 & Crossing 96 (\%) & Pinball 720 & Crossing 720 (\%) \\
+\midrule
+Full HDA-NQ & $0.12966\pm0.00018$ & $0$ & $0.18683\pm0.00068$ & $0$ \\
+Fixed offsets & $0.13461\pm0.00147$ & $0$ & $0.18842\pm0.00098$ & $0$ \\
+Shared embedding & $0.13978\pm0.00065$ & $0$ & $0.18880\pm0.00201$ & $0$ \\
+Dense attention & $0.14158\pm0.00104$ & $0$ & $0.18971\pm0.00295$ & $0$ \\
+No correction & $0.13299\pm0.00073$ & $0$ & $0.18586\pm0.00090$ & $0$ \\
+Fixed + no correction & $0.13452\pm0.00139$ & $0$ & $0.18783\pm0.00169$ & $0$ \\
+Independent head & $0.12997\pm0.00114$ & $9.81\times10^{-4}$ & $0.18591\pm0.00159$ & $1.91\times10^{-5}$ \\
+\bottomrule
+\end{tabular}
+\end{table}

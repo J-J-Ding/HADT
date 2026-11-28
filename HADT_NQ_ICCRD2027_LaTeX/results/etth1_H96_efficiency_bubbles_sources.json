@@ -1,0 +1,23 @@
+{
+  "source_sha256": {
+    "outputs/model_complexity/etth1_complexity.json": "c6478fa72c782418156e7b1f5f6c4dd6f8a3ea8c467ceef01f7b032f03c26c0d",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2024/test_complete.json": "188f7d0133ac2b6054e1cef005a835cb7148eec85b45aab80856e3dd4800aab8",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2025/test_complete.json": "f1843157dacb15c1c6d36ffc82e5e337770f3097ec5161f512fa9c22032624e8",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2026/test_complete.json": "bf1100897cb8d397b5878136ad8bf19db2061614f7dbb252cbe933646155e35e",
+    "outputs/paper_completion_20261126/baseline/dlinear/H96/seed2024/complete.json": "68760f053f41e971ca7998f3e8567419103b4f826b31d620fe1599a5f46fc1a4",
+    "outputs/paper_completion_20261126/baseline/dlinear/H96/seed2025/complete.json": "db279ddf4d24dd441ca5726937e3b57f1645930218de73669e6c42c6fbe0aa92",
+    "outputs/paper_completion_20261126/baseline/dlinear/H96/seed2026/complete.json": "262f9ce2db8cd1cbe41bc7fd06f7da1cf2c668bcdcb77ccfcb3c392b5e9df6e4",
+    "outputs/paper_completion_20261126/baseline/patchtst/H96/seed2024/complete.json": "d3a0dc8068a6d0b46545dd370df2c944c38c03eaf81a1b241bff5b8c463d9023",
+    "outputs/paper_completion_20261126/baseline/patchtst/H96/seed2025/complete.json": "c6c9a355e4f17cc2ff16a60d18d1acf79bb55e0bfcddbe67773b0f7df549d235",
+    "outputs/paper_completion_20261126/baseline/patchtst/H96/seed2026/complete.json": "38e438c7e9857b7a77f0681a3d5d6bbe60285318efeec344bc428149989d9f15",
+    "outputs/paper_completion_20261126/baseline/timemixer/H96/seed2024/complete.json": "ff49649c333210326bd433c391d9b51958adb9dd3b42ee8740302a49a083e167",
+    "outputs/paper_completion_20261126/baseline/timemixer/H96/seed2025/complete.json": "8bfb5b83673b25cb075ed14c9b5b09a17f529148c4f0efb5e9499a6d1de122a6",
+    "outputs/paper_completion_20261126/baseline/timemixer/H96/seed2026/complete.json": "c5d4aac13a9fc174933456a08bc082208b74e5b63839488b5d7ba821c9d04deb",
+    "outputs/paper_completion_20261126/baseline/itransformer/H96/seed2024/complete.json": "7ea2d11f82b22296a493be5c0a73aaa1574c16f46788742595049cfb5f5d7901",
+    "outputs/paper_completion_20261126/baseline/itransformer/H96/seed2025/complete.json": "cef52909effaebf53bbb2291754d147b9971bf847c598a9df6c8cf40b5dc75ef",
+    "outputs/paper_completion_20261126/baseline/itransformer/H96/seed2026/complete.json": "a91ec74a73dbeb0fce9a0ee84ca664ed159b89b823855e58a605bc52d62641e5"
+  },
+  "bubble_area": "Proportional to trainable parameter count, not memory.",
+  "error_bars": "Sample standard deviation across seeds 2024/2025/2026.",
+  "scope": "ETTh1 H96 only; no generalization to other horizons or datasets."
+}

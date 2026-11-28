@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "unique_training_paths": 39,
+  "validation_selection_checked": true,
+  "fallback_checked": true,
+  "selection_is_frozen": true
+}

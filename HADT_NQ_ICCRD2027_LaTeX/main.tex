@@ -1,328 +1,58 @@
 \documentclass[sigconf,anonymous,review]{acmart}
-
 \settopmatter{printacmref=false,printfolios=true}
-
 \setcopyright{none}
-
 \renewcommand\footnotetextcopyrightpermission[1]{}
-
 \acmConference[ICCRD 2027]{2027 19th International Conference on Computer Research and Development}{January 15--17, 2027}{Singapore}
-
 \usepackage{mathtools}
-
 \usepackage{booktabs,tabularx,array}
-
 \usepackage{graphicx}
-
 \usepackage{microtype}
-
-\newcommand{\HADT}{\textsc{HADT-NQ}}
-
-% Allow modest extra interword stretch when narrow columns need a fallback.
-
+\usepackage{balance}
 \setlength{\emergencystretch}{1em}
-
 \begin{document}
-
-\title[HADT-NQ for Ordered Quantile Forecasting]{HADT-NQ: Horizon-Conditioned Deformable Attention for Non-Crossing Time-Series Quantile Forecasting}
-
-
-
+\title[HDA-NQ for Probabilistic Time Series Forecasting]
+{HDA-NQ: Horizon-Conditioned Deformable Attention with Non-Crossing Quantiles for Long-Term Probabilistic Time Series Forecasting}
 \begin{abstract}
-
-Direct quantile forecasting provides a practical way to represent temporal uncertainty. However, the historical information most relevant to a prediction may vary across forecast horizons, and independently predicted quantiles may violate their natural ordering. We study HADT-NQ, which combines channel-independent patch encoding, reversible instance normalization, and a deformable decoder conditioned on each future step. Each future-step query predicts bounded offsets around a sparse historical reference grid, and interpolated keys and values are used to construct its forecast representation. A median-anchored positive-gap head produces seven ordered quantiles without sorting. Non-crossing is guaranteed by construction, whereas calibration is assessed empirically. We evaluate locally implemented linear, patch-direct, dense-attention, and fixed-reference controls under a common quantile forecasting protocol, using three training seeds on two ETT datasets and a separate single-seed evaluation on the high-dimensional Traffic dataset.
-
-\input{results/abstract_results}
-
-\input{results/architecture_abstract}
-
-Results reveal dataset-dependent trade-offs between predictive fit and interval properties.
-
+Long-term probabilistic time series forecasting aims to quantify future uncertainty while maintaining forecasting accuracy. However, the temporal dependencies between historical observations and future time steps may vary across forecasting horizons. Existing direct multi-step forecasting methods typically map historical inputs to future outputs without explicitly adapting historical feature retrieval to individual forecasting horizons. Moreover, conventional quantile regression without ordering constraints may suffer from quantile crossing, leading to inconsistent prediction intervals. To address these problems, this paper investigates horizon-aware temporal feature extraction and non-crossing quantile regression, and proposes a unified probabilistic forecasting framework (HDA-NQ) that integrates horizon-conditioned deformable attention with non-crossing quantile regression. Through learnable sampling offsets and sparse attention aggregation, the proposed framework adaptively extracts relevant historical temporal features for different forecasting horizons, enabling horizon-specific temporal representation learning. A gated historical correction mechanism is further employed to enhance the ability of the model to capture local temporal dynamics. In addition, a median-anchored quantile regression strategy is developed by parameterizing the differences between adjacent quantiles as positive values, thereby ensuring the monotonicity of predicted quantiles and avoiding quantile crossing. Across 17 completed dataset--horizon settings on five benchmark datasets, HDA-NQ attains the lowest mean pinball loss in 15 settings against four quantile-adapted forecasting backbones. Component experiments support horizon conditioning and learned sampling at the studied settings, while empirical interval coverage remains below nominal levels.
 \end{abstract}
-
-
-
 \ccsdesc[500]{Computing methodologies~Machine learning}
-
 \ccsdesc[300]{Information systems~Data mining}
-
-\keywords{quantile forecasting, prediction intervals, deformable attention, time series}
-
+\keywords{Deformable attention, Non-crossing quantile regression, Probabilistic forecasting, Long-term time series forecasting}
 \maketitle
-
-
 
 \section{Introduction}
 
-Operational forecasts should describe uncertainty alongside a central estimate. Quantile forecasts can represent asymmetric predictive variation without choosing a parametric likelihood, and pairs of quantiles directly define prediction intervals. Their assessment requires both calibration and sharpness: a wide interval can cover many observations without being informative, while a narrow interval can be unreliable if it misses too often~\cite{koenker1978regression,gneiting2007probabilistic}. Consequently, accuracy, coverage, width, and interval scores should be examined together.
+With the development of deep learning, data-driven methods have been widely applied to object detection~\cite{vidal2026hybrid}, energy forecasting~\cite{abisoye2024solar}, and financial analysis~\cite{krawczyk2025financial} owing to their feature extraction and nonlinear modeling capabilities. In time series forecasting, extracting informative features from historical observations and capturing complex temporal dependencies are essential for improving forecasting performance. However, conventional deterministic forecasting methods only provide point estimates of future observations and cannot adequately characterize predictive uncertainty. In contrast, probabilistic forecasting estimates conditional quantiles or predictive distributions to provide richer information about future uncertainty, thereby supporting risk assessment and decision-making~\cite{chen2025noncrossing}. Therefore, improving forecasting accuracy while effectively quantifying future uncertainty remains an important research problem in long-term time series forecasting.
 
+In recent years, considerable progress has been made in long-term time series forecasting. Representative methods, including DLinear~\cite{zeng2023transformers}, PatchTST~\cite{nie2023timeseries}, iTransformer~\cite{liu2024itransformer}, and TimeMixer~\cite{wang2024timemixer}, have demonstrated the effectiveness of linear modeling, patch-based representation learning, cross-variate dependency modeling, and multiscale feature extraction. Meanwhile, probabilistic forecasting models such as DeepAR~\cite{salinas2020deepar}, the multi-horizon quantile recurrent forecaster~\cite{wen2017multihorizon}, and the Temporal Fusion Transformer~\cite{lim2021temporal} provide effective approaches to uncertainty quantification in time series forecasting.
 
+Despite these advances, two issues remain worth investigating in long-term probabilistic time series forecasting. First, time series generally contain multiple temporal patterns, including trends, periodic fluctuations, and local variations. Different future time steps may therefore exhibit heterogeneous dependencies on historical observations. However, many existing direct multi-step forecasting methods generate future predictions from shared historical representations without explicitly adjusting historical sampling positions for individual forecasting steps. Second, quantile regression provides a flexible non-parametric approach to probabilistic forecasting~\cite{koenker1978regression}, but unconstrained quantile estimation may lead to quantile crossing, resulting in inconsistent prediction intervals. How to improve temporal feature extraction while maintaining quantile monotonicity remains an important issue in long-term probabilistic forecasting.
 
-Direct multi-step prediction raises two distinct modeling questions. First, a future step may require different historical evidence from another step. A historical segment useful for the next hour need not receive the same importance several days ahead. Second, forecasts at multiple quantile levels should preserve their probability ordering. Independent outputs can violate that order, whereas a structural constraint can prevent crossing without establishing the correct coverage. These questions concern temporal representation and output validity, respectively; solving one does not solve the other.
+To address these issues, this paper proposes a unified probabilistic forecasting framework that integrates horizon-conditioned deformable attention with non-crossing quantiles (HDA-NQ). Specifically, a horizon-conditioned deformable attention mechanism is developed to adaptively extract relevant historical features through horizon-specific queries, learnable sampling offsets, and sparse attention aggregation. A gated historical correction mechanism is introduced to enhance the modeling of local temporal dynamics. Furthermore, a median-anchored non-crossing quantile regression strategy is employed to ensure the monotonicity of predicted quantiles through positive-gap parameterization.
 
-
-
-We combine temporal retrieval with ordered quantile prediction. HADT-NQ represents each variable with overlapping patches and a shared temporal encoder. For every future step, it combines a learned horizon embedding with pooled history to produce a query. That query predicts a bounded adjustment to a small reference grid on the historical patch axis. A sparse cross-attention operation aggregates interpolated features, and a median-anchored positive-gap head produces ordered marginal quantiles. RevIN restores each input window's location and scale after prediction. The architecture supports different numbers of input variables through shared parameterization.
-
-
-
-We investigate whether conditioning historical sampling on individual forecast horizons improves probabilistic forecasting performance and examine the contributions of the individual architectural components. Controls preserve the objective and output constraint while changing the mapping from history to forecasts.
-
-
-
-This study makes three contributions:
+The main contributions of this paper are summarized as follows:
 
 \begin{itemize}
 
-\item It specifies a direct marginal quantile architecture with bounded temporal sampling conditioned on each future step and a constructive ordering property.
+\item A horizon-conditioned deformable attention mechanism is proposed for long-term probabilistic time series forecasting. By combining horizon-specific queries with learnable sampling offsets, the proposed mechanism adaptively retrieves relevant historical features and captures horizon-specific temporal dependencies.
 
-\item It evaluates decoder choice using local quantile controls, repeated training seeds, scaling fitted on training data, and complementary interval metrics. Dense and fixed-reference controls isolate different aspects of the decoder.
+\item A unified probabilistic forecasting framework integrating gated historical correction and median-anchored non-crossing quantile regression is developed. The framework enhances the modeling of local temporal dynamics and ensures quantile monotonicity through positive-gap parameterization without requiring post-processing.
 
-\item It examines component removals and an encoder-depth pilot, retaining negative findings and distinguishing repeated experiments from single-seed cases. The analysis further demonstrates that architectural complexity does not necessarily translate into consistent performance improvements across datasets.
+\item The proposed HDA-NQ achieves favorable probabilistic forecasting performance across multiple benchmark datasets and forecasting lengths. Comparative experiments and ablation studies further demonstrate the effectiveness of the proposed forecasting framework and its key components.
 
 \end{itemize}
-
-The forecasts are marginal, with calibration assessed empirically.
-
-
 
 \input{sections/related_work}
-
 \input{sections/method}
-
-
-
-\begin{figure*}[t]
-
-\centering
-
-\includegraphics[width=0.98\textwidth]{figures/paper_architecture.pdf}
-
-\caption{Original reference configuration of HADT-NQ. Variables are encoded independently with shared weights. Horizon-conditioned offsets select interpolated historical keys and values before the ordered quantile head. The validation-selected configuration is specified separately in Section~\ref{sec:architecture-search}.}
-
-\Description{A shared per-variable normalization and patch encoder feeds a horizon-conditioned deformable attention decoder and a median-anchored ordered quantile head.}
-
-\label{fig:architecture}
-
-\end{figure*}
-
-
-
-\section{Experimental Design}
-
-\label{sec:experiments}
-
-\subsection{Questions and Data Protocol}
-
-We address three questions: (RQ1) how the decoder compares with common ordered-quantile controls; (RQ2) how removing offsets, horizon identity, normalization, or ordering changes the forecasts; and (RQ3) whether an encoder-depth preference transfers between datasets. The primary repeated comparison uses ETTh1 and ETTh2, each containing 17,420 hourly observations and seven numeric variables, at $H=96$. A completed extension uses $H=192$ for selected controls. A Traffic case contains 17,544 observations and 862 numeric variables; its separate single-seed results are not pooled into the three-seed comparisons. The ETT datasets are adopted from the benchmark introduced by Zhou et al.~\cite{zhou2021informer}.
-
-
-
-Chronological training, validation, and test shares are 60\%, 20\%, and 20\% for ETT; Traffic uses 70\%, 10\%, and 20\%. These ETT ratios differ from widely used fixed-month splits; we therefore compare methods only within this protocol and do not import published scores from incompatible partitions. Each input sample consists of the $L=336$ observations immediately preceding the corresponding prediction window. All target windows are restricted to their respective data splits, while validation and test input windows may include historical observations preceding the corresponding split boundaries. Each scaler is fitted only on training rows. Numeric inputs are checked for finite values. No future covariates or calendar features are supplied.
-
-
-
-\subsection{Controls and Component Comparisons}
-
-All main controls use the same seven quantile levels, RevIN, global scaler, and ordered output parameterization. These models are \emph{local quantile implementations}, rather than official reproductions of point-forecasting baselines.
-
-\begin{itemize}
-
-\item \textbf{Linear-NQ}: an affine map from normalized history to $7H$ raw median and gap parameters. This map defines the linear control; RevIN and positive-gap conversion make the full predictor nonlinear.
-
-\item \textbf{Patch-NQ}: the same three-layer patch encoder, followed by flattening of its $ND$ features and a direct map to $7H$ raw parameters. The resulting forecast head is larger, so parameter counts differ.
-
-\item \textbf{Dense-NQ}: the same history/query construction, projections, and residual FFN as HADT-NQ, attending to all $N$ historical tokens without learned sampling offsets.
-
-\item \textbf{Fixed-NQ}: the HADT-NQ decoder with offsets fixed to zero, retaining attention over the same $K$ reference locations.
-
-\end{itemize}
-
-At $H=96$, allocated parameter counts are 0.656M (HADT-NQ), 0.226M (Linear-NQ), 3.932M (Patch-NQ), and 0.647M (Dense-NQ). Thus, these controls share a consistent experimental protocol but are not matched in terms of model capacity.
-
-
-
-We numerically verify that Dense-NQ is equivalent to the sparse sampling implementation when $K=N$ and all sampling offsets are set to zero, including agreement in the corresponding input gradients. Other checks cover shape, channel independence, positive-gap ordering, and gradient propagation.
-
-
-
-Additional ETTh1 removals replace horizon embeddings with a shared zero embedding, replace the ordered head with seven independent affine outputs, or disable RevIN. A shared query forces identical deterministic forecasts across future steps, isolating the role of lead-time identity. Independent-head comparisons focus on pinball and crossing rate, since reversed endpoints need not define valid central prediction intervals. Existing depth-0/1/2/3 runs on ETTh1 and Traffic form a separately labeled seed-2024 pilot. Depth zero bypasses the \emph{entire} encoder, including its terminal layer normalization.
-
-
-
-\subsection{Optimization and Reproducibility}
-
-Models are trained in PyTorch 2.7.1 with CUDA 12.8 on an NVIDIA RTX 5090. The original controlled-study protocol fixes $D=128$, eight heads, three encoder blocks, $P=16$, $S=8$, $K=8$, dropout 0.1, and maximum offset 1.5 patch tokens. AdamW~\cite{loshchilov2019adamw} is used with a learning rate of $10^{-4}$ and a weight decay of $10^{-5}$. The batch size is 32, the gradient norm is clipped at 1.0, and training runs for at most 30 epochs. The checkpoint with the lowest validation pinball loss is retained. A plateau-based learning rate scheduler uses a patience of 2 and a reduction factor of 0.5, while early stopping uses a patience of 7. Each method receives the same policy, not necessarily the same realized stopping epoch. The validation-selected variant's deviations are recorded separately in Section~\ref{sec:architecture-search}.
-
-
-
-Primary comparisons use seeds 2024, 2025, and 2026, and we report the mean and \emph{sample} standard deviation across these runs. Identical seed values do not imply identical initial weights, dropout streams, or minibatch trajectories across different architectures. For $C>16$, training samples 16 variables per batch using matching input and target indices. Validation and test evaluation cover \emph{every} variable and every eligible forecasting window; figure sampling for Traffic does not reduce the population used to calculate its metrics. Previously completed runs that match the specified configurations are retained with their checkpoints and data provenance; their historical code digests are explicitly marked as unavailable. For new runs, implementation and data fingerprints are recorded together with the complete configurations specified before training.
-
-
-
-\subsection{Measures}
-
-The primary loss is mean pinball loss in training-standardized units. For central $(1-\alpha)$ prediction intervals with lower and upper endpoints $(l,u)$, we report marginal elementwise PICP and mean prediction interval width, normalized per variable by its training range $R_c$ (PINAW). For variables with a constant training range, we set $R_c=1$. The range-normalized interval score is calculated as
-
-\begin{equation}
-\begin{aligned}
-\frac{1}{R_c}\Bigl[(u-l)&+\frac{2}{\alpha}(l-y)\mathbf{1}_{y<l}\\
-&+\frac{2}{\alpha}(y-u)\mathbf{1}_{y>u}\Bigr].
-\end{aligned}
-\end{equation}
-
-This is the range-normalized interval score, also known as the Winkler score~\cite{winkler1972decision,gneiting2007scoring}; smaller values indicate better interval performance. Coverage is interpreted against its nominal level rather than maximized. Crossing rate counts forecasts with any adjacent quantile reversal. Overlapping windows contribute to pooled forecast scores but are not treated as independent statistical replicates. Uncertainty bars describe variability over training seeds, not confidence intervals or forecast intervals.
-
-
-
-\section{Results and Analysis}
-
-\label{sec:results}
-
-\subsection{Repeated Comparisons}
-
-\input{results/table_main}
-
-Table~\ref{tab:main} reports completed three-seed comparisons at $H=96$.
-
-\input{results/summary_main}
-
-The controls separate predictive fit from interval properties. A smaller pinball value need not coincide with the narrowest interval or coverage closest to 90\%. In particular, the strong performance of Patch-NQ, despite its larger direct forecasting head, indicates that the additional complexity introduced by the deformable decoder does not necessarily improve forecasting performance. Conversely, comparison with Dense-NQ and Fixed-NQ is more directly informative about decoder design because their temporal representations and residual constructions are more closely aligned.
-
-
-
-\begin{figure*}[t]
-
-\centering
-
-\includegraphics[width=.98\textwidth]{figures/paper_calibration.pdf}
-
-\caption{Coverage at the three central interval levels on the primary ETT comparisons. Error bars are one sample standard deviation over three training seeds; the dashed diagonal is nominal coverage. Ordering does not enforce calibration.}
-
-\Description{Two calibration panels compare observed and nominal central coverage for HADT-NQ, Patch-NQ, and Linear-NQ on ETTh1 and ETTh2.}
-
-\label{fig:calibration}
-
-\end{figure*}
-
-The calibration curves in Figure~\ref{fig:calibration} complement proper interval scores: differences in sharpness should not be read as gains when they arise from undercoverage. No post-hoc sorting, conformal calibration, or test-based interval adjustment is used.
-
-
-
-\subsection{Components and Learned Sampling}
-
-\input{results/table_ablation}
-
-Table~\ref{tab:ablation} compares completed ETTh1 component groups under the same training policy.
-
-\input{results/summary_ablation}
-
-The ordered quantile head guarantees non-crossing by construction, while the independent-head ablation evaluates the empirical effect of removing this structural constraint using pinball loss and crossing rate. The shared-query comparison reflects the loss of lead-time identity. Fixed-NQ is the more direct control for the learned displacement of historical sampling positions.
-
-
-
-\begin{figure}[t]
-
-\centering
-
-\includegraphics[width=\columnwidth]{figures/paper_sampling.pdf}
-
-\caption{A representative learned sampling diagnostic showing attention head 0 for the ETTh1 oil-temperature variable, using seed 2025 and the first eligible test window. The panels show actual offsets and attention weights over future steps. Variation demonstrates use of the mechanism, not causal evidence of forecasting benefit.}
-
-\Description{Heatmaps show eight sampled locations' offsets and attention weights across 96 forecast steps for a predetermined test sample.}
-
-\label{fig:sampling}
-
-\end{figure}
-
-Figure~\ref{fig:sampling} visualizes intermediate computations for a predetermined test sample. A visually varying attention or offset map is not sufficient to establish contribution: the retrained fixed-reference comparison must support that interpretation. Reference clipping can also constrain endpoint sampling, so some locations can remain nearly fixed.
-
-
-
-\subsection{Sampling-Point Sensitivity}
-
-\input{results/table_sampling_sensitivity}
-
-We vary the number of sampled locations on ETTh1 at $H=96$, retaining the same offset bound and training policy. Table~\ref{tab:sampling_sensitivity} reports only complete three-seed groups. The primary default $K=8$ remains unchanged; these exploratory results are not used to retune the primary test comparison. They address sampling density at the fixed patch length and stride, rather than a comprehensive hyperparameter search.
-
-
-
-\subsection{Horizon Extension and High-Dimensional Case}
-
-\input{results/table_horizon}
-
-The original $H=192$ extension in Table~\ref{tab:horizon} increases the prediction length while retaining $L=336$ and the training policy. Its scope is the named controls. The prospective architecture study in Section~\ref{sec:architecture-search} separately tracks additional horizons and includes only completed measurements.
-
-\input{results/table_traffic}
-
-\input{results/summary_traffic}
-
-Table~\ref{tab:traffic} reports a separate high-dimensional evaluation using seed 2024. It evaluates model execution and marginal forecasting across 862 variables, but it does not assess seed stability or a learned joint distribution. Its absolute loss should not be interpreted as directly comparable to an ETT loss because the target distributions differ.
-
-
-
-\begin{figure*}[t]
-
-\centering
-
-\includegraphics[width=.98\textwidth]{figures/paper_forecasts.pdf}
-
-\caption{Predictions for the first eligible test window, chosen independently of forecasting quality. Left: ETTh1 oil temperature, seed 2025. Right: the final sensor column in Traffic, using seed 2024. Shading is HADT-NQ's 90\% forecast interval; control medians are shown for context. These individual windows illustrate behavior and do not replace full-test scores.}
-
-\Description{Observed values, HADT-NQ medians and prediction intervals, and a control median are plotted on original scales for fixed ETTh1 and Traffic test windows.}
-
-\label{fig:forecasts}
-
-\end{figure*}
-
-
-
-\subsection{Encoder-Depth Pilot}
-
-\begin{figure}[t]
-
-\centering
-
-\includegraphics[width=\columnwidth]{figures/paper_depth_pilot.pdf}
-
-\caption{Single-seed depth pilot at $H=96$: test pinball change relative to bypassing the encoder. Negative values improve on depth zero. The maximum-epoch and early-stopping policy are shared, but realized epochs differ. No seed-uncertainty bars are available for this pilot.}
-
-\Description{Encoder depths zero through three have opposite relative loss trends on ETTh1 and Traffic in a single-seed pilot.}
-
-\label{fig:depth}
-
-\end{figure}
-
-The depth pilot in Figure~\ref{fig:depth} demonstrates that the effect of encoder depth is dataset-dependent. On ETTh1, bypassing the encoder yields test pinball 0.13335, compared with 0.13775 at depth three. On Traffic, the corresponding values are 0.09698 and 0.08359; depth three reduces the loss by approximately 13.8\% relative to bypass. The ETTh1 result therefore does not justify removing the encoder across all datasets. These are seed-2024 observations, not repeated evidence that any particular depth is universally optimal. Depth was not selected using test scores in the repeated default-depth comparison.
-
-
-
-\input{results/architecture_section}
-
-\section{Discussion and Limitations}
-
-The experiments support a distinction between \emph{valid ordering}, \emph{calibration}, and \emph{predictive fit}. Ordered quantiles prevent one logical inconsistency in a collection of marginal forecasts. They do not imply that a nominal interval achieves its target coverage. Horizon-specific sparse sampling supplies a particular historical retrieval mechanism, but the direct patch control can be more effective on some data. A useful evaluation therefore needs both architecture-aligned removals and simpler forecasters; neither a non-crossing guarantee nor an attention visualization is evidence of uniform accuracy gains.
-
-
-
-Several limitations should be considered when interpreting these results. First, the main repeated study contains two related hourly ETT datasets and three seeds, not a broad benchmark or a large statistical sample. The Traffic experiment and encoder-depth pilot are based on a single random seed and therefore cannot provide reliable estimates of training variability. Second, the ETT ratio splits differ from common fixed-month benchmarks. Third, the methods share a training policy, not a matched parameter budget or independently optimized hyperparameters for each control. The patch-direct head has substantially different capacity. Fourth, runs are limited to 30 epochs and some best checkpoints occur near this limit; rankings characterize that budget rather than proven convergence.
-
-
-
-Finally, variables are modeled independently with shared parameters, so useful cross-variable predictive information can be missed. Strict positive gaps also exclude exact quantile ties in real arithmetic, a representational limitation for distributions with point masses. Seven quantiles describe marginal uncertainty without an explicit tail distribution or simultaneous prediction region. End-to-end runtime also depends on interpolation, gathers, projections, FFNs, and implementation kernels. Since GPU resources were shared with other processes, the reported training times are provided only as execution records rather than as controlled hardware performance benchmarks. Future work should extend the evaluation to more datasets, random seeds, and forecasting horizons, while investigating additional calibration methods fitted exclusively on validation data rather than on the test set.
-
-
+\input{sections/experiments}
 
 \section{Conclusion}
-
-HADT-NQ combines horizon-conditioned bounded temporal sampling with structurally ordered marginal quantiles. Controlled comparisons distinguish output validity from predictive performance. The repeated comparisons show that simple forecasting controls remain competitive and that empirical coverage may deviate from nominal levels. Meanwhile, the separate encoder-depth pilot demonstrates that the effect of architectural depth can vary across datasets. These findings motivate further investigation of horizon-conditioned temporal retrieval alongside simple direct forecasting architectures, with broader evaluations across datasets, forecasting horizons, and calibration strategies.
-
-
-
-\input{results/architecture_conclusion}
+HDA-NQ combines future-step queries, bounded deformable historical retrieval, a common historical correction, and structurally ordered quantile outputs. The completed comparisons on five benchmark datasets favor the proposed model in 15 of 17 dataset--horizon settings under the stated common-head adaptation and validation budget. ETTh1 component experiments support learned positions and horizon identity, while the correction exhibits a tradeoff between quantile fit and local-variation error. These results do not establish superiority under matched hyperparameter searches. Non-crossing outputs still exhibit undercoverage, and cross-variable modeling and validation-only calibration remain useful directions. Conclusions about Traffic, Weather, and Electricity await their complete experimental matrices.
 
 \bibliographystyle{ACM-Reference-Format}
-
+\begingroup
+\balance
+\interlinepenalty=10000
 \bibliography{references}
-
+\endgroup
 \end{document}

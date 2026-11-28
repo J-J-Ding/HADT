@@ -1,0 +1,653 @@
+{
+  "status": "planned_not_started",
+  "spec": "specs/V4-审稿补实验与校准边界验证.md",
+  "spec_sha256": "2979b4a97b275e8b2e1eaf7b43511259e88cd4a19d2f887d721b6787f43b5fd0",
+  "execution": "After current seven-dataset comparison completes; CPU smoke checks may be prepared beforehand.",
+  "primary_experiment_status": "Separate existing queue remains active.",
+  "formal_new_runs": 36,
+  "validation_pilots": 3,
+  "reused_runs": 12,
+  "jobs": [
+    {
+      "id": "points_4_H96_seed2024",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2024,
+      "variant": "points_4",
+      "changes": {
+        "n_points": 4
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "points_4_H96_seed2025",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2025,
+      "variant": "points_4",
+      "changes": {
+        "n_points": 4
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "points_4_H96_seed2026",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2026,
+      "variant": "points_4",
+      "changes": {
+        "n_points": 4
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "points_4_H720_seed2024",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2024,
+      "variant": "points_4",
+      "changes": {
+        "n_points": 4
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "points_4_H720_seed2025",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2025,
+      "variant": "points_4",
+      "changes": {
+        "n_points": 4
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "points_4_H720_seed2026",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2026,
+      "variant": "points_4",
+      "changes": {
+        "n_points": 4
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "points_12_H96_seed2024",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2024,
+      "variant": "points_12",
+      "changes": {
+        "n_points": 12
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "points_12_H96_seed2025",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2025,
+      "variant": "points_12",
+      "changes": {
+        "n_points": 12
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "points_12_H96_seed2026",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2026,
+      "variant": "points_12",
+      "changes": {
+        "n_points": 12
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "points_12_H720_seed2024",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2024,
+      "variant": "points_12",
+      "changes": {
+        "n_points": 12
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "points_12_H720_seed2025",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2025,
+      "variant": "points_12",
+      "changes": {
+        "n_points": 12
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "points_12_H720_seed2026",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2026,
+      "variant": "points_12",
+      "changes": {
+        "n_points": 12
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "offset_0p5_H96_seed2024",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2024,
+      "variant": "offset_0p5",
+      "changes": {
+        "max_offset": 0.5
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "offset_0p5_H96_seed2025",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2025,
+      "variant": "offset_0p5",
+      "changes": {
+        "max_offset": 0.5
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "offset_0p5_H96_seed2026",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2026,
+      "variant": "offset_0p5",
+      "changes": {
+        "max_offset": 0.5
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "offset_0p5_H720_seed2024",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2024,
+      "variant": "offset_0p5",
+      "changes": {
+        "max_offset": 0.5
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "offset_0p5_H720_seed2025",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2025,
+      "variant": "offset_0p5",
+      "changes": {
+        "max_offset": 0.5
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "offset_0p5_H720_seed2026",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2026,
+      "variant": "offset_0p5",
+      "changes": {
+        "max_offset": 0.5
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "offset_3_H96_seed2024",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2024,
+      "variant": "offset_3",
+      "changes": {
+        "max_offset": 3.0
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "offset_3_H96_seed2025",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2025,
+      "variant": "offset_3",
+      "changes": {
+        "max_offset": 3.0
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "offset_3_H96_seed2026",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2026,
+      "variant": "offset_3",
+      "changes": {
+        "max_offset": 3.0
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "offset_3_H720_seed2024",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2024,
+      "variant": "offset_3",
+      "changes": {
+        "max_offset": 3.0
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "offset_3_H720_seed2025",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2025,
+      "variant": "offset_3",
+      "changes": {
+        "max_offset": 3.0
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "offset_3_H720_seed2026",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2026,
+      "variant": "offset_3",
+      "changes": {
+        "max_offset": 3.0
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "interior_grid_H96_seed2024",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2024,
+      "variant": "interior_grid",
+      "changes": {
+        "reference_margin": 0.5
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "interior_grid_H96_seed2025",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2025,
+      "variant": "interior_grid",
+      "changes": {
+        "reference_margin": 0.5
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "interior_grid_H96_seed2026",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2026,
+      "variant": "interior_grid",
+      "changes": {
+        "reference_margin": 0.5
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "interior_grid_H720_seed2024",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2024,
+      "variant": "interior_grid",
+      "changes": {
+        "reference_margin": 0.5
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "interior_grid_H720_seed2025",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2025,
+      "variant": "interior_grid",
+      "changes": {
+        "reference_margin": 0.5
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "interior_grid_H720_seed2026",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2026,
+      "variant": "interior_grid",
+      "changes": {
+        "reference_margin": 0.5
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": []
+    },
+    {
+      "id": "calibration_pilot_lambda0.1",
+      "phase": "validation_pilot",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2024,
+      "variant": "calibration",
+      "changes": {
+        "calibration_lambda": 0.1,
+        "temperature": 0.1
+      },
+      "epochs": 8,
+      "test_evaluation": false,
+      "requires": []
+    },
+    {
+      "id": "calibration_pilot_lambda1.0",
+      "phase": "validation_pilot",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2024,
+      "variant": "calibration",
+      "changes": {
+        "calibration_lambda": 1.0,
+        "temperature": 0.1
+      },
+      "epochs": 8,
+      "test_evaluation": false,
+      "requires": []
+    },
+    {
+      "id": "calibration_pilot_lambda10.0",
+      "phase": "validation_pilot",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2024,
+      "variant": "calibration",
+      "changes": {
+        "calibration_lambda": 10.0,
+        "temperature": 0.1
+      },
+      "epochs": 8,
+      "test_evaluation": false,
+      "requires": []
+    },
+    {
+      "id": "calibration_H96_seed2024",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2024,
+      "variant": "calibration",
+      "changes": {
+        "calibration_lambda_from": "selection.json",
+        "temperature": 0.1
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": [
+        "calibration_selection_frozen"
+      ]
+    },
+    {
+      "id": "calibration_H96_seed2025",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2025,
+      "variant": "calibration",
+      "changes": {
+        "calibration_lambda_from": "selection.json",
+        "temperature": 0.1
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": [
+        "calibration_selection_frozen"
+      ]
+    },
+    {
+      "id": "calibration_H96_seed2026",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "seed": 2026,
+      "variant": "calibration",
+      "changes": {
+        "calibration_lambda_from": "selection.json",
+        "temperature": 0.1
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": [
+        "calibration_selection_frozen"
+      ]
+    },
+    {
+      "id": "calibration_H720_seed2024",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2024,
+      "variant": "calibration",
+      "changes": {
+        "calibration_lambda_from": "selection.json",
+        "temperature": 0.1
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": [
+        "calibration_selection_frozen"
+      ]
+    },
+    {
+      "id": "calibration_H720_seed2025",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2025,
+      "variant": "calibration",
+      "changes": {
+        "calibration_lambda_from": "selection.json",
+        "temperature": 0.1
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": [
+        "calibration_selection_frozen"
+      ]
+    },
+    {
+      "id": "calibration_H720_seed2026",
+      "phase": "formal",
+      "dataset": "ETTh1",
+      "horizon": 720,
+      "seed": 2026,
+      "variant": "calibration",
+      "changes": {
+        "calibration_lambda_from": "selection.json",
+        "temperature": 0.1
+      },
+      "epochs": 30,
+      "checkpoint_selection": "validation_pinball",
+      "requires": [
+        "calibration_selection_frozen"
+      ]
+    }
+  ],
+  "reuse": [
+    {
+      "variant": "full",
+      "horizon": 96,
+      "seed": 2024,
+      "record": "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2024/test_complete.json"
+    },
+    {
+      "variant": "fixed",
+      "horizon": 96,
+      "seed": 2024,
+      "record": "/home/dingjunjie/PythonCode/Project2/1030TPF/outputs/paper_completion_20261126/ablation/hadt_fixed/H96/seed2024/complete.json"
+    },
+    {
+      "variant": "full",
+      "horizon": 96,
+      "seed": 2025,
+      "record": "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2025/test_complete.json"
+    },
+    {
+      "variant": "fixed",
+      "horizon": 96,
+      "seed": 2025,
+      "record": "/home/dingjunjie/PythonCode/Project2/1030TPF/outputs/paper_completion_20261126/ablation/hadt_fixed/H96/seed2025/complete.json"
+    },
+    {
+      "variant": "full",
+      "horizon": 96,
+      "seed": 2026,
+      "record": "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2026/test_complete.json"
+    },
+    {
+      "variant": "fixed",
+      "horizon": 96,
+      "seed": 2026,
+      "record": "/home/dingjunjie/PythonCode/Project2/1030TPF/outputs/paper_completion_20261126/ablation/hadt_fixed/H96/seed2026/complete.json"
+    },
+    {
+      "variant": "full",
+      "horizon": 720,
+      "seed": 2024,
+      "record": "outputs/etth1_detail_search/confirm/L336/linear_skip/H720/seed2024/test_complete.json"
+    },
+    {
+      "variant": "fixed",
+      "horizon": 720,
+      "seed": 2024,
+      "record": "/home/dingjunjie/PythonCode/Project2/1030TPF/outputs/paper_completion_20261126/ablation/hadt_fixed/H720/seed2024/complete.json"
+    },
+    {
+      "variant": "full",
+      "horizon": 720,
+      "seed": 2025,
+      "record": "outputs/etth1_detail_search/confirm/L336/linear_skip/H720/seed2025/test_complete.json"
+    },
+    {
+      "variant": "fixed",
+      "horizon": 720,
+      "seed": 2025,
+      "record": "/home/dingjunjie/PythonCode/Project2/1030TPF/outputs/paper_completion_20261126/ablation/hadt_fixed/H720/seed2025/complete.json"
+    },
+    {
+      "variant": "full",
+      "horizon": 720,
+      "seed": 2026,
+      "record": "outputs/etth1_detail_search/confirm/L336/linear_skip/H720/seed2026/test_complete.json"
+    },
+    {
+      "variant": "fixed",
+      "horizon": 720,
+      "seed": 2026,
+      "record": "/home/dingjunjie/PythonCode/Project2/1030TPF/outputs/paper_completion_20261126/ablation/hadt_fixed/H720/seed2026/complete.json"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering\small
+\caption{Complete local-variation diagnostics, mean $\pm$ sample SD over three seeds. Event thresholds use training-prefix changes.}
+\label{tab:detail-ablation}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Variant & $\Delta$MAE 96 & $\Delta$MAE 720 & Event MAE 96 & Event MAE 720 \\
+\midrule
+Full HDA-NQ & $0.2466\pm0.0036$ & $0.2663\pm0.0012$ & $0.7147\pm0.0084$ & $0.8598\pm0.0097$ \\
+Fixed offsets & $0.2413\pm0.0005$ & $0.2659\pm0.0012$ & $0.7160\pm0.0037$ & $0.8634\pm0.0078$ \\
+Shared embedding & $0.2460\pm0.0011$ & $0.2661\pm0.0058$ & $0.7393\pm0.0118$ & $0.8615\pm0.0207$ \\
+Dense attention & $0.2506\pm0.0067$ & $0.2712\pm0.0020$ & $0.7421\pm0.0025$ & $0.8667\pm0.0032$ \\
+No correction & $0.2727\pm0.0026$ & $0.3087\pm0.0031$ & $0.7490\pm0.0041$ & $0.8405\pm0.0089$ \\
+Fixed + no correction & $0.2665\pm0.0019$ & $0.2862\pm0.0014$ & $0.7488\pm0.0124$ & $0.8632\pm0.0241$ \\
+Independent head & $0.2473\pm0.0016$ & $0.2644\pm0.0027$ & $0.7156\pm0.0111$ & $0.8532\pm0.0082$ \\
+\bottomrule
+\end{tabular}
+\end{table}

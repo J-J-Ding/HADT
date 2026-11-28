@@ -1,0 +1,22 @@
+\begin{table*}[t]
+\centering\small
+\caption{Separate ETTh1 configuration study: mean $\pm$ sample SD over three seeds. HADT-NQ changes depth, regularization and the history-correction branch jointly. It is not a single-component ablation; the same HADT-NQ configuration is used for all $H$. $\Delta$MAE measures first-difference error; event MAE uses thresholds fitted on training data.}
+\label{tab:refinement}
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+$H$ & Model & Pinball & PICP90 (\%) & $\Delta$MAE & Event MAE \\
+\midrule
+96 & MLP-3 & $0.13254\pm0.00083$ & $86.98\pm0.63$ & $0.2695\pm0.0015$ & $0.7508\pm0.0030$ \\
+ & HADT-NQ & $0.12966\pm0.00018$ & $86.21\pm1.10$ & $0.2466\pm0.0036$ & $0.7147\pm0.0084$ \\
+\midrule
+192 & MLP-3 & $0.14481\pm0.00102$ & $86.48\pm0.16$ & $0.2819\pm0.0013$ & $0.7697\pm0.0227$ \\
+ & HADT-NQ & $0.14138\pm0.00134$ & $85.72\pm1.63$ & $0.2506\pm0.0012$ & $0.7400\pm0.0043$ \\
+\midrule
+336 & MLP-3 & $0.15756\pm0.00204$ & $87.41\pm1.64$ & $0.2948\pm0.0042$ & $0.8035\pm0.0164$ \\
+ & HADT-NQ & $0.15376\pm0.00169$ & $85.45\pm1.93$ & $0.2530\pm0.0017$ & $0.7754\pm0.0138$ \\
+\midrule
+720 & MLP-3 & $0.18647\pm0.00145$ & $82.94\pm1.75$ & $0.3108\pm0.0074$ & $0.8461\pm0.0103$ \\
+ & HADT-NQ & $0.18683\pm0.00068$ & $82.97\pm1.06$ & $0.2663\pm0.0012$ & $0.8598\pm0.0097$ \\
+\bottomrule
+\end{tabular}
+\end{table*}

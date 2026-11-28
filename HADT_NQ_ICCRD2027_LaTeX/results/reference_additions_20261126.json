@@ -1,0 +1,35 @@
+{
+  "access_date": "2026-11-26",
+  "source_type": "Official publisher and conference proceedings",
+  "verified_fields": "authors/title/year/volume/issue/pages/DOI where applicable",
+  "references": [
+    {
+      "key": "krawczyk2025financial",
+      "url": "https://www.ijcte.org/show-149-1706-1.html",
+      "doi": "10.7763/IJCTE.2025.V17.1380",
+      "use": "Financial forecasting and tokenization; not a quantile calibration result."
+    },
+    {
+      "key": "vidal2026hybrid",
+      "url": "https://www.ijcte.org/show-152-1714-1.html",
+      "doi": "10.7763/IJCTE.2026.V18.1387",
+      "use": "Cross-domain depth filtering example; not temporal deformable attention."
+    },
+    {
+      "key": "abisoye2024solar",
+      "url": "https://www.ijcte.org/show-136-1671-1.html",
+      "doi": "10.7763/IJCTE.2024.V16.1355",
+      "use": "Solar forecasting application and validation tuning."
+    },
+    {
+      "key": "wang2024timemixer",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/a7ac8a21e5a27e7ab31a5f42a0117bdb-Abstract-Conference.html",
+      "use": "External point backbone adapted to shared ordered quantile head."
+    },
+    {
+      "key": "liu2024itransformer",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/2ea18fdc667e0ef2ad82b2b4d65147ad-Abstract-Conference.html",
+      "use": "External variable-token attention backbone adapted to ordered head."
+    }
+  ]
+}

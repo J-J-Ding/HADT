@@ -1,48 +1,55 @@
-# HADT-NQ / ICCRD 2027 完整实证论文
+# HADT-NQ 论文修订版
 
-2026-11-05 扩展说明：下文的66条记录及原交付ZIP/manifest描述历史稿件。本轮另增验证集架构搜索及七数据集、四预测长度的队列；实时完成状态见`results/architecture_status.json`，新增证据见`architecture_records.json`，正文见`architecture_section.tex`。只有已完成的三种子组进入新增汇总。工作区`main.pdf`会随已完成实验持续重编译。协议、恢复和独立核验方式见项目根目录`docs/ARCHITECTURE_STUDY.md`。旧的`package_completed_paper.py`锁定历史版本，不能用于打包本轮扩展。
+入口：`main.tex`；编译结果：`main.pdf`；完整消融补充材料为 `supplement.tex` / `supplement.pdf`。保留ACM sigconf匿名评审模板，按Introduction、Related Work、Method、Experiments、Conclusion组织。
 
-已使用提供的 ACM `sigconf,anonymous,review` 模板完成英文匿名论文。入口为 **main.pdf**，源码为 **main.tex** 与 sections/。正文包含引言、相关工作、方法及有序性说明、实验设计、实测结果、讨论、局限和结论。
+## 模型与实验范围
 
-## 实验范围与证据
+- 正文模型HADT-NQ为最终统一linear_skip配置：两层D64残差MLP、预测步条件化可变形解码器、有序头和共同历史修正。
+- 主比较覆盖ETTh1、ETTh2、ETTm1、ETTm2、Traffic、Weather、Electricity，历史336，预测96/192/336/720，5个模型，每组3种子，共420次完整测试。
+- 外部baseline为DLinear-NQ、PatchTST-NQ、TimeMixer-NQ、iTransformer-NQ，保留已有点预测主干并接入共同分位数输出参数化。
+- ETTh1另有6个消融变体、2个预测长度、3种子，共36组新增训练。
+- 全部追加训练共456组：12个验证学习率预实验、336组外部baseline、72组新增数据集最终模型、36组消融；复用12组已冻结最终模型结果。
+- 正文只描述最终模型。旧七数据集三层MLP研究和Transformer结果保留作历史记录，不混入本稿比较。
+- ETT使用60/20/20、其他数据集使用70/10/20时间比例划分，与常见固定月份协议不同，不混用公开leaderboard分数。
 
-- 共整理 **66 条已完成的种子实验记录**：主研究 60 条、K 敏感性 6 条。其中 2 条为配置/数据匹配后核验复用的既有结果，历史代码指纹明确标为未知；其余为本轮实际训练。
-- 主对照：ETTh1、ETTh2，H=96，HADT-NQ / Linear-NQ / Patch-NQ / Dense-NQ / Fixed-NQ，各3个种子。
-- 长度扩展：两ETT数据集，H=192，HADT-NQ / Linear-NQ / Dense-NQ，各3个种子。
-- 关键消融：ETTh1 H=96，共享查询、独立输出头、关闭RevIN，各3个种子。
-- 采样点数：ETTh1 H=96，K=4/8/12，各3个种子；K=8复用主对照，不据测试结果重选默认参数。
-- Traffic：HADT-NQ / Linear-NQ / Dense-NQ，H=96、seed=2024；测试全部862个变量，明确为单种子案例。
-- 既有0–3层深度案例保持单种子定位，不冒充多种子稳定性结论。
+## 来源与复现
 
-三种子集合为2024/2025/2026。均值与样本标准差(ddof=1)只由完整三种子组产生，误差条不是置信区间。独立头的区间指标不适合作为proper interval comparisons，聚合中留空，仅比较损失与交叉率；原始诊断数值仍可追溯。
+- `results/completion_audit.json`：最终结构补实验及校验完成凭证。
+- `results/completion_baseline_aggregates.csv`、`completion_ablation_aggregates.csv`：新实验完整统计。
+- `results/revision_sources.json`：新版图表来源指纹。
+- `results/reference_audit.md`：原15篇文献核验；`reference_additions_20261126.json`：新增5篇官方来源。
+- `results/revision_validation.json`：最终编译、引用和完整性核验。
+- 完整检查点和训练记录位于项目根目录 `outputs/`；交付包不包含大型检查点或数据集。
 
-## 关键文件
-
-- results/aggregate_metrics.csv：主研究19个完整三种子组的未舍入统计量。
-- results/evidence_runs.csv、evidence_records.json：逐运行结果与源路径。
-- results/sampling_sensitivity_aggregates.csv：K敏感性统计。
-- results/reference_audit.md/.json：15篇真实文献的来源、DOI或官方页面与核验信息。
-- results/artifact_validation.json：检查点选优、训练集标准化、数据指纹和图片真值对应核验。
-- results/provenance_audit.json：逐运行签名及历史来源限制。
-- results/figure_sources.json：图的数据来源、固定样本、变量和注意力头。
-- results/figure_data/：校准图数据和预测/采样图的实测NPZ数组，可直接检查绘图原值。
-- results/model_inventory.csv、software_environment.json：参数数量和实际软件环境。
-- supplementary/reproducibility_source.zip：精简代码、配置、测试和复现入口，未包含大型数据与检查点。
-
-本工作区的原始训练日志、完整检查点、逐步指标与NPZ位于 outputs/paper_study/ 和 outputs/paper_sensitivity/。数据文件版本由 results/datasets.json 的SHA256锁定。未完成的可选运行不进入论文结果。
-
-## 阅读结论
-
-结果并非所有对照都优于简单模型：HADT-NQ在ETT中改善了相对Dense-NQ与Fixed-NQ的部分指标，Linear-NQ/Patch-NQ在一些比较中更强；Traffic的Dense-NQ损失更低。论文保留这些结果，并区分排序保证、经验覆盖率和预测精度。ETT采用60/20/20时间划分，与常见固定月份协议不同，不混用其他论文的公开分数。
-
-## 编译
-
-在项目根目录可运行：
+使用djjTF环境，依次执行：
 
 ```bash
+python scripts/complete_paper_experiments.py
+python scripts/extend_paper_datasets.py
+python scripts/prepare_revised_paper.py
+python scripts/finish_paper_completion.py
 TECTONIC_OFFLINE=1 ./scripts/build_paper.sh
+TECTONIC_OFFLINE=1 ./scripts/build_paper.sh HADT_NQ_ICCRD2027_LaTeX/supplement.tex
 ```
 
-本地便携Tectonic已验证。也可在此目录使用标准TeX环境运行 `latexmk -pdf main.tex`，或依次pdflatex、bibtex、pdflatex两遍。保持原始acmart.cls与ACM-Reference-Format.bst。
+旧版自动导出器和交付ZIP保留作历史记录，不用于重建本修订稿。不要在补实验进行中改动冻结的模型、配置或控制器代码。
 
-复现实验与证据生成见 supplementary/REPRODUCE.md。当前保留匿名作者与机构字段，未填写DOI、ISBN或录用信息。文献核验与软件检查不等同于会议录用或外部同行评审。
+## 图件
+
+正文使用 `figures/revised_architecture.pdf`、`revised_forecasts.pdf`、`revised_calibration.pdf` 和 `revised_attention.pdf`，对应框架、完整长度预测、完整测试覆盖率及固定窗口机制汇总。均有矢量与预览文件。详细讲解框架为 `paper_architecture_detailed.pdf`，附可编辑SVG。
+
+原稿备份：项目 `outputs/paper_revision_20261126/before/`，保留用户此前修改。
+
+
+## 脱离AI会话的自动执行
+
+训练与监督均为本机Python进程，不调用OpenAI API。独立会话监督程序为 `scripts/paper_background_supervisor.py`，自动接续训练队列，并在实验齐全后执行结果核验、绘图、正文及补充材料编译、10页上限和引用检查、LaTeX交付包生成。
+
+实时进度：项目 `outputs/paper_revision_20261126/progress.html`。
+监督状态：`outputs/paper_revision_20261126/supervisor_status.json`。
+完成状态：`outputs/paper_revision_20261126/finalization_progress.json`。
+
+若本机程序异常，监督程序最多自动恢复三次，复用已完成且通过哈希检查的实验。未完成的单组训练会重新执行，不承诺从中断批次继续。遇到持续训练或版面错误，状态会标为需要处理并保留日志。服务器关机或所有监督进程被终止时，自动执行会停止。
+
+
+2026-11-27训练预算调整：Traffic、Weather、Electricity的所有模型和预测长度统一上限10轮；ETT四数据集仍为30轮，保留验证早停及最佳权重。原冻结协议保存在protocol.json，新生效协议为protocol_v2.json，调整记录为epoch_cap_amendment.json。四组已开始的训练从保存的最佳检查点接续；旧检查点没有RNG状态，接续时使用记录的确定性重设种子，不宣称与未中断训练逐位相同。后续检查点保存随机状态。

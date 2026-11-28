@@ -1,0 +1,30 @@
+\begin{table*}[t]
+\centering\small
+\caption{Completed common-head comparisons: test pinball mean $\pm$ sample SD over three seeds, with $L=336$. Every row contains all five models and three seeds. Bold marks the lowest mean; 1st Count counts wins using unrounded means, including ties. Settings are included by completion, not performance.}
+\label{tab:external}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llrrrrr@{}}
+\toprule
+Dataset & $H$ & HDA-NQ (Ours) & DLinear-NQ & PatchTST-NQ & TimeMixer-NQ & iTransformer-NQ \\
+\midrule
+ETTh1 & 96 & $\boldsymbol{0.12966\pm0.00018}$ & $0.13798\pm0.00008$ & $0.16706\pm0.01131$ & $0.18999\pm0.01559$ & $0.14322\pm0.00214$ \\
+ETTh1 & 192 & $\boldsymbol{0.14138\pm0.00134}$ & $0.14670\pm0.00003$ & $0.16983\pm0.00558$ & $0.19309\pm0.00661$ & $0.15529\pm0.00186$ \\
+ETTh1 & 336 & $\boldsymbol{0.15376\pm0.00169}$ & $0.15504\pm0.00001$ & $0.19117\pm0.01924$ & $0.19071\pm0.00454$ & $0.17107\pm0.00269$ \\
+ETTh1 & 720 & $0.18683\pm0.00068$ & $\boldsymbol{0.17506\pm0.00017}$ & $0.20322\pm0.00415$ & $0.20289\pm0.00900$ & $0.18826\pm0.00207$ \\
+ETTh2 & 96 & $\boldsymbol{0.09332\pm0.00032}$ & $0.10340\pm0.00013$ & $0.11235\pm0.00057$ & $0.13038\pm0.00240$ & $0.11572\pm0.00239$ \\
+ETTh2 & 192 & $\boldsymbol{0.10628\pm0.00152}$ & $0.11554\pm0.00038$ & $0.12513\pm0.00207$ & $0.14634\pm0.00161$ & $0.12846\pm0.00086$ \\
+ETTh2 & 336 & $\boldsymbol{0.11581\pm0.00043}$ & $0.12381\pm0.00021$ & $0.13640\pm0.00156$ & $0.15782\pm0.00095$ & $0.14485\pm0.00334$ \\
+ETTh2 & 720 & $\boldsymbol{0.12608\pm0.00111}$ & $0.14200\pm0.00142$ & $0.22252\pm0.00672$ & $0.27223\pm0.01288$ & $0.16427\pm0.00085$ \\
+ETTm1 & 96 & $\boldsymbol{0.10678\pm0.00014}$ & $0.12073\pm0.00003$ & $0.12624\pm0.00157$ & $0.15352\pm0.00210$ & $0.12642\pm0.00224$ \\
+ETTm1 & 192 & $\boldsymbol{0.11588\pm0.00056}$ & $0.12983\pm0.00007$ & $0.13352\pm0.00112$ & $0.15843\pm0.00052$ & $0.13498\pm0.00075$ \\
+ETTm1 & 336 & $\boldsymbol{0.12530\pm0.00110}$ & $0.13844\pm0.00014$ & $0.16500\pm0.04159$ & $0.17110\pm0.00220$ & $0.14342\pm0.00045$ \\
+ETTm1 & 720 & $\boldsymbol{0.14113\pm0.00102}$ & $0.14929\pm0.00010$ & $0.15195\pm0.00272$ & $0.17505\pm0.00204$ & $0.15310\pm0.00122$ \\
+ETTm2 & 96 & $\boldsymbol{0.07538\pm0.00019}$ & $0.08315\pm0.00042$ & $0.08322\pm0.00125$ & $0.09264\pm0.00046$ & $0.08629\pm0.00006$ \\
+ETTm2 & 192 & $\boldsymbol{0.08515\pm0.00010}$ & $0.09286\pm0.00026$ & $0.09344\pm0.00077$ & $0.10479\pm0.00348$ & $0.09940\pm0.00065$ \\
+ETTm2 & 336 & $\boldsymbol{0.09397\pm0.00056}$ & $0.10358\pm0.00036$ & $0.10334\pm0.00054$ & $0.11878\pm0.00368$ & $0.11038\pm0.00109$ \\
+ETTm2 & 720 & $\boldsymbol{0.10675\pm0.00043}$ & $0.11919\pm0.00019$ & $0.11823\pm0.00034$ & $0.13875\pm0.00977$ & $0.12388\pm0.00030$ \\
+Electricity & 720 & $0.09196\pm0.00019$ & $0.09411\pm0.00021$ & $0.09240\pm0.00040$ & $0.09907\pm0.00092$ & $\boldsymbol{0.09160\pm0.00064}$ \\
+\midrule
+\multicolumn{2}{l}{\textbf{1st Count}} & 15 & 1 & 0 & 0 & 1 \\
+\bottomrule
+\end{tabular*}
+\end{table*}

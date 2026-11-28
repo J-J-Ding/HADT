@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "lambda_zero_exact": true,
+  "calibration_gradient_finite": true,
+  "boundary_derivatives": [
+    0.0,
+    79.0
+  ],
+  "model_variants_checked": 4,
+  "output_shape_and_order": true,
+  "trainer_objective_checkpoint_and_evaluation_integration": true
+}

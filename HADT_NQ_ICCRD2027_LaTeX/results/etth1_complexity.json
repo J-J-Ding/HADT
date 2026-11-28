@@ -1,0 +1,430 @@
+{
+  "policy": {
+    "input": "[1,336,7], ETTh1; H independently 96/192/336/720; output [1,H,7,7]",
+    "configs": "Actual saved final ETTh1 model configurations; full seven-variable inference, no channel sampling.",
+    "metric": "Estimated core forward FLOPs; multiply-add counted as 2 FLOPs.",
+    "measured": "PyTorch FlopCounterMode matrix multiplication, convolution, and registered attention operators.",
+    "manual_hadt": "Add 4*B*C*H*K*D for sampled attention dot/aggregation and 6*B*C*H*K*D for key/value interpolation.",
+    "excluded": "Backward/optimizer, data loading, memory indexing/copy, normalization, nonlinear activation, softmax, and other miscellaneous scalar/elementwise operations. This is not a complete instruction count or speed measurement.",
+    "device": "CPU for profiling only; ongoing GPU training unchanged.",
+    "torch_version": "2.7.1+cu128"
+  },
+  "results": [
+    {
+      "model": "hadt",
+      "history": 336,
+      "horizon": 96,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 157960,
+      "trainable_parameters": 157960,
+      "torch_matmul_convolution_flops": 63745024,
+      "added_sampled_attention_flops": 1376256,
+      "added_interpolation_flops": 2064384,
+      "estimated_core_flops": 67185664,
+      "estimated_core_macs": 33592832.0,
+      "gflops": 0.067185664,
+      "config_sha256": "e98789d4048a72d20dff19f8af8152d7f42f11899fcc2330d35154bdd5070875",
+      "counted_operators": {
+        "aten.mm": 1039360,
+        "aten.addmm": 62705664
+      }
+    },
+    {
+      "model": "dlinear",
+      "history": 336,
+      "horizon": 96,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 64718,
+      "trainable_parameters": 64718,
+      "torch_matmul_convolution_flops": 912576,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 912576,
+      "estimated_core_macs": 456288.0,
+      "gflops": 0.000912576,
+      "config_sha256": "00e43aae474381e39bef5e0571bc7f698864cb98d16c9bf48c771de05db95236",
+      "counted_operators": {
+        "aten.mm": 903168,
+        "aten.addmm": 9408
+      }
+    },
+    {
+      "model": "patchtst",
+      "history": 336,
+      "horizon": 96,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 788734,
+      "trainable_parameters": 788732,
+      "torch_matmul_convolution_flops": 175224000,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 175224000,
+      "estimated_core_macs": 87612000.0,
+      "gflops": 0.175224,
+      "config_sha256": "0bb1f22825de904c1bad9220772bec599452053daee457f36315cc71d2c96a88",
+      "counted_operators": {
+        "aten.mm": 68640768,
+        "aten.addmm": 93938880,
+        "aten.bmm": 12644352
+      }
+    },
+    {
+      "model": "timemixer",
+      "history": 336,
+      "horizon": 96,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 828233,
+      "trainable_parameters": 828233,
+      "torch_matmul_convolution_flops": 2321817792,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 2321817792,
+      "estimated_core_macs": 1160908896.0,
+      "gflops": 2.321817792,
+      "config_sha256": "e3ab68174dd170c65b9d359d4ffe499511f5a0dd42b50833798043db6783bdcb",
+      "counted_operators": {
+        "aten.convolution": 3161088,
+        "aten.addmm": 1525751808,
+        "aten.mm": 792904896
+      }
+    },
+    {
+      "model": "itransformer",
+      "history": 336,
+      "horizon": 96,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 320750,
+      "trainable_parameters": 320750,
+      "torch_matmul_convolution_flops": 4503744,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 4503744,
+      "estimated_core_macs": 2251872.0,
+      "gflops": 0.004503744,
+      "config_sha256": "d19c67ee023b2aea9851995e5a8d27134d275bcf63f9c9c286618cc76e78a2fc",
+      "counted_operators": {
+        "aten.mm": 602112,
+        "aten.addmm": 2016448,
+        "aten.bmm": 50176,
+        "aten.convolution": 1835008
+      }
+    },
+    {
+      "model": "hadt",
+      "history": 336,
+      "horizon": 192,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 190216,
+      "trainable_parameters": 190216,
+      "torch_matmul_convolution_flops": 103333888,
+      "added_sampled_attention_flops": 2752512,
+      "added_interpolation_flops": 4128768,
+      "estimated_core_flops": 110215168,
+      "estimated_core_macs": 55107584.0,
+      "gflops": 0.110215168,
+      "config_sha256": "3da9c62e8621aa4aed140252bcbc6886183a0515c0d00dee62194155bc0c2a17",
+      "counted_operators": {
+        "aten.mm": 23511040,
+        "aten.addmm": 79822848
+      }
+    },
+    {
+      "model": "dlinear",
+      "history": 336,
+      "horizon": 192,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 129422,
+      "trainable_parameters": 129422,
+      "torch_matmul_convolution_flops": 1825152,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 1825152,
+      "estimated_core_macs": 912576.0,
+      "gflops": 0.001825152,
+      "config_sha256": "f78ae06de22333c835801645d0d1bd8308b3d6ea0ae8d6b286961a211a5eb676",
+      "counted_operators": {
+        "aten.mm": 1806336,
+        "aten.addmm": 18816
+      }
+    },
+    {
+      "model": "patchtst",
+      "history": 336,
+      "horizon": 192,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 1304926,
+      "trainable_parameters": 1304924,
+      "torch_matmul_convolution_flops": 182458752,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 182458752,
+      "estimated_core_macs": 91229376.0,
+      "gflops": 0.182458752,
+      "config_sha256": "330c8a23e9a5c480d13c16fa64e236a2cf9410c05c698d8ca4f9ef0ca2f1e39a",
+      "counted_operators": {
+        "aten.mm": 68640768,
+        "aten.addmm": 101173632,
+        "aten.bmm": 12644352
+      }
+    },
+    {
+      "model": "timemixer",
+      "history": 336,
+      "horizon": 192,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 884969,
+      "trainable_parameters": 884969,
+      "torch_matmul_convolution_flops": 2423498112,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 2423498112,
+      "estimated_core_macs": 1211749056.0,
+      "gflops": 2.423498112,
+      "config_sha256": "c05bb020d15b694b6429a1cb23575166aef0e93e175e3a3c2972ee3f6516206f",
+      "counted_operators": {
+        "aten.convolution": 3161088,
+        "aten.addmm": 1626906624,
+        "aten.mm": 793430400
+      }
+    },
+    {
+      "model": "itransformer",
+      "history": 336,
+      "horizon": 192,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 333134,
+      "trainable_parameters": 333134,
+      "torch_matmul_convolution_flops": 4685184,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 4685184,
+      "estimated_core_macs": 2342592.0,
+      "gflops": 0.004685184,
+      "config_sha256": "b1ca1ba23d6f1b2ec60bab5aa7e4f54bc135787922f0541e65585ece83df2d9e",
+      "counted_operators": {
+        "aten.mm": 602112,
+        "aten.addmm": 2197888,
+        "aten.bmm": 50176,
+        "aten.convolution": 1835008
+      }
+    },
+    {
+      "model": "hadt",
+      "history": 336,
+      "horizon": 336,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 238600,
+      "trainable_parameters": 238600,
+      "torch_matmul_convolution_flops": 162717184,
+      "added_sampled_attention_flops": 4816896,
+      "added_interpolation_flops": 7225344,
+      "estimated_core_flops": 174759424,
+      "estimated_core_macs": 87379712.0,
+      "gflops": 0.174759424,
+      "config_sha256": "d1f7750a3d428a41ee8e861549843e9be07afcb77f99efb772f29ffa350f90dd",
+      "counted_operators": {
+        "aten.mm": 40703488,
+        "aten.addmm": 122013696
+      }
+    },
+    {
+      "model": "dlinear",
+      "history": 336,
+      "horizon": 336,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 226478,
+      "trainable_parameters": 226478,
+      "torch_matmul_convolution_flops": 3194016,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 3194016,
+      "estimated_core_macs": 1597008.0,
+      "gflops": 0.003194016,
+      "config_sha256": "4d8113ec6846c6e73ab7132b6acfe52940a7cd9ee01394c9e76bace73221b526",
+      "counted_operators": {
+        "aten.mm": 3161088,
+        "aten.addmm": 32928
+      }
+    },
+    {
+      "model": "patchtst",
+      "history": 336,
+      "horizon": 336,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 2079214,
+      "trainable_parameters": 2079212,
+      "torch_matmul_convolution_flops": 193310880,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 193310880,
+      "estimated_core_macs": 96655440.0,
+      "gflops": 0.19331088,
+      "config_sha256": "f4cd7647a789fa5277ff2e3b23c03d5e7f6cfde87db6e6a05762dd7973e1504c",
+      "counted_operators": {
+        "aten.mm": 68640768,
+        "aten.addmm": 112025760,
+        "aten.bmm": 12644352
+      }
+    },
+    {
+      "model": "timemixer",
+      "history": 336,
+      "horizon": 336,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 970073,
+      "trainable_parameters": 970073,
+      "torch_matmul_convolution_flops": 2576018592,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 2576018592,
+      "estimated_core_macs": 1288009296.0,
+      "gflops": 2.576018592,
+      "config_sha256": "b44810f3f72d902fe0cef7e3502f257104eb1c6fe121c1a33b5fe007969db0e0",
+      "counted_operators": {
+        "aten.convolution": 3161088,
+        "aten.addmm": 1778638848,
+        "aten.mm": 794218656
+      }
+    },
+    {
+      "model": "itransformer",
+      "history": 336,
+      "horizon": 336,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 351710,
+      "trainable_parameters": 351710,
+      "torch_matmul_convolution_flops": 4957344,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 4957344,
+      "estimated_core_macs": 2478672.0,
+      "gflops": 0.004957344,
+      "config_sha256": "8770f3c0e897a0a7356f700275af2101d6b14b3308bb26395c369fd6cfbe26d8",
+      "counted_operators": {
+        "aten.mm": 602112,
+        "aten.addmm": 2470048,
+        "aten.bmm": 50176,
+        "aten.convolution": 1835008
+      }
+    },
+    {
+      "model": "hadt",
+      "history": 336,
+      "horizon": 720,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 367624,
+      "trainable_parameters": 367624,
+      "torch_matmul_convolution_flops": 321072640,
+      "added_sampled_attention_flops": 10321920,
+      "added_interpolation_flops": 15482880,
+      "estimated_core_flops": 346877440,
+      "estimated_core_macs": 173438720.0,
+      "gflops": 0.34687744,
+      "config_sha256": "4fb2896796d233698924e9129e15769845b1ca9c6e94cef03d68a05f51bbbd11",
+      "counted_operators": {
+        "aten.mm": 86550016,
+        "aten.addmm": 234522624
+      }
+    },
+    {
+      "model": "dlinear",
+      "history": 336,
+      "horizon": 720,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 485294,
+      "trainable_parameters": 485294,
+      "torch_matmul_convolution_flops": 6844320,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 6844320,
+      "estimated_core_macs": 3422160.0,
+      "gflops": 0.00684432,
+      "config_sha256": "d60e7257ed59cfa09edc3c6986ff212bb59194629b910cab1ee68b2868ddaa59",
+      "counted_operators": {
+        "aten.mm": 6773760,
+        "aten.addmm": 70560
+      }
+    },
+    {
+      "model": "patchtst",
+      "history": 336,
+      "horizon": 720,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 4143982,
+      "trainable_parameters": 4143980,
+      "torch_matmul_convolution_flops": 222249888,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 222249888,
+      "estimated_core_macs": 111124944.0,
+      "gflops": 0.222249888,
+      "config_sha256": "c95acd1dc13b22e9e5210c37f21c2ce1dc873402d95416eacb490a6ae5fcc5fb",
+      "counted_operators": {
+        "aten.mm": 68640768,
+        "aten.addmm": 140964768,
+        "aten.bmm": 12644352
+      }
+    },
+    {
+      "model": "timemixer",
+      "history": 336,
+      "horizon": 720,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 1197017,
+      "trainable_parameters": 1197017,
+      "torch_matmul_convolution_flops": 2982739872,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 2982739872,
+      "estimated_core_macs": 1491369936.0,
+      "gflops": 2.982739872,
+      "config_sha256": "7844f715a81a0761e6f2d3b99c46ecf755c162495d57e075d976d0479851cda9",
+      "counted_operators": {
+        "aten.convolution": 3161088,
+        "aten.addmm": 2183258112,
+        "aten.mm": 796320672
+      }
+    },
+    {
+      "model": "itransformer",
+      "history": 336,
+      "horizon": 720,
+      "variables": 7,
+      "batch_size": 1,
+      "parameters": 401246,
+      "trainable_parameters": 401246,
+      "torch_matmul_convolution_flops": 5683104,
+      "added_sampled_attention_flops": 0,
+      "added_interpolation_flops": 0,
+      "estimated_core_flops": 5683104,
+      "estimated_core_macs": 2841552.0,
+      "gflops": 0.005683104,
+      "config_sha256": "96a3f7a09189cbb54cb3ff7fbb17f4d7c07d7f8945f614b1e3f6364b99bb130a",
+      "counted_operators": {
+        "aten.mm": 602112,
+        "aten.addmm": 3195808,
+        "aten.bmm": 50176,
+        "aten.convolution": 1835008
+      }
+    }
+  ]
+}

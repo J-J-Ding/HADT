@@ -1,0 +1,59 @@
+{
+  "last_check": "2026-11-28T23:37:37.252068+08:00",
+  "primary_completed": 297,
+  "primary_total": 420,
+  "reviewer_progress": {
+    "status": "waiting_for_primary",
+    "formal_completed": 0,
+    "formal_total": 36,
+    "pilots_completed": 0,
+    "pilots_total": 3,
+    "reused_diagnostics_completed": 0,
+    "reused_diagnostics_total": 12
+  },
+  "last_publication": {
+    "pages": 8,
+    "undefined_citations": 0,
+    "undefined_references": 0,
+    "template_changes": false,
+    "bibliography_duplicate_keys": [
+      "cannon2018noncrossing",
+      "gneiting2007scoring",
+      "kim2022revin",
+      "vaswani2017attention",
+      "winkler1972decision",
+      "zhu2021deformable"
+    ],
+    "bibliography_policy": "Preserve author edits; report duplicate keys without rewriting bibliography. Compilation and citation resolution must succeed.",
+    "status": "published",
+    "updated": "2026-11-28T23:37:37.188026+08:00",
+    "primary_published_runs": 255,
+    "complete_settings": 17,
+    "best_count": 15,
+    "reviewer_results_included": false,
+    "introduction_unchanged": true,
+    "changed_files": [
+      "main.tex",
+      "sections/experiments.tex",
+      "results/completion_limitations.tex",
+      "results/revised_external.tex",
+      "results/revised_external_intervals.tex",
+      "results/completion_comparison_analysis.tex",
+      "results/completion_scope.tex",
+      "results/supplement_external_intervals.tex",
+      "results/snapshot_baseline_aggregates.csv",
+      "results/snapshot_audit.json",
+      "results/completion_dataset_table.tex",
+      "results/snapshot_baseline_runs.csv",
+      "main.pdf",
+      "main.log",
+      "main.aux",
+      "supplement.pdf",
+      "supplement.log"
+    ],
+    "backup": "/home/dingjunjie/PythonCode/Project2/1030TPF/outputs/paper_hourly_monitor/updates/20261128_233722/before",
+    "pdf_sha256": "b67c24afcd03b1b8ded3da2fdf75b557aa166387923ec9f5b4e37d6a51a02d7a"
+  },
+  "next_hourly_check_epoch": 1795883857.2520876,
+  "model_api_calls": 0
+}

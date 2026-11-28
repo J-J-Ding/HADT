@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "scope": "Completed-results snapshot; seven-dataset study remains in progress",
+  "pages_including_references": 9,
+  "introduction_unchanged": true,
+  "introduction_sha256": "dfe67e41756793a44db2f7f1b4d3f688f0031b376118cd45c2695e5b08cdabab",
+  "published_primary_test_runs": 180,
+  "completed_settings": 12,
+  "ablation_runs": 36,
+  "figures": 4,
+  "undefined_citations": 0,
+  "undefined_references": 0,
+  "duplicate_bibliography_keys": 0,
+  "overfull_hboxes": 0,
+  "pdf_sha256": "ea7767c9ca7a1657fd317cdb2d3e222f7e40c463064636d6a67285757a6e328e",
+  "architecture_single_column": true,
+  "other_figures_and_tables_double_column": true,
+  "ours_first": true,
+  "best_values_bold": true,
+  "first_place_counts": {
+    "pinball": {
+      "hadt": 11,
+      "dlinear": 1,
+      "patchtst": 0,
+      "timemixer": 0,
+      "itransformer": 0
+    },
+    "coverage": {
+      "hadt": 1,
+      "dlinear": 1,
+      "patchtst": 0,
+      "timemixer": 1,
+      "itransformer": 1
+    },
+    "interval_score": {
+      "hadt": 4,
+      "dlinear": 0,
+      "patchtst": 0,
+      "timemixer": 0,
+      "itransformer": 0
+    }
+  },
+  "forecast_datasets": [
+    "ETTh1",
+    "ETTh2",
+    "ETTm1",
+    "ETTm2"
+  ],
+  "reference_entries_kept_together": true,
+  "bibliography_columns_balanced": true
+}

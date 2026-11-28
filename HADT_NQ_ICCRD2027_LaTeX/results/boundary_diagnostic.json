@@ -1,0 +1,55 @@
+{
+  "scope": "12 saved-run diagnostics, not full-test averages",
+  "all_rightmost_offsets_zero": true,
+  "reason": "At N-1 the interpolation neighbors coincide, so zero-initialized rightmost offsets receive no interpolation gradient.",
+  "runs": [
+    {
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H192/seed2024/figures/intermediate_steps.npz",
+      "rightmost_max_abs_offset": 0.0
+    },
+    {
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H192/seed2025/figures/intermediate_steps.npz",
+      "rightmost_max_abs_offset": 0.0
+    },
+    {
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H192/seed2026/figures/intermediate_steps.npz",
+      "rightmost_max_abs_offset": 0.0
+    },
+    {
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H336/seed2024/figures/intermediate_steps.npz",
+      "rightmost_max_abs_offset": 0.0
+    },
+    {
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H336/seed2025/figures/intermediate_steps.npz",
+      "rightmost_max_abs_offset": 0.0
+    },
+    {
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H336/seed2026/figures/intermediate_steps.npz",
+      "rightmost_max_abs_offset": 0.0
+    },
+    {
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H720/seed2024/figures/intermediate_steps.npz",
+      "rightmost_max_abs_offset": 0.0
+    },
+    {
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H720/seed2025/figures/intermediate_steps.npz",
+      "rightmost_max_abs_offset": 0.0
+    },
+    {
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H720/seed2026/figures/intermediate_steps.npz",
+      "rightmost_max_abs_offset": 0.0
+    },
+    {
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2024/figures/intermediate_steps.npz",
+      "rightmost_max_abs_offset": 0.0
+    },
+    {
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2025/figures/intermediate_steps.npz",
+      "rightmost_max_abs_offset": 0.0
+    },
+    {
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2026/figures/intermediate_steps.npz",
+      "rightmost_max_abs_offset": 0.0
+    }
+  ]
+}

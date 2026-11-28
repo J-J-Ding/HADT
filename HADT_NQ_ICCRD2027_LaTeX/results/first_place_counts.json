@@ -1,0 +1,23 @@
+{
+  "pinball": {
+    "hadt": 11,
+    "dlinear": 1,
+    "patchtst": 0,
+    "timemixer": 0,
+    "itransformer": 0
+  },
+  "coverage": {
+    "hadt": 1,
+    "dlinear": 1,
+    "patchtst": 0,
+    "timemixer": 1,
+    "itransformer": 1
+  },
+  "interval_score": {
+    "hadt": 4,
+    "dlinear": 0,
+    "patchtst": 0,
+    "timemixer": 0,
+    "itransformer": 0
+  }
+}

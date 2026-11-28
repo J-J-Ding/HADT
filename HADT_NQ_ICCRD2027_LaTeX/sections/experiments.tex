@@ -1,0 +1,89 @@
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Datasets and Evaluation Protocol}
+\input{results/completion_scope}
+All reported comparisons use $L=336$ and independently trained models for the reported $H\in\{96,192,336,720\}$. Forecasts are not obtained by truncating a longer prediction. ETT originates from the benchmark of Zhou et al.~\cite{zhou2021informer}; hourly and 15-minute observations have different physical forecast durations. All reported settings are long-term forecasting tasks.
+
+\input{results/completion_dataset_table}
+
+Scalers are fitted on training rows only. Future targets remain within their assigned split; validation and test inputs may contain earlier observed history. No future covariates or calendar features are supplied. The ETT ratio split differs from common fixed-month protocols, so published scores from other partitions are not imported. Full-test metrics cover every eligible window and variable. Overlapping windows contribute to forecast scores but are not treated as independent statistical replicates.
+
+\subsection{Baselines and Controlled Variants}
+The backbones are DLinear~\cite{zeng2023transformers}, PatchTST~\cite{nie2023timeseries}, TimeMixer~\cite{wang2024timemixer}, and iTransformer~\cite{liu2024itransformer}. We retain each point prediction backbone and append the same median and positive-gap parameterization to each scalar forecast. All train end-to-end with pinball loss. The suffix \emph{-NQ} identifies this adaptation, not an original probabilistic result from the cited paper. These heads share a construction, but their scalar inputs differ from HDA-NQ's decoder features; parameter budgets and representational capacities are not equal.
+
+The final-structure removals retain HDA-NQ settings apart from the specified component:
+\begin{itemize}
+\item \textbf{Fixed}: offsets are zero, while horizon queries and attention over the reference grid remain.
+\item \textbf{Shared}: all future steps share one learned horizon embedding, retaining historical context.
+\item \textbf{Dense}: cross-attention uses all historical patches, retaining query and residual refinement.
+\item \textbf{No correction}: the direct historical correction is removed.
+\item \textbf{Fixed + no correction}: both changes are applied, completing the offset--correction comparison.
+\item \textbf{Independent}: seven unconstrained affine outputs replace the ordered head.
+\end{itemize}
+Each variant is retrained on ETTh1 at $H=96$ and $720$ with three seeds. The shared-query variant can still vary across steps through the direct correction; identical entire-model predictions are not implied. Independent outputs are evaluated with pinball and crossing rate; unordered endpoints are not reported as valid central intervals.
+
+\subsection{Training and Validation Selection}
+Training uses PyTorch 2.7.1, CUDA 12.8, and NVIDIA RTX 5090 GPUs in the \texttt{djjTF} environment. AdamW~\cite{loshchilov2019adamw} minimizes pinball loss, with gradient clipping at 1.0, at most 30 epochs on ETT and 10 epochs on Traffic, Weather, and Electricity, validation early-stopping patience 7, and a plateau learning-rate scheduler with patience 2 and factor 0.5. The minimum-validation checkpoint is saved and reloaded before testing. Seeds are 2024, 2025, and 2026; summaries report their mean and sample standard deviation.
+
+HDA-NQ uses batch size 32, learning rate $3\times10^{-4}$, weight decay $10^{-3}$, encoder dropout 0.2, and correction dropout 0.1. Its selection used twelve six-epoch history pilots over $L\in\{96,336,512\}$, followed by 18 candidates at four horizons and three-seed confirmation of four shortlisted configurations. History was fixed globally to 336 before final comparisons. Screening combined validation pinball, first-difference error, and event error using fixed relative weights 0.7/0.2/0.1; the confirmed accuracy choice minimized mean validation pinball. The final uniform configuration was frozen before its tests. Per-horizon alternative selections are not combined into the reported HDA-NQ results.
+
+For each external backbone, the learning rate is chosen from $\{10^{-4},3\times10^{-4},10^{-3}\}$ using ETTh1 $H=96$, seed 2024, and at most eight validation-screening epochs. The chosen rate is frozen for all datasets, horizons, and final seeds. These runs use batch size 32, weight decay $10^{-3}$, and neural backbone dropout 0.2, retaining other native architecture settings. This modest search does not establish optimal baseline tuning or convergence. On Traffic and Electricity, memory checks determine method-specific batches: HDA-NQ and DLinear use 32, PatchTST and iTransformer use 8, and TimeMixer uses 2 and 4, respectively. Evaluation uses at most 16 windows per batch. HDA-NQ samples 16 variables per training batch when $C>16$, then evaluates all variables in chunks of 32. Native baseline variable context is preserved; no cross-variable model is evaluated using channel subsets. The reported comparisons therefore share data and objectives but not a matched memory or compute budget.
+
+For all seven datasets, the final HDA-NQ structure and hyperparameters are frozen from ETTh1 validation selection. Every run fits a separate model and training scaler on its own dataset. We do not retune on the other datasets or use their test metrics for selection. The final architecture has received more extensive validation exploration than the baselines, so this is not a matched-search comparison.
+
+\subsection{Metrics}
+Pinball loss in training-standardized units is the principal metric. We report empirical interval coverage (PICP), width normalized by each variable's training range (PINAW), and the normalized interval score
+\begin{equation}
+ \frac{(u-l)+\frac{2}{\alpha}(l-y)\mathbf1_{y<l}
+                   +\frac{2}{\alpha}(y-u)\mathbf1_{y>u}}{R_c}.
+\end{equation}
+Here $1-\alpha$ is nominal coverage, and $R_c$ is the training range, set to 1 when constant. This is the normalized Winkler score~\cite{winkler1972decision}; smaller is preferable. Coverage is assessed against the nominal level, rather than maximized.
+
+For the ETTh1 detail analysis, $\Delta$MAE compares consecutive forecast-median differences with target differences within the future window. Event MAE evaluates the median at steps whose absolute target change exceeds that variable's training-prefix 95th percentile. The first history-to-future boundary is excluded from difference metrics. These diagnostics do not reward reproducing unpredictable noise. Crossing rate counts variable--step forecasts with any adjacent quantile reversal.
+
+\subsection{Completed Backbone Comparisons}
+\input{results/revised_external}
+\input{results/revised_external_intervals}
+\input{results/completion_comparison_analysis}
+The common output constraint removes quantile crossing as a distinguishing factor in this comparison. Differences reflect each end-to-end adaptation under the stated budget. Point-backbone normalization and architecture defaults are retained; the experiment does not reproduce the original papers' point-forecasting leaderboards. The scalar-to-quantile adaptation is an explicit scope limitation when interpreting relative accuracy.
+
+\subsection{Component Contributions}
+\input{results/revised_final_ablation}
+\input{results/completion_ablation_analysis}
+The fixed-offset comparison tests learned displacement while retaining sparse attention. The full/fixed/no-correction/combined comparison distinguishes displacement from the direct history route. The dense variant tests the choice of sampled rather than all-token retrieval, while the shared embedding tests decoder lead-time identity. Component conclusions are restricted to these retrained settings and should not be generalized solely from attention images.
+
+\input{sections/complexity}
+
+\subsection{Prediction and Calibration Analysis}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/dataset_forecasts.pdf}
+\caption{Example forecasts and 90\% prediction intervals on the four ETT datasets.}
+\Description{Four panels show observed values, predicted medians, and 90 percent intervals for one complete forecast on each ETT dataset.}
+\label{fig:forecasts}
+\end{figure}
+Figure~\ref{fig:forecasts} shows one favorable example per ETT dataset at seed 2024, using $H=96$ on ETTh2 and $H=336$ elsewhere. Within each dataset, we select the highest within-window $R^2$ among seven variables and 21 uniformly spaced test windows. The horizon choices follow qualitative inspection, rather than a matched-horizon comparison. Complete forecasts and 90\% intervals are plotted in original units without smoothing. These selected examples illustrate attainable fit rather than population-average performance and complement the full-test metrics.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/revised_calibration.pdf}
+\caption{Empirical versus nominal interval coverage on ETTh1.}
+\Description{Four panels show HDA-NQ empirical versus nominal coverage at all four prediction lengths.}
+\label{fig:calibration}
+\end{figure}
+Figure~\ref{fig:calibration} compares empirical coverage with nominal 50\%, 80\%, and 90\% levels. Points and error bars show the mean and sample standard deviation over three seeds; the diagonal denotes nominal coverage. The same frozen HDA-NQ configuration is used across prediction lengths. Its empirical 90\% coverage is approximately 86.21\%, 85.72\%, 85.45\%, and 82.97\% as $H$ increases. Figure~\ref{fig:calibration} therefore does not support a calibration-improvement claim. No test-fitted interval widening is applied.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/revised_attention.pdf}
+\caption{ETTh1 attention diagnostics: (a) historical attention mass; (b) normalized head entropy.}
+\Description{A historical attention-mass map and a head-entropy heatmap show learned retrieval behavior and diversity across prediction lengths.}
+\label{fig:diagnostics}
+\end{figure}
+Figure~\ref{fig:diagnostics}(a) shows interpolated attention mass averaged over eight heads for a fixed high-fit ETTh1 HUFL case at $H=96$, selected from a separate first/middle/last-window diagnostic set. Each sampled weight is distributed to its two interpolation neighbors, so each future-step row sums to one after head averaging. Panel (b) reports normalized head entropy averaged over three fixed windows, seven variables, future steps, and three seeds. These diagnostics describe retrieval behavior rather than causal feature attribution or full-test population performance; retrained component comparisons assess forecast contribution.
+
+\subsection{Limitations}
+\input{results/completion_limitations} The final-structure ablations are restricted to ETTh1; their conclusions are not automatically transferable to every dataset. Three seeds describe limited training variability, not statistical significance. Short validation screens can miss slower configurations, and repeated validation use introduces selection optimism. Models have different capacities and tuning histories, and the dataset-specific epoch caps do not establish convergence.
+
+Independent variable processing can miss cross-variable predictive information. Positive gaps exclude exact quantile ties in real arithmetic, and seven marginal quantiles do not define a joint distribution. Undercoverage, especially at long horizons, and imperfect extreme-change prediction remain unresolved. We make no end-to-end efficiency claim from asymptotic sampling cost or shared-GPU training times.

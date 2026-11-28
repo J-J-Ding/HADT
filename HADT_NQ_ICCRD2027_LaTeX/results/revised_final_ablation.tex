@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering\small
+\caption{ETTh1 component study at $H=96$ (long-term forecasting). Mean $\pm$ sample SD over three seeds; crossing is the mean percentage. Bold marks the lowest loss or crossing rate, including ties. Complete $H=96/720$ results appear in Supplementary Table S1.}
+\label{tab:final-ablation}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrr@{}}
+\toprule
+Variant & Pinball & Crossing (\%) \\
+\midrule
+HDA-NQ (Ours) & $\boldsymbol{0.12966\pm0.00018}$ & $\boldsymbol{0}$ \\
+Fixed offsets & $0.13461\pm0.00147$ & $\boldsymbol{0}$ \\
+Shared embedding & $0.13978\pm0.00065$ & $\boldsymbol{0}$ \\
+Dense attention & $0.14158\pm0.00104$ & $\boldsymbol{0}$ \\
+No correction & $0.13299\pm0.00073$ & $\boldsymbol{0}$ \\
+Fixed + no correction & $0.13452\pm0.00139$ & $\boldsymbol{0}$ \\
+Independent head & $0.12997\pm0.00114$ & $9.81\times10^{-4}$ \\
+\bottomrule
+\end{tabular*}
+\end{table}

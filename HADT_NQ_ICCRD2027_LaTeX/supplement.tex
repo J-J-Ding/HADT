@@ -1,0 +1,32 @@
+\documentclass[manuscript,anonymous,review]{acmart}
+\settopmatter{printacmref=false,printfolios=true}
+\setcopyright{none}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\acmConference[ICCRD 2027]{2027 19th International Conference on Computer Research and Development}{January 15--17, 2027}{Singapore}
+\usepackage{booktabs,mathtools}
+\setlength{\emergencystretch}{1em}
+\renewcommand{\thetable}{S\arabic{table}}
+\begin{document}
+\title{HDA-NQ: Supplementary Component Results}
+\begin{abstract}
+This supplement reports the complete component experiments at both studied prediction lengths. It accompanies the focused 96-step long-term forecasting analysis in the main manuscript and retains the longer-horizon accuracy--detail tradeoffs.
+\end{abstract}
+\ccsdesc[500]{Computing methodologies~Machine learning}
+\keywords{quantile forecasting, component analysis, reproducibility}
+\maketitle
+\section{Scope and Protocol}
+The component study uses ETTh1, history length 336, prediction lengths 96 and 720, and seeds 2024, 2025, and 2026. The six modified models are retrained independently at both lengths; full-model reference checkpoints are shared with the primary comparison. All use the same data split, training-only scaler, optimizer policy, and validation checkpoint selection as the final model. Each comparison changes only its named component.
+
+The main text presents the 96-step results as a focused illustration, chosen after inspecting the completed results. This presentation choice does not alter any training configuration or test metric. Tables~\ref{tab:full-ablation} and \ref{tab:detail-ablation} retain both horizons, including component changes that improve the longest-horizon loss. No uniform benefit across horizons is implied.
+
+\input{results/supplement_full_ablation}
+\input{results/supplement_detail_ablation}
+\section{Interpretation}
+\input{results/supplement_ablation_analysis}
+The fixed-reference and correction removals also form a two-by-two comparison. Contributions can interact with the correction branch and prediction length, so separate configuration changes should not be interpreted as additive causal effects. Independent-head results are reported with pinball and crossing rate; interval scores are omitted because unordered endpoints need not define valid central intervals.
+
+The accompanying results files contain the complete unrounded component statistics, including sample standard deviations.
+\section{Complete Interval Statistics}
+Table~\ref{tab:full-intervals} expands the compact coverage and interval-score comparison in the main manuscript. Only dataset--horizon settings with all five models and three seeds complete are included, matching the main comparison. The horizon sets are listed in the main interval table; these are averaged within each training seed before computing the three-seed mean and sample standard deviation.
+\input{results/supplement_external_intervals}
+\end{document}

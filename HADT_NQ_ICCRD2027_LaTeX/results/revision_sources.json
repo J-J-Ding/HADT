@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-26",
+  "scope": "Only complete three-seed groups; no new training.",
+  "figure_scope": "Final linear_skip model only",
+  "source_sha256": {
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2024/metrics.json": "19270ecfb13076c3ef2e523fd94fe82f117b938ac5286c04e5ab0af6c4745d2e",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2025/metrics.json": "52cfbc677cba45469f181095b31fac6b485a7996e1523b916f97a075b9ac292e",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2026/metrics.json": "19d4133885fead4effc4de3ab863626ca48d47fbfb03cbb99858aa2b7877fc59",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H192/seed2024/metrics.json": "c678ff886ea0fd8809e18db42e62a11539d7898e19a80de5584d4468e06021d9",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H192/seed2025/metrics.json": "2efa365a64cffd1836c1f2755b00772a9a9b05f69721fae81b299a786173f919",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H192/seed2026/metrics.json": "91592a89f38e87c1c76c99a81a7b4eb650d2541dd0a4857f85f261f921513d1f",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H336/seed2024/metrics.json": "28dcf7b554ea5c43c71bd9d300239eafbd5ffd7574cd1a59b3dcacd88d57b326",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H336/seed2025/metrics.json": "e057386a79839e19c587c9b8ba09f951ff7ee26bb3899848460ec9bfd203bfe2",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H336/seed2026/metrics.json": "aeb842b06830f8e95c55ea67f807e3b55c89a9dac85e871e4fd232f68ae38d81",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H720/seed2024/metrics.json": "aed6e420d8ee2f315bb80a087d5c2b7cce540a4d00c7858ed7411db4b5da5485",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H720/seed2025/metrics.json": "14fbe9afb6fc1447e11fc87d8f69d7ba3fbf896eb39a32d5da507b7f17039adf",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H720/seed2026/metrics.json": "89da603a44f3fb422f13e81d32f137051f48431360838b72dd33eb150be83fe4",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2024/figures/forecast_samples.npz": "f11ffab3d2f2d7499738ec7abe7201f9fb604b9255d57f895fa6d657935747ca",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H192/seed2024/figures/forecast_samples.npz": "11141ac20ea105a2ebffbd393bc8375b535f9ec5915fa5f2c98205d3a6e99278",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H336/seed2024/figures/forecast_samples.npz": "9b73566685141761a1347ae27be3a4788d95b45b718fbf27775403ff9789b1e0",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H720/seed2024/figures/forecast_samples.npz": "1843106325846bed71190754487be01e5a111909cec4b22313d97a7ff8dfb70f",
+    "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2024/figures/intermediate_steps.npz": "07930084560f131d25ae0b457e758e9e3763274f8b290beb0cd3121f3c33cd20",
+    "docs/validation/paper_attention_diagnostics.csv": "ade48d27c51a4fc5f139f166046e9512c670ef3384ec9bbbfe9cc856b8d2000e"
+  }
+}

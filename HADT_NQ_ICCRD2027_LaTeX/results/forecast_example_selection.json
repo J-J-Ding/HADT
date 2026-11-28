@@ -1,0 +1,51 @@
+{
+  "policy": "Qualitative display only: fixed model linear_skip and seed2024; highest within-window R2 over saved first/middle/last windows and all seven variables, independently for each H. Full named horizons are plotted without smoothing.",
+  "selected": [
+    {
+      "horizon": 96,
+      "seed": 2024,
+      "window": 3388,
+      "variable": "HUFL",
+      "origin_index": 2,
+      "channel_index": 0,
+      "r2": 0.8522902696261634,
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H96/seed2024/figures/forecast_samples.npz",
+      "selected": true
+    },
+    {
+      "horizon": 192,
+      "seed": 2024,
+      "window": 3292,
+      "variable": "HUFL",
+      "origin_index": 2,
+      "channel_index": 0,
+      "r2": 0.715161626240849,
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H192/seed2024/figures/forecast_samples.npz",
+      "selected": true
+    },
+    {
+      "horizon": 336,
+      "seed": 2024,
+      "window": 3148,
+      "variable": "HUFL",
+      "origin_index": 2,
+      "channel_index": 0,
+      "r2": 0.8190947702220557,
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H336/seed2024/figures/forecast_samples.npz",
+      "selected": true
+    },
+    {
+      "horizon": 720,
+      "seed": 2024,
+      "window": 2764,
+      "variable": "HUFL",
+      "origin_index": 2,
+      "channel_index": 0,
+      "r2": 0.7258886001468741,
+      "source": "outputs/etth1_detail_search/confirm/L336/linear_skip/H720/seed2024/figures/forecast_samples.npz",
+      "selected": true
+    }
+  ],
+  "test_used_for_model_selection": false,
+  "not_representative_population_estimate": true
+}
