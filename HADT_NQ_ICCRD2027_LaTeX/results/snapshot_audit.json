@@ -1,14 +1,16 @@
 {
   "status": "passed",
-  "created": "2026-11-28T23:37:26.276823+08:00",
+  "created": "2026-11-29T00:38:09.738809+08:00",
   "datasets": [
     "ETTh1",
     "ETTh2",
     "ETTm1",
     "ETTm2",
+    "Traffic",
+    "Weather",
     "Electricity"
   ],
-  "published_runs": 255,
+  "published_runs": 285,
   "complete_settings": [
     [
       "ETTh1",
@@ -75,22 +77,30 @@
       720
     ],
     [
+      "Traffic",
+      720
+    ],
+    [
+      "Weather",
+      720
+    ],
+    [
       "Electricity",
       720
     ]
   ],
-  "observed_complete_runs": 297,
+  "observed_complete_runs": 305,
   "ablation_runs": 36,
   "source_artifacts_verified": true,
   "validation_best_epochs_verified": true,
   "selection_rule": "Only full five-model three-seed rows; no performance filtering.",
   "wins": {
-    "dlinear": 16,
-    "patchtst": 17,
-    "timemixer": 17,
-    "itransformer": 16
+    "dlinear": 18,
+    "patchtst": 19,
+    "timemixer": 19,
+    "itransformer": 18
   },
-  "best": 15,
+  "best": 17,
   "source_records": {
     "outputs/paper_completion_20261126/baseline/dlinear/H192/seed2024/complete.json": "4e19c64c24227698c3ca3daf9f771917c1d1e6ffee92cb8438dc7a1f002d46ce",
     "outputs/paper_completion_20261126/baseline/dlinear/H192/seed2025/complete.json": "7dbc512272e0d37f252e176973b8dd50aa45ab3afc4850d5e07d8cbc76c6adcc",
@@ -320,9 +330,11 @@
     "outputs/paper_seven_datasets_20261126/ETTm2/timemixer/H96/seed2024/complete.json": "713c438d29fdb5b1c2bc4aece3f0439bd7a83fbd9834d7a008ea74c791a50654",
     "outputs/paper_seven_datasets_20261126/ETTm2/timemixer/H96/seed2025/complete.json": "160bf36453952edf53607c210e8fddf9bfef05c829659e6de6f1158f8179dca4",
     "outputs/paper_seven_datasets_20261126/ETTm2/timemixer/H96/seed2026/complete.json": "c3ebb4166cc00031247edf526c088c5dea4ea2a68e0a7ed1a4fb8a487aea4985",
+    "outputs/paper_seven_datasets_20261126/Electricity/dlinear/H336/seed2024/complete.json": "c27e4d2d35cae5cf92cd1ead39940bcda850ea199f1c070bcfbc2e65450e0838",
     "outputs/paper_seven_datasets_20261126/Electricity/dlinear/H720/seed2024/complete.json": "e9422e061e34dab6ad986203872f10538e7b7d4483eb73463ad5b471487b39da",
     "outputs/paper_seven_datasets_20261126/Electricity/dlinear/H720/seed2025/complete.json": "4c9d37b38cf3e8479fe3f068120a38eba99ff88d66ea52e2b6fdc906c2fd94bd",
     "outputs/paper_seven_datasets_20261126/Electricity/dlinear/H720/seed2026/complete.json": "64283e58e47c5709357bc064600758dc13326676e9e38d598a73b007bac60d3e",
+    "outputs/paper_seven_datasets_20261126/Electricity/hadt/H336/seed2024/complete.json": "bdc28cc902e60b7d9fbacbdc81a30fbe0e4b84464ccd26a73b8960b9cc87e1f3",
     "outputs/paper_seven_datasets_20261126/Electricity/hadt/H720/seed2024/complete.json": "c2b657271b8fca43d863da7d511fa9da60ff5b1decc340ccefdcab943e645914",
     "outputs/paper_seven_datasets_20261126/Electricity/hadt/H720/seed2025/complete.json": "024d0e97939bb7762ff11bd8682731e2b68c6a69572f995abe546c4cc4419138",
     "outputs/paper_seven_datasets_20261126/Electricity/hadt/H720/seed2026/complete.json": "9dafc07819ff06eb35dce694877f020a6a1cbcbdf027afaf701abd50661e07ab",
@@ -355,6 +367,7 @@
     "outputs/paper_seven_datasets_20261126/Traffic/itransformer/H720/seed2026/complete.json": "d33c9d67e5810ddbeea11de213a145bfacc0afa6b8edae10a1b942c77927e92c",
     "outputs/paper_seven_datasets_20261126/Traffic/patchtst/H720/seed2024/complete.json": "f5b274c1d28b52456860fc62fcf51f0d59e8121d439659ee8328da747f4ed7d1",
     "outputs/paper_seven_datasets_20261126/Traffic/patchtst/H720/seed2025/complete.json": "dcdcd51b568dbee3d3edf97345689a30e1061e5049b5394e52175ebb434ba1a2",
+    "outputs/paper_seven_datasets_20261126/Traffic/patchtst/H720/seed2026/complete.json": "46f92387cb26f138b83e3b72a3c7d17e4a04a46a2052a4d339e7be833770a11b",
     "outputs/paper_seven_datasets_20261126/Traffic/timemixer/H192/seed2024/complete.json": "5e83380ce5520a041d4204aa78b8551828e0c6ccd126bb18fd348e425c998afd",
     "outputs/paper_seven_datasets_20261126/Traffic/timemixer/H192/seed2025/complete.json": "07792310543bb926e8e17e4167e4ed2b64e1c1f6391cf5f001de857066b19ece",
     "outputs/paper_seven_datasets_20261126/Traffic/timemixer/H192/seed2026/complete.json": "01d72ab7e7ff544ee9036d2755e5626d03d86d9972b52aa51fb14cfe2f9cbbc7",
@@ -372,10 +385,15 @@
     "outputs/paper_seven_datasets_20261126/Weather/dlinear/H720/seed2026/complete.json": "a30ed61c489073ef2ba9b1d052ed94415dd1bdb5c44a2d24d7d7a55443020e49",
     "outputs/paper_seven_datasets_20261126/Weather/hadt/H720/seed2024/complete.json": "3742795cc15ce8c62da2811c0727262681be1f629641b30318980ee4114bd275",
     "outputs/paper_seven_datasets_20261126/Weather/hadt/H720/seed2025/complete.json": "de577235f5d08f6b37e49045c71f5bbafffda9624492b5cb17cbec68f9a8ac46",
+    "outputs/paper_seven_datasets_20261126/Weather/hadt/H720/seed2026/complete.json": "12111cc539eee7a8461cdb97f7507956355fc9b3b8b4f9f3113be1e94c1e7aa8",
     "outputs/paper_seven_datasets_20261126/Weather/itransformer/H720/seed2024/complete.json": "7cb39fc7ea3e5bf958ff2728894b7e0da297f4a28950363de3a4153edd055129",
     "outputs/paper_seven_datasets_20261126/Weather/itransformer/H720/seed2025/complete.json": "7fb59b46cda2d0dec45ca2dd8f2c74db93a4fa9be0a025d8c935730fc70b4ab7",
+    "outputs/paper_seven_datasets_20261126/Weather/itransformer/H720/seed2026/complete.json": "8d9ea1847ea4e6e11b4bb4f8a2e4acda0083d94b19834612620b553d56002cd2",
     "outputs/paper_seven_datasets_20261126/Weather/patchtst/H720/seed2024/complete.json": "33d26e389a1c6313815e035497a49db152908c63e518470d4440c6df895d68b2",
     "outputs/paper_seven_datasets_20261126/Weather/patchtst/H720/seed2025/complete.json": "3e27b062ff9c58edece7bc316bb1344cc41998d050db78c996bade872f4db7ac",
-    "outputs/paper_seven_datasets_20261126/Weather/timemixer/H720/seed2024/complete.json": "6c7914f89d1cc77f440aff8c1519dbc7fa285d080b97b70625c6ebaa073b3d32"
+    "outputs/paper_seven_datasets_20261126/Weather/patchtst/H720/seed2026/complete.json": "debac3f741324d5f968d066144fc2cd578678eab792671bc1876e490e386b816",
+    "outputs/paper_seven_datasets_20261126/Weather/timemixer/H720/seed2024/complete.json": "6c7914f89d1cc77f440aff8c1519dbc7fa285d080b97b70625c6ebaa073b3d32",
+    "outputs/paper_seven_datasets_20261126/Weather/timemixer/H720/seed2025/complete.json": "9c75ecf8e53e219b9f5713f1d9593c21c7edcab8037364292188226aed180514",
+    "outputs/paper_seven_datasets_20261126/Weather/timemixer/H720/seed2026/complete.json": "db07041f725fb42c07bb02b8034588ff613790e6903920a8825a53809d839f91"
   }
 }
