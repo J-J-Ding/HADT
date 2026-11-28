@@ -1,6 +1,6 @@
 {
-  "last_check": "2026-11-29T02:39:32.683435+08:00",
-  "primary_completed": 322,
+  "last_check": "2026-11-29T03:40:07.044659+08:00",
+  "primary_completed": 339,
   "primary_total": 420,
   "reviewer_progress": {
     "status": "waiting_for_primary",
@@ -26,10 +26,10 @@
     ],
     "bibliography_policy": "Preserve author edits; report duplicate keys without rewriting bibliography. Compilation and citation resolution must succeed.",
     "status": "published",
-    "updated": "2026-11-29T02:39:32.620917+08:00",
-    "primary_published_runs": 300,
-    "complete_settings": 20,
-    "best_count": 18,
+    "updated": "2026-11-29T03:40:06.981762+08:00",
+    "primary_published_runs": 315,
+    "complete_settings": 21,
+    "best_count": 19,
     "reviewer_results_included": false,
     "introduction_unchanged": true,
     "changed_files": [
@@ -47,9 +47,9 @@
       "main.aux",
       "supplement.pdf"
     ],
-    "backup": "/home/dingjunjie/PythonCode/Project2/1030TPF/outputs/paper_hourly_monitor/updates/20261129_023917/before",
-    "pdf_sha256": "7f1f89a297aaf7fbb1b34838178ac944151e5f7a6f78d62d060a57f366c71bcc"
+    "backup": "/home/dingjunjie/PythonCode/Project2/1030TPF/outputs/paper_hourly_monitor/updates/20261129_033952/before",
+    "pdf_sha256": "bf5f8046cea2ca7a0fc5f24f985bd47ebe2b1bc70ef191841c2447ee7aa74719"
   },
-  "next_hourly_check_epoch": 1795894772.6834612,
+  "next_hourly_check_epoch": 1795898407.0446854,
   "model_api_calls": 0
 }
